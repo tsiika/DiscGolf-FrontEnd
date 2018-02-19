@@ -27,10 +27,16 @@ This is the first draft of the forms. This version is not fully responsive but i
             <input type="submit" value="Login">
         </form>
         <p>No account?
-        <a href="registration.html"><button value="register">Register</button></a></p>
+        <a href="registration.html"><button value="register">Register</button></a></p><br>
+        <button onclick="prevPage()">Return</button>
     </div>
-</div>
 
+</div>
+<script>
+    function prevPage() {
+        window.history.back();
+    }
+</script>
 
 </body>
 </html>

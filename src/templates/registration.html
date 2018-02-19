@@ -37,15 +37,20 @@ This is the first draft of the forms. This version is not fully responsive but i
             
             <input type="submit" value="Create account">
             <input type="button" onclick="reset()" value="Reset">
-        </form>
-
+        </form><br>
+        <button onclick="prevPage()">Return</button>
     </div>
+
 </div>
 
 <script>
 function reset() {
     document.getElementById("form").reset();
-}
+};
+
+function prevPage() {
+        window.history.back();
+    }
 </script>
 
 </body>

@@ -1,0 +1,97 @@
+/*
+This is the first draft of the forms. This version is not fully responsive but it is working. 
+
+My vision is that every module is made separetly and they will be merged on build (when we add gulp or something else to site). 
+Therefore it is easier to maintain the each site and it's styles and scripts.
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(#94BCC2, #69969C);   
+    background-attachment: fixed; 
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+li {
+    list-style: none;
+    width: 40%;
+}
+
+.links {
+    display: inline-block;
+    list-style: none;
+    width: 5em;
+} 
+
+/* THIS IS NOT IDEAL STYLE
+FIX OR THINK SOMETHING ELSE */
+
+#even {
+    background-color: gainsboro;
+}
+
+#odd {
+    background-color: wheat;
+}
+
+/* Grid system */
+
+.wrapper {
+    max-width: auto;
+    margin: 0 auto;
+}
+
+.wrapper > div {
+    border: 2px solid orange;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 1em;
+    color: black;
+
+}.wrapper {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+/* Header */
+.one {
+    grid-column: 1 / 13;
+    grid-row: 1;
+}
+
+/* Play */
+.two { 
+    grid-column: 1 / 7;
+    grid-row: 2 / 3 ;
+}
+
+/* Statistic */
+.three {
+    grid-column: 7 / 13;
+    grid-row: 2 / 3;
+}
+
+/* Prev round */
+.four {
+    grid-column: 1/7 ;
+    grid-row: 3 / 4;
+}
+
+/* Prev competition */
+.five {
+    grid-column: 7 / 13;
+    grid-row: 3 / 4;
+}
+
+
+@media (max-width: 400px) {
+    .wrapper {
+      display: block;
+    }
+  }
