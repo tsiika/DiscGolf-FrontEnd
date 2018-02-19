@@ -1,5 +1,5 @@
 /*
-This is the first draft of the forms. This version is not fully responsive but it is working. 
+This is the first draft of the dashboard. This version is not fully responsive but it is working. 
 
 My vision is that every module is made separetly and they will be merged on build (when we add gulp or something else to site). 
 Therefore it is easier to maintain the each site and it's styles and scripts.
