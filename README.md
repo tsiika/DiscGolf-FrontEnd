@@ -15,6 +15,6 @@ We decided to separate front-end and back-end to separate repositories. With thi
 List of contributor of this project:
 - [Sakari Vihilä](https://github.com/svihila)
 - [Maher Abedah](https://github.com/MaherAbedah)
-- Tomi Neste
+- [Tomi Neste](https://github.com/nektoplasma)
 - [Tommi Siik](https://github.com/tsiika)
 
