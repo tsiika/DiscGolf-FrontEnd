@@ -25,7 +25,29 @@ li {
     display: inline-block;
     list-style: none;
     width: 5em;
+    padding: 5px;
 } 
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:link {
+    color: black;
+}
+
+a:active {
+    color: dimgrey;
+}
+
+a:visited {
+    color: lightgray;
+}
+
+a:hover {
+    color: silver;
+}
 
 /* THIS IS NOT IDEAL STYLE
 FIX OR THINK SOMETHING ELSE */
@@ -46,13 +68,15 @@ FIX OR THINK SOMETHING ELSE */
 }
 
 .wrapper > div {
-    border: 2px solid orange;
+    /*border: 1px solid orange;*/
     border-radius: 5px;
     background-color: whitesmoke;
     padding: 1em;
     color: black;
 
-}.wrapper {
+}
+
+.wrapper {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 10px;
@@ -60,38 +84,63 @@ FIX OR THINK SOMETHING ELSE */
 }
 
 /* Header */
+
+/*
+Quick summary on grid system:
+
+grid-column: 1 / 13; this is full width element.
+Changing the first number will set the starting point of element. And changing second number will set ending point of element.
+You can change the amount of column at ".wrapper" in grid-template-columns property.
+
+grid-row: 1; this is the first row of DOM.
+There is as many rows as you desire, it's not determined anywhere. 
+At current state there is three (3) rows.
+*/
+
 .one {
     grid-column: 1 / 13;
     grid-row: 1;
 }
 
+/* Header 2 */
+.li-o  {
+    padding-top: 2em; 
+    grid-column: 10 / 12;
+    grid-row: 1;
+
+}
+
 /* Play */
 .two { 
     grid-column: 1 / 7;
-    grid-row: 2 / 3 ;
+    grid-row: 2  ;
 }
 
 /* Statistic */
 .three {
     grid-column: 7 / 13;
-    grid-row: 2 / 3;
+    grid-row: 2 ;
 }
 
 /* Prev round */
 .four {
     grid-column: 1/7 ;
-    grid-row: 3 / 4;
+    grid-row: 3 ;
 }
 
 /* Prev competition */
 .five {
     grid-column: 7 / 13;
-    grid-row: 3 / 4;
+    grid-row: 3 ;
 }
 
 
+/* Responsitivity */
+
 @media (max-width: 400px) {
     .wrapper {
-      display: block;
+        display: block;
+        width: auto;
+        grid-gap: 10px;
     }
-  }
+}
