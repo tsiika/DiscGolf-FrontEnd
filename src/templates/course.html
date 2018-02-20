@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Disc Golf App | Select course
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- This stylesheet is shared with players.html-->
+    <link rel="stylesheet" href="../css/course.css" type="text/css">
+</head>
+
+<body>
+
+<!-- 
+This is the first draft of the courses. This version is not fully responsive but it is working. 
+-->
+
+<div class="container">
+    <div class="main">
+        <h1>THIS PAGE IS TEMPORARY</h1>
+        <h2>Content of this page <i>will be</i> changed to popup later on.</h2>
+        <hr>
+        <form>
+            <h3>Search course</h3>
+            <!-- Search not functional at this state -->
+            <input type="text" placeholder="Name"> <input type="text" placeholder="Area"><br>
+            <select name="course" size="10">
+                <option value="c1">Course 1 </option>
+                <option value="c2">Course 2 </option>
+                <option value="c3">Course 3 </option>
+                <option value="c4">Course 4 </option>
+            </select> 
+        </form><br>
+        <a href="#"><button>Select players</button></a>
+
+        <button onclick="prevPage()">Return</button>
+    </div>
+
+</div>
+<script>
+    function prevPage() {
+        window.history.back();
+    }
+</script>
+
+</body>
+</html>
