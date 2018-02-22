@@ -1,0 +1,33 @@
+{
+  "name": "discgolf-frontend",
+  "version": "0.0.2",
+  "description": "Application for disc golf hobbyists",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsiika/DiscGolf-FrontEnd.git"
+  },
+  "keywords": [
+    "disc",
+    "golf",
+    "front-end"
+  ],
+  "author": [
+    "Tommi Siik",
+    "Maher Abedah",
+    "Sakari Vihilä",
+    "Tomi Neste"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tsiika/DiscGolf-FrontEnd/issues"
+  },
+  "homepage": "https://github.com/tsiika/DiscGolf-FrontEnd#readme",
+  "devDependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
