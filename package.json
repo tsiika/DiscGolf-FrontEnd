@@ -30,15 +30,11 @@
   },
   "homepage": "https://github.com/tsiika/DiscGolf-FrontEnd#readme",
   "dependencies": {
+    "gulp": "^3.9.1",
+    "material-ui": "^0.20.0",
     "react": "^16.2.0",
-<<<<<<< HEAD
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1",
-=======
-    "react-dom": "^16.2.0"
-  },
-  "dependencies": {
->>>>>>> react-dev
-    "gulp": "^3.9.1"
+    "react-scripts": "^1.1.1"
   }
 }
