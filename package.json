@@ -31,8 +31,14 @@
   "homepage": "https://github.com/tsiika/DiscGolf-FrontEnd#readme",
   "dependencies": {
     "react": "^16.2.0",
+<<<<<<< HEAD
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1",
+=======
+    "react-dom": "^16.2.0"
+  },
+  "dependencies": {
+>>>>>>> react-dev
     "gulp": "^3.9.1"
   }
 }
