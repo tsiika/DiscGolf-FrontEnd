@@ -1,14 +1,17 @@
 {
-  "name": "discgolf-frontend",
+  "name": "discgolf-frontend-react",
   "version": "0.0.2",
   "description": "Application for disc golf hobbyists",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tsiika/DiscGolf-FrontEnd.git"
+    "url": "git+https://github.com/tsiika/DiscGolf-FrontEnd.git#react-dev"
   },
   "keywords": [
     "disc",
@@ -26,8 +29,10 @@
     "url": "https://github.com/tsiika/DiscGolf-FrontEnd/issues"
   },
   "homepage": "https://github.com/tsiika/DiscGolf-FrontEnd#readme",
-  "devDependencies": {
+  "dependencies": {
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1",
+    "gulp": "^3.9.1"
   }
 }
