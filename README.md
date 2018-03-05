@@ -1,4 +1,5 @@
-# DiscGolf-FrontEnd
+# DiscGolf-FrontEnd (legacy)
+## This is old version and is only stored in separate branch.
 Front End side of unnamed disc golf app (name will be changed in time!)
 
 # About
@@ -12,7 +13,7 @@ We decided to separate front-end and back-end to separate repositories. With thi
 
 - [**Server-side source code can be found here:**](https://github.com/svihila/DiscGolf-API)
 
-- [**React development branch is used for maintain react version of this project:**](https://github.com/tsiika/DiscGolf-FrontEnd/tree/react-dev)
+- [**Front-end source code of this project:**](https://github.com/tsiika/DiscGolf-FrontEnd)
 
 # Contributors
 List of contributor of this project:
