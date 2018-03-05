@@ -1,26 +1,14 @@
-# DiscGolf-FrontEnd
-Front End side of unnamed disc golf app (name will be changed in time!)
+# DiscGolf-FrontEnd-React DEVELOPMENT BUILD
+
+## Warning!
+All changes to react app will and have to be in this branch!
+
 
 # About
-This project is part of full-stack developer course by Opiframe Oy. During this course students are creating their own projects and this is ours!
+This branch is made for React version of this app. For this state it's good idea to separate the master and react developement is different branches because I want to have our current build as vertical slice. 
 
-Idea for this app is to follow disc golfers as they play the game. 
+As the project goes further these two branches will be merged to master leaving us with react app as vertical slice. 
 
-We decided to separate front-end and back-end to separate repositories. With this it's easier to examine the source code as their own instances:
-
-- [**Server-side source code can be found here:**](https://github.com/svihila/DiscGolf-API)
-
-- [**Front-End source code of this project:**](https://github.com/tsiika/DiscGolf-FrontEnd)
-
-- [**Legacy code of horizontal slice:**](https://github.com/tsiika/DiscGolf-FrontEnd/tree/legacy)
-
-# Stages of development
-
-In the first stage the page layout is built to look and feel functional. Information will be static at this point of developement. As we proceed with the project the functionality will come with it piece by piece. 
-
-On second stage React will be implemented to project. 
-
-Third stage of project is to get React talk to back-end.
 
 # Contributors
 List of contributor of this project:
@@ -28,4 +16,3 @@ List of contributor of this project:
 - [Maher Abedah](https://github.com/MaherAbedah)
 - [Tomi Neste](https://github.com/nektoplasma)
 - [Tommi Siik](https://github.com/tsiika)
-
