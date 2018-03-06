@@ -38,7 +38,13 @@
     "react-router": "^4.2.0",
     "react-scripts": "^1.1.1"
   },
-  "proxy": "https://localhost:3007"
+  "proxy": "https://localhost:3007",
+  
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^4.1.0",
+    "webpack-dev-server": "^3.1.0"
+  }
 }
-
-
