@@ -12,7 +12,7 @@ export default class Header extends React.Component {
                 </Navbar.Brand>
             </Navbar.Header>
             <Nav>
-                <NavItem eventKey={1} href="#">
+                <NavItem eventKey={1} href="./modules/login">
                 Play
                 </NavItem>
                 <NavItem eventKey={2} href="#">

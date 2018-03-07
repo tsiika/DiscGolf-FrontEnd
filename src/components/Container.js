@@ -10,8 +10,7 @@ export default class Container extends React.Component {
                     <p>
                         Welcome to the Disc Golf app!
                     </p>
-                    <Button bsStyle="primary">Sign in</Button>
-                    <Button bsStyle="success">Sign up</Button>
+
             </Jumbotron>
 
         )
