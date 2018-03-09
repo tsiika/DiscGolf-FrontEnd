@@ -1,19 +1,10 @@
 import React from 'react';
-import {Jumbotron, Button} from 'react-bootstrap';
+import RaisedButton from 'material-ui/RaisedButton';
+import Paper  from 'material-ui/Paper';
 
-export default class Container extends React.Component {
+const Container = () => (
+    <Paper/>
+    //<RaisedButton label="Default" />
+);
 
-    render() {
-        return(
-            <Jumbotron>
-                <h1>Disc Golf App</h1>
-                    <p>
-                        Welcome to the Disc Golf app!
-                    </p>
-
-            </Jumbotron>
-
-        )
-    }
-
-}
+export default Container;
