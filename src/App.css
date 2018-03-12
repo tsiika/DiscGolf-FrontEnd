@@ -42,10 +42,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.navbar {
+Menu {
   color: green;
 }
 
 .btn {
   margin: 5px;
+}
+
+Container {
+  background-color: red;
 }

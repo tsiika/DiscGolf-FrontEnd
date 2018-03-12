@@ -1,40 +1,16 @@
 //UI imports will be in separate module in future 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom';
+import { Menu, Input, Segment } from 'semantic-ui-react';
+
 import Container from './components/Container';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { Menu, Input, Segment } from 'semantic-ui-react'
+import Home from './modules/Home';
+import Login from './modules/Login';
+import Register from './modules/Register';
+import Logout from './modules/Logout';
 
-// These are just placeholder to see which "page" the user is in. 
-//Will be removed in the future when routing is worknig properly.
-
-function Site(props) {
-	return <h4>You are at <i>{props.name}</i> page</h4>
-}
-
-const Home = () => (
-	<div>
-			<Site name="home" />
-	</div>
-);
-
-const Login = () => (
-	<div>
-			<Site name="login" />
-	</div>
-);
-
-const Register = () => (
-	<div>
-			<Site name="registration" />
-	</div>
-);
-
-const Logout = () => (
-	<div>
-			<Site name="logout" />
-	</div>
-);
+import "./App.css";
 
 class App extends Component {
 	//Sets default state to menu
@@ -83,6 +59,7 @@ class App extends Component {
 			<Route path="/login" component={Login} />
 			<Route path="/register" component={Register} />
 			<Route path="/logout" component={Logout} />
+
 
 			<Container/>
 			</div>
