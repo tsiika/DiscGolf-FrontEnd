@@ -1,14 +1,17 @@
-//UI imports will be in separate module in future 
+//Imports will be in separate module in future 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom';
-import { Menu, Input, Segment } from 'semantic-ui-react';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react';
 
 import Container from './components/Container';
+import NoMatch from './components/404';
+
 import Home from './modules/Home';
 import Login from './modules/Login';
 import Register from './modules/Register';
 import Logout from './modules/Logout';
+
 
 import "./App.css";
 
@@ -54,13 +57,18 @@ class App extends Component {
 					</Menu.Item>
 				</Menu.Menu>
 				</Menu>
-					
-			<Route exact path="/" component={Home} /> 
-			<Route path="/login" component={Login} />
-			<Route path="/register" component={Register} />
-			<Route path="/logout" component={Logout} />
 
+			<Switch>		
+				<Route exact path="/" component={Home} /> 
+				<Route path="/login" component={Login} />
+				<Route path="/register" component={Register} />
+				<Route path="/logout" component={Logout} />
 
+				{/*404*/}
+				<Route component={NoMatch}/>
+			</Switch>
+
+			{/* Prints container module to only show that it exists */}
 			<Container/>
 			</div>
 		)

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import Confirm from './Confirm';
 import '../App.css';
 
 
@@ -15,18 +14,18 @@ export default class LoginForm extends Component {
     }
   }
 
-  submitForm = (e) => {
+  loginForm = (e) => {
     e.preventDefault()
     this.setState({ fireRedirect: true })
   }
 
   render() {
-    const { from } = this.props.location.state || '/'
+    const { from } = this.props.location.state || '/Login'
     const { fireRedirect } = this.state
 
     return (
       <div>
-        <form>
+        <form onSubmit={this.loginForm}>
           <h2>This is login page.</h2>
           Username: <br/>
           <input type="text" name="usrname"/> <br/>
@@ -35,7 +34,7 @@ export default class LoginForm extends Component {
           <input type="submit" name="Submit" />
         </form>
         {fireRedirect && (
-          <Redirect to={from || '/confirm'}/>
+          <Redirect to={from || './Confirm'}/>
         )}
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import '../App.css';
 
@@ -8,7 +8,7 @@ import '../App.css';
 class App extends Component {
   render() {
     return (
-    <HashRouter>
+    <BrowserRouter>
       <div>
         <form>
         <h2>This is registration page.</h2>
@@ -25,7 +25,7 @@ class App extends Component {
           <input type="submit" name="Submit" />
         </form>
       </div>
-    </HashRouter>
+    </BrowserRouter>
     );
   }
 }
