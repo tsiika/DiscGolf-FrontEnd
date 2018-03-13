@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Redirect, withRouter } from 'react-router-dom';
 
 import '../App.css';
 
+ class RegisterForm extends Component {
 
+  registerForm(e) {
+    e.preventDefault()
+    this.props.history.push('/Confirm')
+  }
 
-class App extends Component {
   render() {
     return (
-    <BrowserRouter>
       <div>
-        <form>
+        <form onSubmit={this.registerForm.bind(this)}>
         <h2>This is registration page.</h2>
           Full name: <br/>
           <input type="text" name="namef"/> <br/>
@@ -22,12 +25,13 @@ class App extends Component {
           <input type="password" name="pwd" /><br/>
           Password again: <br/>
           <input type="password" name="pwd" /><br/>
-          <input type="submit" name="Submit" />
+          <input type="submit" name="Submit"/>
+
         </form>
       </div>
-    </BrowserRouter>
+
     );
   }
 }
 
-export default App;
+export default withRouter(RegisterForm);
