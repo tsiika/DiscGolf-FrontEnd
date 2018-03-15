@@ -1,11 +1,16 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react'
+import Paper from 'material-ui/Paper';
+const paperStyle = {
+    height: '95%',
+    width: "85%",
+    textAlign: 'center',
+    display: 'inline-block',
+};
 
 const MainContainer = () => (
-    <Container textAlign='center'>
-        <hr />
-        <small>This is container</small>
-    </Container>
+
+<Paper style={paperStyle} zDepth={5}/>
+
 );
 
 export default MainContainer;
