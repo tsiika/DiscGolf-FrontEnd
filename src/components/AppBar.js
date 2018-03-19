@@ -48,6 +48,7 @@ render(){
                     <Link to="/register" style={{ textDecoration: 'none' }}><MenuItem>Register</MenuItem></Link>
                     <Link to="/dashboard" style={{ textDecoration: 'none' }}><MenuItem>Dashboard</MenuItem></Link>
                     <Link to="/logout" style={{ textDecoration: 'none' }}><MenuItem>Logout</MenuItem></Link>
+                    <Link to="/admin" style={{ textDecoration: 'none' }}><MenuItem>Admin</MenuItem></Link>
 
                 </Drawer>
                 <Paper style={paperStyle} zDepth={5}>

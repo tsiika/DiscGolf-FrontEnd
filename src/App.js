@@ -19,6 +19,7 @@ import Register from './modules/Register';
 import Logout from './modules/Logout';
 import Confirm from './modules/Confirm';
 import Dashboard from './modules/Dashboard';
+import Admin from './modules/Admin';
 
 import "./App.css";
 
@@ -42,6 +43,7 @@ class App extends Component {
 					<Route path="/logout" component={Logout} />
 					<Route path="/confirm" component={Confirm} />
 					<Route path="/dashboard" component={Dashboard} />
+                    <Route path="/admin" component={Admin} />
 
 					{/*404*/}
 					<Route component={NoMatch}/>
