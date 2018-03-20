@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:5000/api/v0';
 
 function fetchUsers() {
 
@@ -23,8 +23,20 @@ function postUser(user) {
     return fetch(API_URL + '/users', options);
 }
 
+function postCourse(course) {
+
+    let options = { 
+        method: 'POST', 
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(course) 
+    };
+
+    return fetch(API_URL + '/courses', options);
+}
+
 module.exports = {
     fetchUsers: fetchUsers,
     fetchCourses: fetchCourses,
-    postUser: postUser
+    postUser: postUser,
+    postCourse: postCourse
 };
