@@ -13,6 +13,12 @@ class UserTable extends Component {
     
     constructor(props) {
         super(props);
+        this.onRowSelection = props.onUsersSelected;
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if(nextProps.users.length === this.props.users.length) return false;
+        return true;
     }
 
     render() {
@@ -33,16 +39,16 @@ class UserTable extends Component {
             });
         }
 
-        return(
-            <Table selectable={false} multiSelectable={false}>
-                <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={false}>
+        return (
+            <Table selectable={true} multiSelectable={true} onRowSelection={this.onRowSelection}>
+                <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={true}>
                     <TableRow>
                         <TableHeaderColumn>id</TableHeaderColumn>
                         <TableHeaderColumn>username</TableHeaderColumn>
                         <TableHeaderColumn>email</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
-                <TableBody displayRowCheckbox={false}>
+                <TableBody displayRowCheckbox={true} deselectOnClickaway={false}>
                     {tableRows}
                 </TableBody>
             </Table>

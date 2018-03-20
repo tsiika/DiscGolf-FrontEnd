@@ -13,7 +13,7 @@ import { TextField, RaisedButton } from 'material-ui';
 
 /*
     UserForm
-
+    
     props {
         postData: function()    // Function for handling user data, called from form submit event handler
     }

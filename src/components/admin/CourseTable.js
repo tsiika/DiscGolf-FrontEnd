@@ -13,10 +13,12 @@ class CourseTable extends Component {
     
     constructor(props) {
         super(props);
+        this.onRowSelection = props.onCoursesSelected;
     }
 
-    componentDidMount() {
-
+    shouldComponentUpdate(nextProps, nextState) {
+        if(nextProps.courses.length === this.props.courses.length) return false;
+        return true;
     }
 
     render() {
@@ -38,9 +40,9 @@ class CourseTable extends Component {
             });
         }
 
-        return(
-            <Table selectable={false} multiSelectable={false}>
-                <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={false}>
+        return (
+            <Table selectable={true} multiSelectable={false} onRowSelection={this.onRowSelection}>
+                <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={true}>
                     <TableRow>
                         <TableHeaderColumn>id</TableHeaderColumn>
                         <TableHeaderColumn>name</TableHeaderColumn>
@@ -48,7 +50,7 @@ class CourseTable extends Component {
                         <TableHeaderColumn>fairways</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
-                <TableBody displayRowCheckbox={false}>
+                <TableBody displayRowCheckbox={true} deselectOnClickaway={false}>
                     {tableRows}
                 </TableBody>
             </Table>
