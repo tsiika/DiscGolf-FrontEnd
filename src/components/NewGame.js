@@ -11,7 +11,8 @@ class newGame extends Component {
             <div>
                 <h3>Play</h3>
                 <p>You can play single course or attend to competition.</p>
-                <RaisedButton label="Single Course" primary={true} style={style}></RaisedButton>  <RaisedButton label="Tournament" primary={true} style={style}></RaisedButton>
+                <RaisedButton label="Single Course" primary={true} style={style}></RaisedButton> 
+                <RaisedButton label="Tournament" primary={true} style={style}></RaisedButton>
             </div>
         )
     }
