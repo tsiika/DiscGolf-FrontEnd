@@ -23,12 +23,26 @@ import Scorecard from './modules/Scorecard';
 import Admin from './modules/Admin';
 
 import "./App.css";
+import "./styles/simple-grid.css";
 
 
 
 class App extends Component {
+	state = {
+		loading: true,
+	};
+
+	componentDidMount(){
+		setTimeout(() => this.setState({loading: false}),1);
+	}
 
 	render() {
+		const { loading } = this.state;
+
+		if(loading) {
+			return null;
+		}
+
 		return (
 			<div className="App">
 				<AppBar>

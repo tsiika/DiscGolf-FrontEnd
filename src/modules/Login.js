@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
 import '../App.css';
 
 var btnStyle = {
@@ -17,21 +20,34 @@ class LoginForm extends Component{
   render() {
 
     const Button = withRouter(({ history }) => (
-      <button
+      <RaisedButton 
+       label="Register"
         type='button'
         onClick={() => {history.push('/Register') }}
-        > Register </button>
+        backgroundColor="#a4c639" />  
     ));
 
     return (
       <div>
         <form onSubmit={this.loginForm.bind(this)}>
           <h2>This is login page.</h2>
-          Username: <br/>
-          <input type="text" name="usrname"/> <br/>
-          Password: <br/>
-          <input type="password" name="pwd" /><br/>
-          <input type="submit" name="Submit" style={btnStyle} />
+          <TextField
+          name="usrname"
+          hintText="User name"
+          floatingLabelText="User Name"
+          floatingLabelFixed
+        />
+        <br />
+        <TextField
+          name="pwd"
+          type="password"
+          hintText="Password"
+          floatingLabelText="Password"
+          floatingLabelFixed
+        />
+        <br />
+         
+          <RaisedButton type="submit" label="Submit" style={btnStyle}  primary/>
           <Button style={btnStyle}/>
         </form>
       </div>

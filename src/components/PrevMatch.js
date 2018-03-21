@@ -5,8 +5,8 @@ class previousMatch extends Component {
     render() {
         return (
             <div>
-                <table>
                 <h3>Last three (3) matches:</h3>
+                <table>
                     <tr>
                         <th>Course</th>
                         <th>Throws</th>

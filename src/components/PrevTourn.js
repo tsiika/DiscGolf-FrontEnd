@@ -5,8 +5,8 @@ class previousTournament extends Component {
     render() {
         return (
             <div>
-                <table>
                 <h3>Previous tournaments:</h3>
+                <table>
                     <tr>
                         <th>Tournament</th>
                         <th>Placement</th>
