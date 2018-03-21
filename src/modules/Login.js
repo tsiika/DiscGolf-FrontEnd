@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
-import RaisedButton from 'material-ui/RaisedButton';
+
 import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import '../App.css';
 
@@ -39,6 +40,7 @@ class LoginForm extends Component{
         <br />
         <TextField
           name="pwd"
+          type="password"
           hintText="Password"
           floatingLabelText="Password"
           floatingLabelFixed
