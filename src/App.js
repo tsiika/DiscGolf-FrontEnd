@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 import {List, ListItem} from 'material-ui/List';
@@ -19,9 +19,11 @@ import Register from './modules/Register';
 import Logout from './modules/Logout';
 import Confirm from './modules/Confirm';
 import Dashboard from './modules/Dashboard';
+import Scorecard from './modules/Scorecard';
 import Admin from './modules/Admin';
 
 import "./App.css";
+
 
 
 class App extends Component {
@@ -43,7 +45,11 @@ class App extends Component {
 					<Route path="/logout" component={Logout} />
 					<Route path="/confirm" component={Confirm} />
 					<Route path="/dashboard" component={Dashboard} />
+
+                    <Route path="/scorecard" render={ (props) => (<Scorecard {...props} fooprop='barfoo' />) } />
+
                     <Route path="/admin" component={Admin} />
+
 
 					{/*404*/}
 					<Route component={NoMatch}/>

@@ -3,6 +3,8 @@ import Api from '../api/Api';
 import '../App.css';
 import '../Admin.css';
 
+import { Link } from 'react-router-dom';
+
 import UserTable from '../components/admin/UserTable';
 import CourseTable from '../components/admin/CourseTable';
 import UserForm from '../components/admin/UserForm';
@@ -38,6 +40,8 @@ class Admin extends Component {
         this.onCourseSaved = this.onCourseSaved.bind(this);
         this.onUsersSelected = this.onUsersSelected.bind(this);
         this.onCoursesSelected = this.onCoursesSelected.bind(this);
+
+        this.newRoundHandler = this.newRoundHandler.bind(this);
 
         this.state = { 
             users: [], 
@@ -128,7 +132,6 @@ class Admin extends Component {
 
     onCoursesSelected(selections) {
 
-        
         if(selections.length > 0) {
             let selectedCourses = selections.map(i => this.state.courses[i]);
             let newRoundEnabled = (this.state.selectedUsers.length > 0 ) ? true : false;
@@ -138,7 +141,22 @@ class Admin extends Component {
         }
     }
 
+    onClickNewRound() {
+        console.log('New round....');
+    }
+
+    newRoundHandler(param) {
+        console.log('newRoundHandler');
+        console.log(param.target);
+        console.log(param.match);
+        console.log(param.target.match);
+        
+    }
+
     render() {
+
+        let linkParams = {pathname: 'scorecard', params:{foo: 'bar'}};
+
         return (
             <div className="Admin">
                 <h2>Admin</h2>
@@ -164,10 +182,18 @@ class Admin extends Component {
                         </div>
                     </div>
                 </div>
-                <RaisedButton id="newRoundButton" label="New Round" primary={true} disabled={!this.state.newRoundEnabled} />
+                <div>
+                    <Link to='/scorecard' style={{ textDecoration: 'none' }} onClick={this.newRoundHandler} >
+                        New round
+                    </Link>
+                </div>
             </div>
         );
     }
 }
+
+//<RaisedButton id="newRoundButton" label="New Round" primary={true} disabled={!this.state.newRoundEnabled} />
+// to={{path: '/scorecard', state: {statePropsi: 'foobar'}}}
+
 
 export default Admin;
