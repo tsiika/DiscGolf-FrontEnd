@@ -81,7 +81,7 @@ class Admin extends Component {
     }
 
     fetchCourses() {
-        let coursesPromise = Api.fetchCourses();
+        let coursesPromise = Api.fetchCourses(false);
         
         coursesPromise.then(response => {
             return response.json();
@@ -181,11 +181,6 @@ class Admin extends Component {
                             <CourseForm postData={this.postCourse} />
                         </div>
                     </div>
-                </div>
-                <div>
-                    <Link to='/scorecard' style={{ textDecoration: 'none' }} onClick={this.newRoundHandler} >
-                        New round
-                    </Link>
                 </div>
             </div>
         );

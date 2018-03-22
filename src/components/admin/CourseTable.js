@@ -27,14 +27,15 @@ class CourseTable extends Component {
 
         if(courses && courses.length > 0) {
             
-            tableRows = courses.map((course, index) => { 
+            tableRows = courses.map((course, index) => {
+                
                 return (
                     
                     <TableRow key={index}>
                         <TableRowColumn>{course._id}</TableRowColumn>
                         <TableRowColumn>{course.name}</TableRowColumn>
                         <TableRowColumn>{course.description}</TableRowColumn>
-                        <TableRowColumn>{course.fairways.length}</TableRowColumn>
+                        <TableRowColumn>{ (course.fairways) ? course.fairways.length : 0 }</TableRowColumn>
                     </TableRow>
                 );
             });
