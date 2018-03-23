@@ -5,18 +5,13 @@ class RoundModel {
 
         this.id = _id || null;
         
-        this.course = null;
-        this.players = null;
+        this.course = {
+            fairways: []
+        };
+        this.players = [];
         this.fairwayScores = [];
     }
-
-    toJSON() {
-        return {
-            course: this.course,
-            players: this.players,
-            fairwayScores: this.fairwayScores
-        };
-    }
+    
 }
 
 export default RoundModel;

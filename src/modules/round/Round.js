@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Switch, Route, match } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import NoMatch from '../../components/404';
 
 import Api from  '../../api/Api';
+
+import '../../App.css';
+import '../../Round.css';
 
 import {
     Table,
@@ -13,12 +15,29 @@ import {
     TableRow,
     TableRowColumn
 } from 'material-ui/Table';
-import { TextField, RaisedButton } from 'material-ui';
+import { RaisedButton } from 'material-ui';
 
 import RoundModel from '../../models/RoundModel';
+import Scorecard from '../../components/round/Scorecard';
 
-import CourseTable from '../../components/admin/CourseTable';
-
+/*
+*   Round - module
+*
+*   Renders course selection, player selection and scorecard.
+*
+*   At the moment the idea is that, initial round data-model is build after choosing the course and players, and passed on the
+*   Scorecard, which handles updating and saving it. But this might change...
+*
+*   
+*   TODO: CourseSelection, PlayerSelection and Scorecard should separated into their own component-files(node modules).
+*         ...or probably as modules rather than components.
+*         (Sidenote: 'modules', is not the best name for component category as it mixes with Node module, 'containers' might be better)
+*
+*   TODO: Do view switching by redirecting to corresponding location (or by pushing history or etc.),
+*         so that it would possible to go back to previous view with browser back-button.
+*         ...or at least do a confirmation check for preventing unwanted page leave.
+* 
+*/
 class Round extends Component {
     
     constructor(props) {
@@ -28,19 +47,39 @@ class Round extends Component {
         this.onPlayersSelected = this.onPlayersSelected.bind(this);
 
         let _model = new RoundModel();
-        this.state = {model: _model};
+        this.state = {model: _model, courseSelected: false, playersSelected: false};
     }
 
     onCourseSelected(_course) {
         let _model = this.state.model;
         _model.course = _course;
-        this.setState( { model: _model } );
+        this.setState( { model: _model, courseSelected: true } );
     }
 
+    /* Handles proceeding from player selection */
     onPlayersSelected(_players) {
+
+        // Update players to data model
         let _model = this.state.model;
         _model.players = _players;
-        this.setState( { model: _model } );
+
+        // Create initial fairwayScores-object to model
+        _model.fairwayScores = [];
+
+        // Note that we store also the username for convenience, as we need it while listing players on the scorecard
+        _model.course.fairways.forEach((fairway) => {
+            _model.players.forEach((player) =>{
+                _model.fairwayScores.push({
+                    fairwayId: fairway._id,
+                    userId: player._id,
+                    userName: player.username,
+                    score: null,
+                    ob: null
+                });
+            })
+        });
+
+        this.setState( { model: _model, playersSelected: true } );
     }
 
     render() {
@@ -48,49 +87,69 @@ class Round extends Component {
         let match = this.props.match;
 
         return(
-            <Switch>
-                <Route exact path={match.url + "/"} render={
-                    () => {
-                        
-                        if(!this.state.model.course) {
-                            return <CourseSelection onCourseSelected={this.onCourseSelected} />
-                        } else if(!this.state.model.players) {
-                            return <PlayerSelection onPlayersSelected={this.onPlayersSelected} />
-                        } else {
-                            return <SCORECARD model={this.state.model} />
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div style={{maxWidth: '750px'}}>
+                <Switch>
+                    <Route exact path={match.url + "/"} render={
+                        () => {
+                            // TODO: Do view switching by redirecting to corresponding location (or by pushing history or etc.),
+                            // so that it would possible to go back to previous view with browser back-button.
+                            
+                            if(!this.state.courseSelected) {
+                                return <CourseSelection onCourseSelected={this.onCourseSelected} />
+                                //return <Redirect to={match.url + "/course"} />
+                            } else if(!this.state.playersSelected) {
+                                return <PlayerSelection onPlayersSelected={this.onPlayersSelected} />
+                            } else {
+                                return <Scorecard model={this.state.model} />
+                            }
+
+                            /*
+                            return (
+                                <div>
+                                <CourseSelection onCourseSelected={this.onCourseSelected} />
+                                <PlayerSelection onPlayersSelected={this.onPlayersSelected} />
+                                <Scorecard model={this.state.model} onScoreInputChange={this.onScoreInputChange}/>
+                                </div>
+                            )
+                            */
                         }
-                    }
-                }/>
-                <Route exact path={match.url + "/course"} component={CourseSelection} />
-                <Route exact path={match.url + "/players"} component={PlayerSelection} />
-                
-                <Route component={NoMatch}/>
-            </Switch>
+                    }/>
+                    {/*
+                    <Route exact path={match.url + "/course"} render={ () => (<CourseSelection onCourseSelected={this.onCourseSelected} />) } />
+                    <Route exact path={match.url + "/players"} component={PlayerSelection} />
+                    */}
+                    <Route component={NoMatch}/>
+                </Switch>
+                </div>
+            </div>
         );
     }
 }
 
-class RoundContainer extends Component {
-
-    render() {
-        return(
-            <div><h2>Round container</h2></div>
-        );
-    }
-}
-
+/*
+*   CourseSeletion - component
+*
+*   @props  onCourseSelected    Function for handling the proceed button event
+* 
+*   TODO: Course search
+*   TODO: Courses could be displayed in grid rather than table (would fit more)
+*/
 class CourseSelection extends Component {
     
     constructor(props) {
         super(props);
+
         this.onCoursesReceived = this.onCoursesReceived.bind(this);
         this.onCourseSelected = this.onCourseSelected.bind(this);
-        this.state = {};
+        this.onProceed = this.onProceed.bind(this);
+        
+        this.state = { courseSelected: false };
     }
 
     componentDidMount() {
 
-        let courses = Api.fetchCourses().then((response) => {
+        Api.fetchCourses().then((response) => {
             return response.json();
         }).then((jsonResponse) => {
             this.onCoursesReceived(jsonResponse);
@@ -104,8 +163,12 @@ class CourseSelection extends Component {
     }
 
     onCourseSelected(selection) {
-        let course = this.state.courses[selection];
-        this.props.onCourseSelected(course);
+        this.setState({selectedCourse: selection, courseSelected: true});
+    }
+
+    onProceed() {
+        // Note that this.state.selectedCourse only contains the index of the selected row
+        this.props.onCourseSelected( this.state.courses[this.state.selectedCourse] );
     }
 
     render() {
@@ -115,9 +178,10 @@ class CourseSelection extends Component {
 
         if(courses && courses.length > 0) {
             
-            tableRows = courses.map((course, index) => {                
+            tableRows = courses.map((course, index) => {
+                let selected = ( parseInt(this.state.selectedCourse) === index ) ? true : false;                
                 return (                    
-                    <TableRow key={course._id}>
+                    <TableRow key={course._id} selected={selected}>
                         <TableRowColumn>{course.name}</TableRowColumn>
                         <TableRowColumn>{course.description}</TableRowColumn>
                         <TableRowColumn>{ (course.fairways) ? course.fairways.length : 0 }</TableRowColumn>
@@ -141,11 +205,22 @@ class CourseSelection extends Component {
                         {tableRows}
                     </TableBody>
                 </Table>
+                <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} disabled={!this.state.courseSelected} />
             </div>
         );
     }
 }
 
+/*
+*   PlayerSelection - component
+*
+*   @props  onPlayersSelected   Funtion for handling the proceed button event   
+*
+*   TODO: Logged user should selected in to round by default
+*   TODO: Player search
+*   TODO: Filtering players by team and etc (in the future)
+*
+*/
 class PlayerSelection extends Component {
 
     constructor(props) {
@@ -191,7 +266,7 @@ class PlayerSelection extends Component {
         if(players && players.length > 0) {
             
             tableRows = players.map((player, index) => {
-                let selected = ( this.state.selectedPlayers.indexOf(index) != -1 ) ? true : false;
+                let selected = ( this.state.selectedPlayers.indexOf(index) !== -1 ) ? true : false;
                 return (
                     <TableRow key={player._id} selected={selected}>                        
                         <TableRowColumn>{player.username}</TableRowColumn>
@@ -213,17 +288,8 @@ class PlayerSelection extends Component {
                         {tableRows}
                     </TableBody>
                 </Table>
-                <RaisedButton label="Proceed" onClick={this.onProceed} disabled={!this.state.playersSelected} />
+                <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} disabled={!this.state.playersSelected} />
             </div>
-        );
-    }
-}
-
-class SCORECARD extends Component {
-    render() {
-        console.log(this.props.model);
-        return (
-            <div><h2>SCORECARD</h2></div>
         );
     }
 }

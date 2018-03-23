@@ -20,7 +20,6 @@ import Logout from './modules/Logout';
 import Confirm from './modules/Confirm';
 import Dashboard from './modules/Dashboard';
 import Round from './modules/round/Round';
-import Scorecard from './modules/Scorecard';
 import Admin from './modules/Admin';
 
 import "./App.css";

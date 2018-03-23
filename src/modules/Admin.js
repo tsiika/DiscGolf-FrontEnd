@@ -187,8 +187,4 @@ class Admin extends Component {
     }
 }
 
-//<RaisedButton id="newRoundButton" label="New Round" primary={true} disabled={!this.state.newRoundEnabled} />
-// to={{path: '/scorecard', state: {statePropsi: 'foobar'}}}
-
-
 export default Admin;
