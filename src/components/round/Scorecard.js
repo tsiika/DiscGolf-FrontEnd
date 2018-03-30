@@ -20,6 +20,13 @@ import { RaisedButton } from 'material-ui';
 *
 *   TODO: Send data-object to API
 *   TODO: Keyboard-component for inputting scores on mobile.
+*   
+*   TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO 
+*   Fairways don't have object_ids anymore cause they are embedded into course,
+*   so change the ROUND-datamodel so that it has FAIRWAYS-array (And make this array straight from the course.fairways-array) 
+*   instead of fairwayScores-array. And build players and scores under that array (like they are now under fairwayScores).
+*   TODO TODO TODOTODO TODO TODOTODO TODO TODOTODO TODO TODOTODO TODO TODOTODO TODO TODO TODO
+*
 */
 class Scorecard extends Component {
     
@@ -30,16 +37,30 @@ class Scorecard extends Component {
         this.onScoreInputChange = this.onScoreInputChange.bind(this);
         this.onProceed = this.onProceed.bind(this);
 
+        let currentFairway = null;
+        // Pick the first fairway of the course (Initially it should be the fairway with order=1)
+        this.props.model.course.fairways.forEach((fairway) => {
+            if( parseInt(fairway.order) === 1 ) currentFairway = fairway;
+        });
+
+        // If fairway with order=1 was not found (though it should be), pick the first from fairway-array
+        currentFairway = this.props.model.course.fairways[0];
+        
         this.state = { 
-            model: this.props.model, // Model corresponding the database schema
-            currentFairway: 0        // Index of the fairway in the model.course.fairways array
+            model: this.props.model,        // Model corresponding the database schema
+            currentFairway: currentFairway  // Index of the fairway in the model.course.fairways array
         };
     }
     
     // TODO: At the moment this event comes from the FairwayIndicator when the indicator dots are clicked,
-    //       a keyboard for mobile usage should replace this also.
+    //       a keyboard for mobile usage should replace that also.
     onFairwayChanged(fairwayIndex) {
-        this.setState({currentFairway: fairwayIndex});
+        
+        this.props.model.course.fairways.forEach((fairway) => {
+            if( parseInt(fairway.order) === fairwayIndex ) {
+                this.setState({currentFairway: fairway});
+            }
+        });
     }
 
     /* Handles input change event from PlayerList and updates data-model */
@@ -66,7 +87,8 @@ class Scorecard extends Component {
     }
 
     render() {
-        
+        console.log('--Scorecard--');
+        console.log(this.state);
         let currentFairwayId = 0;
         if(this.state.model.course.fairways.length > 0) {
             currentFairwayId = this.state.model.course.fairways[this.state.currentFairway]._id;
@@ -162,6 +184,9 @@ class PlayerList extends Component {
         let currentFairwayId = this.props.currentFairwayId;
         let fairwayScores = this.props.fairwayScores;
         let tableRows = '';
+
+        console.log(' ---- Scorecard ----');
+        console.log(fairwayScores);
 
         tableRows = fairwayScores.map((fairwayScore, index) => {            
             if(fairwayScore.fairwayId === currentFairwayId) {
