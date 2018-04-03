@@ -63,6 +63,7 @@ class Round extends Component {
         let _model = this.state.model;
         _model.players = _players;
 
+        /*
         // Create initial fairwayScores-object to model
         _model.fairwayScores = [];
 
@@ -70,7 +71,7 @@ class Round extends Component {
         _model.course.fairways.forEach((fairway) => {
             _model.players.forEach((player) =>{
                 _model.fairwayScores.push({
-                    fairwayId: fairway._id,
+                    fairwayOrder: fairway.order,
                     userId: player._id,
                     userName: player.username,
                     score: null,
@@ -78,11 +79,48 @@ class Round extends Component {
                 });
             })
         });
+        */
+
+        /* 
+           Build scores-object that contains object for each player with the player id as the key.
+           This should lead to an object like:
+           {
+               'playerId': {
+                   'fairwayOrder': { throws: null, ob: false },
+                    ...,
+                    totalScore: 0,
+                    userName: 'Foobar'
+                },
+                ...
+            }
+        */
+        _model.players.forEach((player) => {
+            _model.scores[player._id] = {};
+            // For each player store each fairway throw count and ob as it's own object
+            _model.course.fairways.forEach((fairway) => {
+                _model.scores[player._id][fairway.order] = {
+                    throws: null,
+                    ob: false
+                };
+            })
+            // Also store the inital total score
+            _model.scores[player._id].totalScore = 0;
+            // ...and the player(user) name for convenience
+            _model.scores[player._id].userName = player.username;
+        });
 
         this.setState( { model: _model, playersSelected: true } );
     }
 
     render() {
+
+        console.log('--- Round.render ---');
+        if(this.state.model.players.length > 0) console.log(this.state.model.scores[this.state.model.players[0]._id][2]);
+        console.log(this.state.model.scores);
+
+        for(let p in this.state.model.scores) {
+            console.log(p);
+        }
 
         let match = this.props.match;
 

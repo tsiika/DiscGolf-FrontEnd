@@ -9,7 +9,10 @@ class RoundModel {
             fairways: []
         };
         this.players = [];
-        this.fairwayScores = [];
+        
+        //this.fairwayScores = [];
+
+        this.scores = {};
     }
     
 }
