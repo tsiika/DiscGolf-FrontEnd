@@ -26,7 +26,6 @@ import "./App.css";
 import "./styles/simple-grid.css";
 
 
-
 class App extends Component {
 	state = {
 		loading: true,

@@ -3,7 +3,7 @@ class RoundModel {
     
     constructor(_id) {
 
-        this.id = _id || null;
+        this._id = _id || null;
         
         this.course = {
             fairways: []
@@ -13,6 +13,18 @@ class RoundModel {
         //this.fairwayScores = [];
 
         this.scores = {};
+    }
+
+    toSchema() {
+
+        let players = this.players.map((player) => { return player._id });
+
+        return {
+            _id: this._id,
+            courseId: this.course._id,
+            players: players,
+            scores: this.scores
+        }
     }
     
 }

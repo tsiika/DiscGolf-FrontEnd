@@ -58,7 +58,7 @@ class Admin extends Component {
     }
 
     fetchUsers() {
-        let usersPromise = Api.fetchUsers();
+        let usersPromise = Api.getUsers();
 
         usersPromise.then(response => {
             return response.json();
@@ -81,7 +81,7 @@ class Admin extends Component {
     }
 
     fetchCourses() {
-        let coursesPromise = Api.fetchCourses(false);
+        let coursesPromise = Api.getCourses(false);
         
         coursesPromise.then(response => {
             return response.json();

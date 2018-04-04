@@ -10,6 +10,13 @@ import {
 } from 'material-ui/Table';
 import { RaisedButton } from 'material-ui';
 
+// Polyfill for the ES2015 Number.isInteger (For IE)
+// TODO: Move this some util module, or etc.
+Number.isInteger = Number.isInteger || function(value) {
+    return typeof value === "number" && 
+           isFinite(value) && 
+           Math.floor(value) === value;
+};
 
 /*
 *   Scorecard - component
@@ -20,17 +27,14 @@ import { RaisedButton } from 'material-ui';
 *
 *   TODO: Send data-object to API
 *   TODO: Keyboard-component for inputting scores on mobile.
-*   
-*   TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO 
-*   Fairways don't have object_ids anymore cause they are embedded into course,
-*   so change the ROUND-datamodel so that it has FAIRWAYS-array (And make this array straight from the course.fairways-array) 
-*   instead of fairwayScores-array. And build players and scores under that array (like they are now under fairwayScores).
-*   TODO TODO TODOTODO TODO TODOTODO TODO TODOTODO TODO TODOTODO TODO TODOTODO TODO TODO TODO
 *
+*   TODO:
+*   Lopuksi yhteenvedossa tallennetaan heitetyiksi vain ne väyläsuoritukset, joiden heittomäärä on yli 0.
 */
 class Scorecard extends Component {
     
     constructor(props) {
+
         super(props);
 
         this.onFairwayChanged = this.onFairwayChanged.bind(this);
@@ -38,6 +42,7 @@ class Scorecard extends Component {
         this.onProceed = this.onProceed.bind(this);
 
         let currentFairway = null;
+        // TODO: course total par should propably be stored in database
         let courseTotalPar = 0;
         // Pick the first fairway of the course (Initially it should be the fairway with order=1)
         this.props.model.course.fairways.forEach((fairway) => {
@@ -52,7 +57,6 @@ class Scorecard extends Component {
             model: this.props.model,            // Model corresponding the database schema
             currentFairway: currentFairway,     // Fairway data
             courseTotalPar: courseTotalPar      // Total par value of the course
-            //currentFairwayOrder: 1              // Current fairway order number
         };
     }
     
@@ -67,32 +71,36 @@ class Scorecard extends Component {
         });
     }
 
-    /* Handles input change event from PlayerList and updates data-model */
-    // TODO: Change the name of this function
-    onScoreInputChange(playerId, throws) {
+    // Handles input change event from PlayerList and updates data-model
+    onScoreInputChange(playerId, newThrowCount) {
 
         let _model = this.state.model;
 
-        /*
-        // Iterate fairway scores and update score according to player- and fairway order number
-        _model.fairwayScores.forEach(fairwayScore => {
-            if(fairwayScore.fairwayOrder == this.state.currentFairway.order && fairwayScore.userId == playerId ) {
-                fairwayScore.score = score;
-            }
-        });
-        */
-
-        // Update fairway score
-        _model.scores[playerId][this.state.currentFairway.order].throws = throws;
+        // Update fairway throw count
+        _model.scores[playerId][this.state.currentFairway.order].throwCount = newThrowCount;
         
-        // Update total round score
-        let totalScore = 0;
+        // Update total round throw count and total difference to player's played fairways total par value
+        let _totalThrowCount = 0;
+        let _diffToPlayedFairwaysPar = 0;
 
         for(let fairwayOrder in _model.scores[playerId]) {
-            totalScore += _model.scores[playerId][fairwayOrder].score || 0;
+
+            let fairway = _model.scores[playerId][fairwayOrder];
+            
+            if(fairway && fairway.throwCount) {
+                _totalThrowCount += fairway.throwCount;
+                _diffToPlayedFairwaysPar += fairway.throwCount - fairway.par; 
+            }
         }
 
-        _model.scores[playerId].totalScore = totalScore;
+        _model.scores[playerId].totalThrowCount = _totalThrowCount;
+        _model.scores[playerId].diffToPlayedFairwaysPar = _diffToPlayedFairwaysPar;
+
+        // Mark fairway as 'played' (This is mainly for displaying played ones on the FairwayInfo).
+        // Also note that fairway objects do not contain 'played'-property, it's created here 'on the fly'.
+        this.state.model.course.fairways.forEach((fairway) => {
+            if(fairway.order === this.state.currentFairway.order) fairway.played = true;
+        });
 
         console.log('Input change');
         console.log(_model);
@@ -101,23 +109,15 @@ class Scorecard extends Component {
     }
 
     onProceed() {
-        console.log('TODO: Save this to database: ');
-        console.log(this.state.model);
+        this.props.postOrUpdateRound();
     }
 
     render() {
-        
-        /*
-        let currentFairwayId = 0;
-        if(this.state.model.course.fairways.length > 0) {
-            currentFairwayId = this.state.model.course.fairways[this.state.currentFairway]._id;
-        }
-        */
 
         return (
             <div className="Scorecard">
                 <h2>Scorecard</h2>
-                {this.state.model.course.name}
+                {this.state.model.course.name} - Par {this.state.courseTotalPar}
                 <FairwayInfo fairways={this.state.model.course.fairways} currentFairway={this.state.currentFairway} onFairwayChanged={this.onFairwayChanged} />
                 <PlayerList currentFairway={this.state.currentFairway} scores={this.state.model.scores} courseTotalPar={this.state.courseTotalPar} onScoreInputChange={this.onScoreInputChange} />
                 <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} />
@@ -159,8 +159,14 @@ class FairwayInfo extends Component {
             <div className="fairway-info">
                 <div className="fairway-indicator">
                     { fairways.map((f, i) => {
-                        // Display current fairway with filled color dot
-                        let className = (f.order != currentFairway.order) ? "dot" : "dot dot-active";
+                        // Display current and played fairways with different fill colors
+                        let className = "dot";
+                        if(f.order === currentFairway.order) {
+                            className += " dot-active";
+                        } else if(f.played) {
+                            className += " dot-played";
+                        }
+
                         return <div key={f.order} data-order={f.order} className={className} onClick={this.onFairwayChanged}></div>
                     })}
                 </div>
@@ -176,10 +182,17 @@ class FairwayInfo extends Component {
 /*
 *   PlayerList - component
 *   
-*   Displays player list on the Scorecard.
-*   Note that even though this called PlayerList it actually displays fairwayScore-objects.
+*   Displays player list on the Scorecard:
+*   - Player name
+*   - Out-of-Bounds marker
+*   - Input field for current fairway throw count.
+*   - Total throw count on the round
+*   - Total throw count difference to total fairway par value played by the player   
 *
-*   @props  fairwayScores     Array of fairway score-data.
+*   @props  currentFairway      Object      Current fairway-object.
+*   @props  scores              Object      Round score data.
+*   @props  courseTotalPar      Number      Total par value of the course
+*   @props  onScoreInputChange  Function    Callback function to handle input change.
 *
 */
 class PlayerList extends Component {
@@ -198,8 +211,12 @@ class PlayerList extends Component {
     onScoreInputChange(event) {
         // Note the usage of dataset-object
         let playerId = event.target.dataset.playerId; // Refers to 'data-player-id'-propery of the element
-        let score = parseInt(event.target.value);
-        this.props.onScoreInputChange(playerId, score);
+        let throwCount = parseInt(event.target.value);
+
+        // If inputted value is not integer, store null
+        if(!Number.isInteger(throwCount)) throwCount = null;
+
+        this.props.onScoreInputChange(playerId, throwCount);
     }
 
     render() {
@@ -213,18 +230,25 @@ class PlayerList extends Component {
         for(let playerId in scores) {
             
             let playerName = scores[playerId].userName;
-            let score = scores[playerId][currentFairway.order].score;
+            let throwCount = scores[playerId][currentFairway.order].throwCount || 0;
             let ob = scores[playerId][currentFairway.order].ob;
-            let totalScore = scores[playerId].totalScore;
-            let differenceToFairwayPar = score - currentFairway.par;
+            let totalThrowCount = scores[playerId].totalThrowCount;
+            let diffToFairwayPar = throwCount - currentFairway.par;
+            //let differenceToCourseTotalPar = totalThrowCount - courseTotalPar;
+            let diffToPlayedFairwaysTotalPar = scores[playerId].diffToPlayedFairwaysPar;
 
+            // Add plus signs for positive difference values
+            //diffToFairwayPar = (diffToFairwayPar > 0) ? '+' + diffToFairwayPar : diffToFairwayPar;
+            //differenceToCourseTotalPar = (differenceToCourseTotalPar > 0) ? '+' + differenceToCourseTotalPar : differenceToCourseTotalPar;
+            diffToPlayedFairwaysTotalPar = (diffToPlayedFairwaysTotalPar > 0) ? '+' + diffToPlayedFairwaysTotalPar : diffToPlayedFairwaysTotalPar;
+ 
             tableRows.push(
                 <TableRow key={playerId}>                      
                     <TableRowColumn>{playerName}</TableRowColumn>
                     <TableRowColumn className="input-column"><input type="text" className="read-only" defaultValue="OB" readOnly={true} /></TableRowColumn>
-                    <TableRowColumn className="input-column"><input type="text" value={score || ''} data-player-id={playerId} onChange={this.onScoreInputChange}/></TableRowColumn>
-                    <TableRowColumn className="input-column"><input type="text" className="read-only" value={differenceToFairwayPar} readOnly={true}/></TableRowColumn>
-                    <TableRowColumn className="input-column"><input type="text" className="read-only" value={totalScore} readOnly={true}/></TableRowColumn>
+                    <TableRowColumn className="input-column"><input type="text" value={throwCount} data-player-id={playerId} onChange={this.onScoreInputChange}/></TableRowColumn>
+                    <TableRowColumn className="input-column"><input type="text" className="read-only" value={totalThrowCount || 0} readOnly={true}/></TableRowColumn>
+                    <TableRowColumn className="input-column"><input type="text" className="read-only" value={diffToPlayedFairwaysTotalPar || 0} readOnly={true}/></TableRowColumn>
                 </TableRow>
             );
         }

@@ -45,6 +45,9 @@ class Round extends Component {
 
         this.onCourseSelected = this.onCourseSelected.bind(this);
         this.onPlayersSelected = this.onPlayersSelected.bind(this);
+        this.postOrUpdateRound = this.postOrUpdateRound.bind(this);
+        this.postRound = this.postRound.bind(this);
+        this.updateRound = this.updateRound.bind(this);
 
         let _model = new RoundModel();
         this.state = {model: _model, courseSelected: false, playersSelected: false};
@@ -86,9 +89,9 @@ class Round extends Component {
            This should lead to an object like:
            {
                'playerId': {
-                   'fairwayOrder': { throws: null, ob: false },
+                   'fairwayOrder': { throwCount: null, ob: false },
                     ...,
-                    totalScore: 0,
+                    totalThrowCount: 0,
                     userName: 'Foobar'
                 },
                 ...
@@ -96,20 +99,78 @@ class Round extends Component {
         */
         _model.players.forEach((player) => {
             _model.scores[player._id] = {};
-            // For each player store each fairway throw count and ob as it's own object
+            // For each player, store each fairway throw count and ob as it's own object,
+            // and par value for convenience
             _model.course.fairways.forEach((fairway) => {
                 _model.scores[player._id][fairway.order] = {
-                    throws: null,
-                    ob: false
+                    throwCount: null,
+                    ob: false,
+                    par: fairway.par
                 };
             })
-            // Also store the inital total score
-            _model.scores[player._id].totalScore = 0;
+            // Also store the inital total throw count
+            _model.scores[player._id].totalThrowCount = 0;
+            // .. total difference to played fairways total par
+            _model.scores[player._id].diffToPlayedFairwaysPar = null;
             // ...and the player(user) name for convenience
             _model.scores[player._id].userName = player.username;
         });
 
         this.setState( { model: _model, playersSelected: true } );
+    }
+
+    // Checks if round data already has id, and performs update or post respectively
+    // TODO: UI should propably be 'freezed' during posting and updating (at least for posting)...
+    postOrUpdateRound() {
+        console.log('--- postOrUpdateRound ---');
+        console.log(this.state.model._id);
+        if(this.state.model._id !== null) {
+            this.updateRound();
+        } else {
+            this.postRound();
+        }
+    }
+
+    // Posts new round into database
+    postRound() {
+
+        console.log('--- postRound ---');
+        console.log(this.state.model.toSchema());
+
+        Api.postRound(this.state.model.toSchema()).then((response) => {
+            return response.json();
+        }).then((jsonResponse) => {
+            this.onRoundSaved(jsonResponse);
+        }).catch((reason) => {
+            console.error(reason);
+        });
+    }
+
+    // Updates(PUTs) existing round into database
+    updateRound() {
+        console.log('--- updateRound ---');
+        Api.putRound(this.state.model.toSchema()).then((response) => {
+            return response.json();
+        }).then((jsonResponse) => {
+            this.onRoundSaved(jsonResponse);
+        }).catch((reason) => {
+            console.error(reason);
+        });
+    }
+
+    onRoundSaved(response) {
+        console.log('--- onRoundSaved ----');
+        console.log(response);
+        if(response && response._id) {
+            // Update the round id, if this was creation event
+            if(this.state.model._id === null) {
+                let model = this.state.model;
+                model._id = response._id;
+                this.setState({model: model});
+            }
+        } else {
+            console.error('Error on saving round data');
+        }
     }
 
     render() {
@@ -139,7 +200,7 @@ class Round extends Component {
                             } else if(!this.state.playersSelected) {
                                 return <PlayerSelection onPlayersSelected={this.onPlayersSelected} />
                             } else {
-                                return <Scorecard model={this.state.model} />
+                                return <Scorecard model={this.state.model} postOrUpdateRound={this.postOrUpdateRound} />
                             }
 
                             /*
@@ -187,7 +248,7 @@ class CourseSelection extends Component {
 
     componentDidMount() {
 
-        Api.fetchCourses().then((response) => {
+        Api.getCourses().then((response) => {
             return response.json();
         }).then((jsonResponse) => {
             this.onCoursesReceived(jsonResponse);
@@ -273,7 +334,7 @@ class PlayerSelection extends Component {
 
     componentDidMount() {
 
-        Api.fetchUsers().then((response) => {
+        Api.getUsers().then((response) => {
             return response.json();
         }).then((jsonResponse) => {
             this.onPlayersReceived(jsonResponse);
