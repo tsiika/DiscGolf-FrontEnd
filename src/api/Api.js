@@ -7,9 +7,13 @@ function getUsers() {
     return fetch(API_URL + '/users', options);
 }
 
-function getCourses() {
+function getCourses(courseId) {
+    courseId = courseId || '';
+    
+    let url = API_URL + '/courses/' + courseId;
     let options = { method: 'GET'};
-    return fetch(API_URL + '/courses', options);
+    
+    return fetch(url, options);
 }
 
 function postUser(user) {

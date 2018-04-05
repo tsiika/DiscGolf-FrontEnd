@@ -47,6 +47,7 @@ render(){
                     <Link to="/login" style={{ textDecoration: 'none' }}><MenuItem>Login</MenuItem></Link>
                     <Link to="/register" style={{ textDecoration: 'none' }}><MenuItem>Register</MenuItem></Link>
                     <Link to="/dashboard" style={{ textDecoration: 'none' }}><MenuItem>Dashboard</MenuItem></Link>
+                    <Link to="/courses" style={{ textDecoration: 'none' }}><MenuItem>Courses</MenuItem></Link>
                     <Link to="/logout" style={{ textDecoration: 'none' }}><MenuItem>Logout</MenuItem></Link>
                     <Link to="/admin" style={{ textDecoration: 'none' }}><MenuItem>Admin</MenuItem></Link>
 

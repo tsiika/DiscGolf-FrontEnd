@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import UserTable from '../components/admin/UserTable';
 import CourseTable from '../components/admin/CourseTable';
 import UserForm from '../components/admin/UserForm';
+import CourseForm from '../components/CourseForm';
 
 //import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -21,7 +22,6 @@ import {
   } from 'material-ui/Table';
 
 import { TextField, RaisedButton } from 'material-ui';
-import CourseForm from '../components/admin/CourseForm';
 import { RadioButton } from 'material-ui/RadioButton';
 
 

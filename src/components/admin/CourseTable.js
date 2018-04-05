@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
     Table,
@@ -13,7 +14,11 @@ class CourseTable extends Component {
     
     constructor(props) {
         super(props);
+        
         this.onRowSelection = props.onCoursesSelected;
+
+        // Default multiselection to true
+        this.multiSelectable = (props.hasOwnProperty('multiSelectable')) ? props.multiSelectable : true;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -33,17 +38,18 @@ class CourseTable extends Component {
                     
                     <TableRow key={index}>
                         <TableRowColumn>{course._id}</TableRowColumn>
-                        <TableRowColumn>{course.name}</TableRowColumn>
+                        <TableRowColumn><Link to={{ pathname:'/courses/' + course._id}} >{course.name}</Link></TableRowColumn>
                         <TableRowColumn>{course.description}</TableRowColumn>
                         <TableRowColumn>{ (course.fairways) ? course.fairways.length : 0 }</TableRowColumn>
                     </TableRow>
+                    
                 );
             });
         }
 
         return (
-            <Table selectable={true} multiSelectable={false} onRowSelection={this.onRowSelection}>
-                <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={true}>
+            <Table selectable={true} multiSelectable={this.multiSelectable} onRowSelection={this.onRowSelection}>
+                <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={this.multiSelectable}>
                     <TableRow>
                         <TableHeaderColumn>id</TableHeaderColumn>
                         <TableHeaderColumn>name</TableHeaderColumn>
@@ -51,7 +57,7 @@ class CourseTable extends Component {
                         <TableHeaderColumn>fairways</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
-                <TableBody displayRowCheckbox={true} deselectOnClickaway={false}>
+                <TableBody displayRowCheckbox={this.multiSelectable} deselectOnClickaway={!this.multiSelectable}>
                     {tableRows}
                 </TableBody>
             </Table>

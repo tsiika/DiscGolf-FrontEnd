@@ -50,3 +50,8 @@ th {
     transform: rotate(360deg);
   }
 }
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
