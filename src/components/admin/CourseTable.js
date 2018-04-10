@@ -13,6 +13,7 @@ import {
 class CourseTable extends Component {
     
     constructor(props) {
+        
         super(props);
         
         this.onRowSelection = props.onCoursesSelected;
@@ -37,7 +38,6 @@ class CourseTable extends Component {
                 return (
                     
                     <TableRow key={index}>
-                        <TableRowColumn>{course._id}</TableRowColumn>
                         <TableRowColumn><Link to={{ pathname:'/courses/' + course._id}} >{course.name}</Link></TableRowColumn>
                         <TableRowColumn>{course.description}</TableRowColumn>
                         <TableRowColumn>{ (course.fairways) ? course.fairways.length : 0 }</TableRowColumn>
@@ -51,7 +51,6 @@ class CourseTable extends Component {
             <Table selectable={true} multiSelectable={this.multiSelectable} onRowSelection={this.onRowSelection}>
                 <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={this.multiSelectable}>
                     <TableRow>
-                        <TableHeaderColumn>id</TableHeaderColumn>
                         <TableHeaderColumn>name</TableHeaderColumn>
                         <TableHeaderColumn>description</TableHeaderColumn>
                         <TableHeaderColumn>fairways</TableHeaderColumn>

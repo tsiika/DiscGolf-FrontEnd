@@ -26,19 +26,29 @@ import {blue500, red500, greenA200} from 'material-ui/styles/colors';
 *   Displays Course information as a form.
 *   If courseId is provided, used to editing existing Course,
 *   otherwise, to create a new one.
+*
+*   TODO:
+*   - VALIDATION!
+*   - Indication for succesful and failed save events
+*   - Fairway deletion
 */
 class CourseForm extends Component {
 
     constructor(props) {
         super(props);
         this.onInputChange = this.onInputChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onSaveCourse = this.onSaveCourse.bind(this);
+        this.onAddFairway = this.onAddFairway.bind(this);
+        this.onCourseSaved = this.onCourseSaved.bind(this);
+
         this.state = {course: {}};
     }
     
     componentDidMount() {
 
         // TODO: Find out why Api.getCourses is called twice when RELOADING the /courses/'courseId'
+
+        // If editing existing course, get it's data
         if(this.props.courseId) {
             
             Api.getCourses(this.props.courseId).then((response) => {
@@ -49,6 +59,11 @@ class CourseForm extends Component {
             }).catch((reason) => {
                 console.error(reason);
             });
+        } else {
+
+            // Create new empty course
+            let course = {name: null, description: null, fairways: []};            
+            this.setState({course: course});
         }
     }
 
@@ -65,9 +80,44 @@ class CourseForm extends Component {
         this.setState({course: course});
     }
 
-    onSubmit(event) {
+    onSaveCourse(event) {
         event.preventDefault();
-        console.log(this.state.course);
+        
+        // If updating existing course
+        if(this.state.course._id) {
+            Api.putCourse(this.state.course, this.onCourseSaved, this.onCourseSaveFailure);
+        } else {
+            Api.postCourse(this.state.course, this.onCourseSaved, this.onCourseSaveFailure);
+        }
+    }
+
+    onCourseSaved(result) {
+        this.setState({course: result});
+    }
+
+    onCourseSaveFailure(reason) {
+        console.error(reason);
+    }
+
+    onAddFairway(event) {
+
+        // Create copy of course-object from the state-object.
+        // Note that, at this point, new course is it's own copy, but course.fairways is still just a reference to the old state.course.fairways,
+        // because Object.assign only creates a shallow copy.
+        let course = Object.assign({}, this.state.course);
+
+        // Create new empty fairway-object
+        // Note that this excepts that existing fairways have correct orders corresponding to the amount of them  
+        let newFairway = {order: course.fairways.length + 1, length: null, par: null};
+
+        // Create new fairways-array by concatenating into existing array reference.
+        // Note that concat-method actually returns a new array.
+        let fairways = course.fairways.concat(newFairway);
+        
+        // Assign new fairways to the course
+        course.fairways = fairways;
+
+        this.setState({course: course});
     }
 
     render() {
@@ -78,7 +128,7 @@ class CourseForm extends Component {
             <div className="flex-container">
                 <div className="course-form-wrapper">
                     <h2>{title}</h2>
-                    <form onSubmit={this.onSubmit}>
+                    <form onSubmit={this.onSaveCourse}>
                         <div>
                             <TextField className="course-form-text-field" type="text" name="name" floatingLabelText="Name" floatingLabelFixed={true} value={this.state.course.name || ''} onChange={this.onInputChange}  />
                         </div>
@@ -90,7 +140,8 @@ class CourseForm extends Component {
                             <FairwayTable fairways={this.state.course.fairways}s/>
                         </div>
                         <div>
-                            <RaisedButton type="submit" label="Save" primary={true} />
+                            <RaisedButton style={{padding: '10px 5px 5px 5px'}} type="submit" label="Save" primary={true} />
+                            <RaisedButton style={{padding: '10px 5px 5px 5px'}} type="button" label="Add fairway" primary={true} backgroundColor="#009" onClick={this.onAddFairway} />
                         </div> 
                     </form>
                     
@@ -104,60 +155,50 @@ class CourseForm extends Component {
 *   FairwayTable
 *
 *   @props  fairways        Array       Fairway data-objects.
-*   @props  onFairwayEdit   Function    Listener function for handling fairway edit events.
 *
-*   Displays course's fairways and enables creating new ones.
+*   Displays course's fairways and enables editing their properties.
 */
 class FairwayTable extends Component {
     
     constructor(props) {
         super(props);
         this.onInputChange = this.onInputChange.bind(this);
-        this.state = { dataEdited: false };
+        this.state = {};
     }
 
-    /*
-        <FloatingActionButton backgroundColor={'#FF3A3A'} >
-            <ContentRemove />
-        </FloatingActionButton>
-    */
-
     onRowSelection() {
-
+        return false;
     }
 
     onInputChange(event) {
 
+        // Note the usage of the dataset-property
+        let order = parseInt(event.target.dataset.order); // Refers to 'data-player-id' of the element
         
-        //console.log(event.target.dataset.order);
-        let order = parseInt(event.target.dataset.order);
         // Pick the correct fairway-object and change property
         let fairway = this.props.fairways.find((element) => { return element.order == order });
+        
+        // TODO / WARNING: This is not the proper way to do this! This mutates state-object(received by props), because this.props.fairways
+        // is reference to it. This should be done by, for example, using Object.assing (see CourseForm.onAddFairway) or by
+        // with React's immutability helper addonsn, and then setting the state with new data. 
         fairway[ event.target.name ] = parseInt(event.target.value);
-        //console.log(fairway);
-        
-        // Note the usage dataset-object
-        // event.target.dataset.playerId; // Refers to 'data-player-id'-propery of the element
-        
-        this.props.fairways.push({order: 4, length: 48, par: 1});
-        
     }
 
     render() {
-        console.log('---FairwayTable.render');
 
         let fairways = this.props.fairways || [];
 
         return (
-            <Table selectable={true} multiSelectable={true} onRowSelection={this.onRowSelection}>
-                <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={true}>
+
+            <Table selectable={true} multiSelectable={false} onRowSelection={this.onRowSelection}>
+                <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={false}>
                 <TableRow>
                 <TableHeaderColumn>Order</TableHeaderColumn>
                 <TableHeaderColumn>Length</TableHeaderColumn>
                 <TableHeaderColumn>Par</TableHeaderColumn>
                 </TableRow>
                 </TableHeader>
-                <TableBody displayRowCheckbox={true} deselectOnClickaway={true}>
+                <TableBody displayRowCheckbox={false} deselectOnClickaway={true}>
                     {fairways.map((fairway) => {
                         return(
                             <TableRow key={fairway.order}>

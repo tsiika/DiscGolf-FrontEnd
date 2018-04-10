@@ -62,7 +62,4 @@ class Courses extends Component {
     }
 }
 
-/*
-*<CourseTable multiSelectable={false} courses={this.state.courses} onCoursesSelected={this.onCourseSelected}/>
-*/
 export default Courses;
