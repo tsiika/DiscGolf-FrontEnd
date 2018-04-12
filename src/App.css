@@ -55,3 +55,7 @@ th {
     display: flex;
     justify-content: center;
 }
+
+.login-wrapper {
+    padding: 70px 10px 20px 10px;
+}

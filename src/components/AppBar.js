@@ -35,7 +35,6 @@ render(){
 
                     <AppBar title="Menu"/>
                     <Link to="/" style={{ textDecoration: 'none' }}><MenuItem>Home</MenuItem></Link>
-                    <Link to="/login" style={{ textDecoration: 'none' }}><MenuItem>Login</MenuItem></Link>
                     <Link to="/register" style={{ textDecoration: 'none' }}><MenuItem>Register</MenuItem></Link>
                     <Link to="/dashboard" style={{ textDecoration: 'none' }}><MenuItem>Dashboard</MenuItem></Link>
                     <Link to="/courses" style={{ textDecoration: 'none' }}><MenuItem>Courses</MenuItem></Link>

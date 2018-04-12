@@ -8,7 +8,6 @@ import NoMatch from './components/404';
 import AppBar from './components/AppBar';
 
 import Home from './modules/Home';
-import Login from './modules/Login';
 import Register from './modules/Register';
 import Logout from './modules/Logout';
 import Confirm from './modules/Confirm';
@@ -48,7 +47,6 @@ class App extends Component {
 				<Switch>
 					{/*Add all routers here*/}
 					<Route exact path="/" component={Home} /> 
-					<Route path="/login" component={Login} />
 					<Route path="/register" component={Register} />
 					<Route path="/logout" component={Logout} />
 					<Route path="/confirm" component={Confirm} />
