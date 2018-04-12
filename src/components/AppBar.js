@@ -1,21 +1,12 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import FlatButton from 'material-ui/FlatButton';
-
-import AppMenu from './AppMenu';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
-import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar'
 
-const paperStyle = {
-
-};
-
+const paperStyle = {};
 
 class AppBarC extends Component {
     constructor(props) {

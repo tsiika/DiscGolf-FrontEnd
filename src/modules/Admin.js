@@ -3,27 +3,10 @@ import Api from '../api/Api';
 import '../App.css';
 import '../Admin.css';
 
-import { Link } from 'react-router-dom';
-
 import UserTable from '../components/admin/UserTable';
 import CourseTable from '../components/admin/CourseTable';
 import UserForm from '../components/admin/UserForm';
 import CourseForm from '../components/CourseForm';
-
-//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn
-  } from 'material-ui/Table';
-
-import { TextField, RaisedButton } from 'material-ui';
-import { RadioButton } from 'material-ui/RadioButton';
-
 
 class Admin extends Component {
 
@@ -154,9 +137,7 @@ class Admin extends Component {
     }
 
     render() {
-
-        let linkParams = {pathname: 'scorecard', params:{foo: 'bar'}};
-
+        
         return (
             <div className="Admin">
                 <h2>Admin</h2>

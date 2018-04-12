@@ -278,7 +278,7 @@ class CourseSelection extends Component {
         if(courses && courses.length > 0) {
             
             tableRows = courses.map((course, index) => {
-                let selected = ( parseInt(this.state.selectedCourse) === index ) ? true : false;                
+                let selected = ( parseInt(this.state.selectedCourse, 10) === index ) ? true : false;                
                 return (                    
                     <TableRow key={course._id} selected={selected}>
                         <TableRowColumn>{course.name}</TableRowColumn>

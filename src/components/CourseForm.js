@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Api from '../api/Api';
 
-import { TextField, RaisedButton, Card, CardText } from 'material-ui';
+import { TextField, RaisedButton } from 'material-ui';
 
 import {
     Table,
@@ -11,12 +11,6 @@ import {
     TableRow,
     TableRowColumn
 } from 'material-ui/Table';
-
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import ContentRemove from 'material-ui/svg-icons/content/remove';
-
-import {blue500, red500, greenA200} from 'material-ui/styles/colors';
 
 /*
 *   CourseForm  
@@ -173,15 +167,15 @@ class FairwayTable extends Component {
     onInputChange(event) {
 
         // Note the usage of the dataset-property
-        let order = parseInt(event.target.dataset.order); // Refers to 'data-player-id' of the element
+        let order = parseInt(event.target.dataset.order, 10); // Refers to 'data-player-id' of the element
         
         // Pick the correct fairway-object and change property
-        let fairway = this.props.fairways.find((element) => { return element.order == order });
+        let fairway = this.props.fairways.find((element) => { return element.order === order });
         
         // TODO / WARNING: This is not the proper way to do this! This mutates state-object(received by props), because this.props.fairways
         // is reference to it. This should be done by, for example, using Object.assing (see CourseForm.onAddFairway) or by
         // with React's immutability helper addonsn, and then setting the state with new data. 
-        fairway[ event.target.name ] = parseInt(event.target.value);
+        fairway[ event.target.name ] = parseInt(event.target.value, 10);
     }
 
     render() {

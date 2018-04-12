@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import {
     Table,
     TableBody,
-    TableHeader,
-    TableHeaderColumn,
     TableRow,
     TableRowColumn
 } from 'material-ui/Table';
@@ -47,7 +45,7 @@ class Scorecard extends Component {
         // Pick the first fairway of the course (Initially it should be the fairway with order=1)
         this.props.model.course.fairways.forEach((fairway) => {
             courseTotalPar += fairway.par;
-            if( parseInt(fairway.order) === 1 ) currentFairway = fairway;
+            if( parseInt(fairway.order, 10) === 1 ) currentFairway = fairway;
         });
 
         // If fairway with order=1 was not found (though it should be), pick the first from fairway-array
@@ -65,7 +63,7 @@ class Scorecard extends Component {
     onFairwayChanged(fairwayOrder) {
         
         this.props.model.course.fairways.forEach((fairway) => {
-            if( parseInt(fairway.order) === fairwayOrder ) {
+            if( parseInt(fairway.order, 10) === fairwayOrder ) {
                 this.setState({currentFairway: fairway});
             }
         });
@@ -147,7 +145,7 @@ class FairwayInfo extends Component {
     }
 
     onFairwayChanged(event) {
-        let fairwayOrder = parseInt(event.target.getAttribute('data-order'));
+        let fairwayOrder = parseInt(event.target.getAttribute('data-order'), 10);
         this.props.onFairwayChanged(fairwayOrder);
     }
 
@@ -211,7 +209,7 @@ class PlayerList extends Component {
     onScoreInputChange(event) {
         // Note the usage of dataset-object
         let playerId = event.target.dataset.playerId; // Refers to 'data-player-id'-propery of the element
-        let throwCount = parseInt(event.target.value);
+        let throwCount = parseInt(event.target.value, 10);
 
         // If inputted value is not integer, store null
         if(!Number.isInteger(throwCount)) throwCount = null;
@@ -223,7 +221,7 @@ class PlayerList extends Component {
         
         let currentFairway = this.props.currentFairway;
         let scores = this.props.scores;
-        let courseTotalPar = this.props.courseTotalPar;
+        //let courseTotalPar = this.props.courseTotalPar;
 
         // Create table rows from round score data
         let tableRows = [];
@@ -233,7 +231,7 @@ class PlayerList extends Component {
             let throwCount = scores[playerId][currentFairway.order].throwCount || 0;
             let ob = scores[playerId][currentFairway.order].ob;
             let totalThrowCount = scores[playerId].totalThrowCount;
-            let diffToFairwayPar = throwCount - currentFairway.par;
+            //let diffToFairwayPar = throwCount - currentFairway.par;
             //let differenceToCourseTotalPar = totalThrowCount - courseTotalPar;
             let diffToPlayedFairwaysTotalPar = scores[playerId].diffToPlayedFairwaysPar;
 
@@ -245,7 +243,7 @@ class PlayerList extends Component {
             tableRows.push(
                 <TableRow key={playerId}>                      
                     <TableRowColumn>{playerName}</TableRowColumn>
-                    <TableRowColumn className="input-column"><input type="text" className="read-only" defaultValue="OB" readOnly={true} /></TableRowColumn>
+                    <TableRowColumn className="input-column"><input type="text" className="read-only" defaultValue={ob} readOnly={true} /></TableRowColumn>
                     <TableRowColumn className="input-column"><input type="text" value={throwCount} data-player-id={playerId} onChange={this.onScoreInputChange}/></TableRowColumn>
                     <TableRowColumn className="input-column"><input type="text" className="read-only" value={totalThrowCount || 0} readOnly={true}/></TableRowColumn>
                     <TableRowColumn className="input-column"><input type="text" className="read-only" value={diffToPlayedFairwaysTotalPar || 0} readOnly={true}/></TableRowColumn>

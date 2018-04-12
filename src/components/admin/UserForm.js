@@ -1,22 +1,10 @@
 import React, { Component } from 'react';
-
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn
-} from 'material-ui/Table';
-
 import { TextField, RaisedButton } from 'material-ui';
 
 /*
-    UserForm
-    
-    props {
-        postData: function()    // Function for handling user data, called from form submit event handler
-    }
+*   UserForm
+*
+*   @props  postData    Function    Function for handling user data, called from form submit event handler.
 */
 class UserForm extends Component {
     

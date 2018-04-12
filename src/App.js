@@ -1,12 +1,6 @@
 //Imports will be in separate module in future 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-
-//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-
-import {List, ListItem} from 'material-ui/List';
+import { Route, Switch } from 'react-router-dom';
 
 import Container from './components/Container';
 import AppMenu from './components/AppMenu';
