@@ -5,10 +5,10 @@ import Api from  '../api/Api';
 import CourseTable from '../components/admin/CourseTable';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import CourseForm from '../components/CourseForm';
-
+/*
 import '../App.css';
 import '../Courses.css';
-
+*/
 class Courses extends Component {
 
     constructor(props) {

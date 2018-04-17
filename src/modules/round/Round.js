@@ -3,10 +3,10 @@ import { Switch, Route } from 'react-router-dom';
 import NoMatch from '../../components/404';
 
 import Api from  '../../api/Api';
-
+/*
 import '../../App.css';
 import '../../Round.css';
-
+*/
 import {
     Table,
     TableBody,

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import '../App.css';
+//import '../App.css';
 
 var btnStyle = { margin: '30px 7px 7px 7px' };
 
@@ -23,8 +23,8 @@ class LoginForm extends Component{
             label="Create account"
             type='button'
             style={btnStyle}
-            onClick={() => {history.push('/Register') }}
-            backgroundColor="#a4c639" />  
+            onClick={() => {history.push('/register') }}
+            backgroundColor="#a4c639" />
         ));
 
         return (

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Api from '../api/Api';
+/*
 import '../App.css';
 import '../Admin.css';
-
+*/
 import UserTable from '../components/admin/UserTable';
 import CourseTable from '../components/admin/CourseTable';
 import UserForm from '../components/admin/UserForm';

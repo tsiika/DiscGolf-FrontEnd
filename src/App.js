@@ -16,6 +16,7 @@ import Courses from './modules/Courses';
 import Round from './modules/round/Round';
 import Admin from './modules/Admin';
 
+
 import "./App.css";
 import "./styles/simple-grid.css";
 
@@ -47,12 +48,12 @@ class App extends Component {
 				<Switch>
 					{/*Add all routers here*/}
 					<Route exact path="/" component={Home} /> 
-					<Route path="/register" component={Register} />
-					<Route path="/logout" component={Logout} />
-					<Route path="/confirm" component={Confirm} />
-					<Route path="/dashboard" component={Dashboard} />
-					<Route path="/courses" component={Courses} />
-                    <Route path="/round" component={Round} />
+					<Route sensitive path="/register" component={Register} />
+					<Route sensitive path="/logout" component={Logout} />
+					<Route sensitive path="/confirm" component={Confirm} />
+					<Route sensitive path="/dashboard" component={Dashboard} />
+					<Route sensitive path="/courses" component={Courses} />
+                    <Route sensitive path="/round" component={Round} />
 
                     <Route path="/admin" component={Admin} />
 
