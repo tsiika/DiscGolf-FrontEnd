@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Api from '../api/Api';
 
 /*
 *   RegisterForm - Component
@@ -19,18 +20,27 @@ class RegisterForm extends Component {
 
         this.onInputChange = this.onInputChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.registerUser = this.registerUser.bind(this);
+        this.onUserRegistered = this.onUserRegistered.bind(this);
+        this.onUserRegisterFailure = this.onUserRegisterFailure.bind(this);
 
-        this.state = { 
-            username: '', 
-            email: '', 
-            password: '', 
-            passwordConfirm: '' 
+        this.state = {
+            user: {
+                username: '', 
+                email: '', 
+                password: '', 
+                passwordConfirm: ''
+            },
+            saving: false
         };
     }
 
     // Using onBlur and defaultValue on the input element would not be so slow...
     onInputChange(event) {
-        this.setState({[event.target.name]: event.target.value});
+        //this.setState({ user: {[event.target.name]: event.target.value} });
+        let user = Object.assign({}, this.state.user);
+        user[event.target.name] = event.target.value;
+        this.setState({user});
     }
 
     onSubmit(event) {
@@ -38,16 +48,37 @@ class RegisterForm extends Component {
         console.log('--- onSubmit ---');
     
         // At this point everything should be ok by native validation, but we have to check password confirmation manually
-        if(this.state.password !== this.state.passwordConfirm) {
+        if(this.state.user.password !== this.state.user.passwordConfirm) {
             console.log('Password NOT ok');
             // Just set input value to empty to indicate error
             // TODO: Clearly not the ideal solution (but works ok with the native validation for now...)
             event.target.elements.passwordConfirm.value = '';
         } else {
             console.log('Pass OK -> Submit');
+            this.setState({saving: true});
+            //setTimeout(() => this.setState({saving: false}), 2000);
+            this.registerUser(this.state.user);
         }
-        
     }
+
+
+    registerUser(user) {
+        Api.postUser(user, this.onUserRegistered, this.onUserRegisterFailure);
+    }
+
+    onUserRegistered(result) {
+        console.log('---onUserRegistered');
+        console.log(result);
+        this.setState({saving: false});
+    }
+
+    onUserRegisterFailure(reason) {
+        console.log('---onUserRegisterFailure');
+        console.error(reason);
+        this.setState({saving: false});
+    }
+    
+    
 
     render() {
         
@@ -55,7 +86,7 @@ class RegisterForm extends Component {
         <div>
             <form className="register-form" onSubmit={this.onSubmit}>
                 <div>
-                <TextField
+                    <TextField
                         name="username"
                         type="text"
                         hintText="At least three characters"
@@ -64,7 +95,7 @@ class RegisterForm extends Component {
                         minLength="3"
                         maxLength="99"
                         required
-                        value={this.state.username}
+                        value={this.state.user.username}
                         onChange={this.onInputChange}
                     />
                 </div>
@@ -77,7 +108,7 @@ class RegisterForm extends Component {
                         errorText=""
                         floatingLabelFixed
                         required
-                        value={this.state.email}
+                        value={this.state.user.email}
                         onChange={this.onInputChange}
                     />
                 </div>
@@ -92,7 +123,7 @@ class RegisterForm extends Component {
                         minLength="4"
                         maxLength="99"
                         required
-                        value={this.state.password}
+                        value={this.state.user.password}
                         onChange={this.onInputChange}
                     />
                 </div>
@@ -107,11 +138,11 @@ class RegisterForm extends Component {
                         minLength="4"
                         maxLength="99"
                         required
-                        value={this.state.passwordConfirm}
+                        value={this.state.user.passwordConfirm}
                         onChange={this.onInputChange}
                     />
                 </div>
-                <RaisedButton type="submit" label="Create" primary style={{marginTop: '20px'}} />
+                <RaisedButton name="submitButton" type="submit" disabled={this.state.saving} label="Create" primary style={{marginTop: '20px'}} />
             </form>
         </div>
 

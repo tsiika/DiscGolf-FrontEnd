@@ -17,7 +17,19 @@ function getUsers() {
     return fetch(API_URL + '/users', options);
 }
 
-function postUser(user) {
+/*
+*   postUser
+*
+*   @param      Object      User-dataobject
+*   @onSuccess  Function    Optional callback function for success event.
+*   @onFailure  Function    Optional callback function for failure event.
+*   
+*   @return     Object      If callbacks where provided, calls them respectively with the resolved promise result,
+*                           otherwise returns promise itself.
+*
+*   Note: If onSuccess is provided, onFailure must be too.
+*/
+function postUser(user, onSuccess, onFailure) {
 
     let options = { 
         method: 'POST', 
@@ -25,8 +37,26 @@ function postUser(user) {
         body: JSON.stringify(user) 
     };
 
-    return fetch(API_URL + '/users', options);
+    let promise = fetch(API_URL + '/users', options); 
+
+    // If callback functions were provided, resolve fetch-promise here,
+    // otherwise just return the promise.
+    if(onSuccess && onFailure) {
+        
+        promise.then((response) => {
+            return response.json();
+        }).then((jsonResponse) => {
+            return onSuccess(jsonResponse);
+        }).catch((reason) => {
+            return onFailure(reason);
+        });
+
+    } else {
+        return promise;
+    }
 }
+
+
 
 function getCourses(courseId) {
     courseId = courseId || '';
