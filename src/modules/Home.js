@@ -5,20 +5,28 @@ import Redirect from 'react-router-dom/Redirect';
 
 class App extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        console.log(this.props.location);
+    }
+
     render() {
 
         const loggedIn = false;
 
-        if(loggedIn) {
-            return ( <Redirect to="/dashboard" /> );
-        } else {
-            return (
-                <div className="login-wrapper">
-                    <h3>Login</h3>
-                    <LoginForm />
-                </div>
-            );
-        }
+        return( 
+            (loggedIn) ?
+            <Redirect to="/dashboard" />
+            :
+            <div className="login-wrapper">
+                <h3>Login</h3>
+                <LoginForm />
+            </div>
+        );
+
     }
 }
 
