@@ -47,10 +47,7 @@ export default class CourseCard extends React.Component {
         </CardMedia>
         <CardTitle title="Card title" subtitle="Card subtitle" expandable={true} />
         <CardText expandable={true}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-          Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+          A brief explanation, and some information about the course. 
         </CardText>
         <CardActions>
           <FlatButton label="Expand" onClick={this.handleExpand} />
