@@ -12,6 +12,7 @@ import Container from './components/Container';
 import AppMenu from './components/AppMenu';
 import NoMatch from './components/404';
 import AppBar from './components/AppBar';
+import AddCourseForm from './components/AddCourseForm';
 
 import Home from './modules/Home';
 import Login from './modules/Login';
@@ -56,6 +57,8 @@ class App extends Component {
 					<Route path="/logout" component={Logout} />
 					<Route path="/confirm" component={Confirm} />
 					<Route path="/dashboard" component={Dashboard} />
+					<Route path="/AddCourseForm" component={AddCourseForm} />
+
 
 					{/*404*/}
 					<Route component={NoMatch}/>

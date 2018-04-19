@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+
 import '../App.css';
 
 var btnStyle = {
@@ -48,6 +49,7 @@ class LoginForm extends Component{
           <RaisedButton type="submit" label="Submit" style={btnStyle}  primary/>
           <Button style={btnStyle}/>
         </form>
+        <navTab />
       </div>
     );
   }

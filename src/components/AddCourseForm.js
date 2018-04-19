@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
+import { Redirect, withRouter } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
-export default class AddCourseForm extends React.Component {
+import '../App.css';
+
+class AddCourseForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
@@ -70,7 +73,8 @@ export default class AddCourseForm extends React.Component {
 				<br/>
 				<RaisedButton type="submit" label="Add Course" primary/>
 			</form>
-		)
+		);
 	}
 
 }
+export default withRouter(AddCourseForm);
