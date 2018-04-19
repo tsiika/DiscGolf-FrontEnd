@@ -71,7 +71,7 @@ class RegisterForm extends Component {
 
     onUserRegisterFailure(reason) {
         console.log('---onUserRegisterFailure');
-        console.error(reason);
+        //console.error(reason);
         
         this.setState({
             saving: false,

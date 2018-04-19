@@ -9,23 +9,38 @@
 
 const API_URL = 'http://localhost:5000/api/v0';
 
+/*
+*   getUsers
+*
+*   @param  {Function}  Optional callback function for success event.
+*   @param  {Function}  Optional callback function for failure event.
+*   
+*   @return {Object}    If callbacks where provided, calls them respectively with the resolved promise result,
+*                       otherwise returns promise itself.
+*
+*   Note: If onSuccess is provided, onFailure must be too.
+*/
+function getUsers(onSuccess, onFailure) {
 
-function getUsers() {
+    const options = { method: 'GET' };
+    let promise = fetch(API_URL + '/users', options);
 
-    //headers: {'content-type': 'application/json'}
-    let options = { method: 'GET'};
-    return fetch(API_URL + '/users', options);
+    if(onSuccess && onFailure) {
+        handleJsonPromise(promise);
+    } else {
+        return promise;
+    }
 }
 
 /*
 *   postUser
-*
-*   @param      Object      User-dataobject
-*   @onSuccess  Function    Optional callback function for success event.
-*   @onFailure  Function    Optional callback function for failure event.
 *   
-*   @return     Object      If callbacks where provided, calls them respectively with the resolved promise result,
-*                           otherwise returns promise itself.
+*   @param  {Object}    user        User-object
+*   @param  {Function}  onSuccess   Optional callback function for success event.
+*   @param  {Function}  onFailure   Optional callback function for failure event.
+*   
+*   @return {Object}    If callbacks where provided, calls them respectively with the resolved promise result,
+*                       otherwise returns promise itself.
 *
 *   Note: If onSuccess is provided, onFailure must be too.
 */
@@ -42,40 +57,49 @@ function postUser(user, onSuccess, onFailure) {
     // If callback functions were provided, resolve fetch-promise here,
     // otherwise just return the promise.
     if(onSuccess && onFailure) {
-        
-        promise.then((response) => {
-            return response.json();
-        }).then((jsonResponse) => {
-            return onSuccess(jsonResponse);
-        }).catch((reason) => {
-            return onFailure(reason);
-        });
-
+        handleJsonPromise(promise, onSuccess, onFailure);
     } else {
         return promise;
     }
 }
 
 
-
-function getCourses(courseId) {
+/*
+*   getCourses
+*   
+*   @param  {String}    courseId    Optional courseId
+*   @param  {Function}  onSuccess   Optional callback function for success event.
+*   @param  {Function}  onFailure   Optional callback function for failure event.
+*   
+*   @return {Object}    If callbacks where provided, calls them respectively with the resolved promise result,
+*                       otherwise returns promise itself.
+*
+*   Note: If onSuccess is provided, onFailure must be too.
+*/
+function getCourses(courseId, onSuccess, onFailure) {
     courseId = courseId || '';
     
     let url = API_URL + '/courses/' + courseId;
     let options = { method: 'GET'};
     
-    return fetch(url, options);
+    let promise = fetch(url, options);
+
+    if(onSuccess && onFailure) {
+        handleJsonPromise(promise, onSuccess, onFailure);
+    } else {
+        return promise;
+    }
 }
 
 /*
 *   postCourse
-*
-*   @param      Object      Course-dataobject
-*   @onSuccess  Function    Optional callback function for success event.
-*   @onFailure  Function    Optional callback function for failure event.
 *   
-*   @return     Object      If callbacks where provided, calls them respectively with the resolved promise result,
-*                           otherwise returns promise itself.
+*   @param  {Object}    course      Course-object
+*   @param  {Function}  onSuccess   Optional callback function for success event.
+*   @param  {Function}  onFailure   Optional callback function for failure event.
+*   
+*   @return {Object}    If callbacks where provided, calls them respectively with the resolved promise result,
+*                       otherwise returns promise itself.
 *
 *   Note: If onSuccess is provided, onFailure must be too.
 */
@@ -92,29 +116,21 @@ function postCourse(course, onSuccess, onFailure) {
     // If callback functions were provided, resolve fetch-promise here,
     // otherwise just return the promise.
     if(onSuccess && onFailure) {
-
-        promise.then((response) => {
-            return response.json();
-        }).then((jsonResponse) => {
-            onSuccess(jsonResponse);
-        }).catch((reason) => {
-            onFailure(reason);
-        });
+        handleJsonPromise(promise, onSuccess, onFailure);
     } else {
-        
         return promise;    
     }
 }
 
 /*
 *   putCourse
-*
-*   @param      Object      Course-dataobject
-*   @onSuccess  Function    Optional callback function for success event.
-*   @onFailure  Function    Optional callback function for failure event.
 *   
-*   @return     Object      If callbacks where provided, calls them respectively with the resolved promise result,
-*                           otherwise returns promise itself.
+*   @param  {Object}    course      Course-object
+*   @param  {Function}  onSuccess   Optional callback function for success event.
+*   @param  {Function}  onFailure   Optional callback function for failure event.
+*   
+*   @return {Object}    If callbacks where provided, calls them respectively with the resolved promise result,
+*                       otherwise returns promise itself.
 *
 *   Note: If onSuccess is provided, onFailure must be too.
 */
@@ -131,34 +147,54 @@ function putCourse(course, onSuccess, onFailure) {
     // If callback functions were provided, resolve fetch-promise here,
     // otherwise just return the promise.
     if(onSuccess && onFailure) {
-
-        // TODO: Not sure if the failure is handled correctly
-        promise.then((response) => {
-            return response.json();
-        }).then((jsonResponse) => {
-            onSuccess(jsonResponse);
-        }).catch((reason) => {
-            onFailure(reason);
-        });
+        handleJsonPromise(promise, onSuccess, onFailure);
     } else {
-        
         return promise;    
     }
 }
 
-
-function postRound(data) {
+/*
+*   postRound
+*   
+*   @param  {Object}    round       Round-object
+*   @param  {Function}  onSuccess   Optional callback function for success event.
+*   @param  {Function}  onFailure   Optional callback function for failure event.
+*   
+*   @return {Object}    If callbacks where provided, calls them respectively with the resolved promise result,
+*                       otherwise returns promise itself.
+*
+*   Note: If onSuccess is provided, onFailure must be too.
+*/
+function postRound(round, onSuccess, onFailure) {
 
     let options = {
         method: 'POST',
         headers: {'content-type': 'application/json'},
-        body: JSON.stringify(data)
+        body: JSON.stringify(round)
     }
     
-    return fetch(API_URL + '/rounds', options);
+    let promise = fetch(API_URL + '/rounds', options); 
+
+    if(onSuccess && onFailure) {
+        handleJsonPromise(promise);
+    } else {
+        return promise;
+    }
 }
 
-function putRound(data) {
+/*
+*   putRound
+*   
+*   @param  {Object}    round       Round-object
+*   @param  {Function}  onSuccess   Optional callback function for success event.
+*   @param  {Function}  onFailure   Optional callback function for failure event.
+*   
+*   @return {Object}    If callbacks where provided, calls them respectively with the resolved promise result,
+*                       otherwise returns promise itself.
+*
+*   Note: If onSuccess is provided, onFailure must be too.
+*/
+function putRound(data, onSuccess, onFailure) {
 
     let options = {
         method: 'PUT',
@@ -166,7 +202,43 @@ function putRound(data) {
         body: JSON.stringify(data)
     }
     
-    return fetch(API_URL + '/rounds', options);
+    let promise = fetch(API_URL + '/rounds', options); 
+
+    if(onSuccess && onFailure) {
+        handleJsonPromise(promise);
+    } else {
+        return promise;
+    }
+}
+
+/*
+*   handleJsonPromise
+*   
+*   @param  {Object}    promise     Promise-object
+*   @param  {Function}  onSuccess   Callback function for success event.
+*   @param  {Function}  onFailure   Callback function for failure event.
+*   
+*   @return {Function call} Calls onSuccess and onFailure respectively. 
+*/
+function handleJsonPromise(promise, onSuccess, onFailure) {
+
+    promise.then((response) => {
+
+        // The Promise returned from fetch() won’t reject on HTTP error status even if the response is an HTTP 404 or 500. 
+        // Instead, it will resolve normally (with ok status set to false), and it will only reject on network failure or 
+        // if anything prevented the request from completing.
+        if(response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+        
+    }).then((jsonResponse) => {
+        // Everything went ok
+        return onSuccess(jsonResponse);
+    }).catch((reason) => {
+        // Will end up here either, on NetworkError or, on HTTP error status(400, 500...)
+        return onFailure(reason);
+    });
 }
 
 module.exports = {
