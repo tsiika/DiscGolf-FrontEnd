@@ -63,25 +63,34 @@ class RegisterForm extends Component {
     }
 
     onUserRegistered(result) {
-        console.log('---onUserRegistered');
-        console.log(result);
         this.setState({saving: false});
         this.props.onUserRegistered();
     }
 
-    onUserRegisterFailure(reason) {
-        console.log('---onUserRegisterFailure');
-        //console.error(reason);
+    onUserRegisterFailure(errorMessage) {
         
+        // At this point API returns Mongoose native error messages
+        if(errorMessage.includes('duplicate key error')) {
+            
+            errorMessage = 'Username or email already in use';
+
+        } else if(errorMessage.includes('NetworkError')) {
+            
+            errorMessage = 'Network connection problem occured';
+
+        } else {
+            errorMessage = 'Registration failed. Please try again';
+        }
+
         this.setState({
             saving: false,
-            errorMessage: 'Registration failed. Please try again'
+            errorMessage: errorMessage
         });
     }
     
     render() {
         
-        let errorMessage = (this.state.errorMessage !== '') ? <span>{this.state.errorMessage}</span> : '';
+        let errorMessage = (this.state.errorMessage !== '') ? <span style={{color: '#900'}}>{this.state.errorMessage}</span> : '';
 
         return (
             <div>

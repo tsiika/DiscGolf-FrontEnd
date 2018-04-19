@@ -227,17 +227,20 @@ function handleJsonPromise(promise, onSuccess, onFailure) {
         // The Promise returned from fetch() won’t reject on HTTP error status even if the response is an HTTP 404 or 500. 
         // Instead, it will resolve normally (with ok status set to false), and it will only reject on network failure or 
         // if anything prevented the request from completing.
-        if(response.ok) {
-            return response.json();
-        }
-        throw new Error(response.statusText);
-        
+        return response.json();
+
     }).then((jsonResponse) => {
-        // Everything went ok
-        return onSuccess(jsonResponse);
-    }).catch((reason) => {
-        // Will end up here either, on NetworkError or, on HTTP error status(400, 500...)
-        return onFailure(reason);
+
+        // Expecting that faulty response contains 'error'-property
+        if(jsonResponse.error) {
+            return onFailure(jsonResponse.error);
+        } else {
+            return onSuccess(jsonResponse);
+        }
+
+    }).catch((error) => {
+        // Will end up here only on rejected promise (on NetworkError or etc...)
+        return onFailure(error.message);
     });
 }
 
