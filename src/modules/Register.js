@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RegisterForm from '../components/RegisterForm';
 import Redirect from 'react-router/Redirect';
+import Auth from '../api/Auth';
 
 //import '../App.css';
 
@@ -14,29 +15,21 @@ class Register extends Component {
         super(props);
         
         this.onUserRegistered = this.onUserRegistered.bind(this);
-
-        this.state = {userWasRegistered: false};
     }
 
     onUserRegistered() {
-        this.setState({userWasRegistered: true});
+        console.log('onUserRegistered');
     }
 
     render() {
+
+        console.log(Auth.isAuthenticated());
 
         const loggedIn = false;
 
         if(loggedIn) {
             // Is user is logged in redirect to dashboard
             return( <Redirect to="/dashboard" /> );
-        } else if(this.state.userWasRegistered) {
-            // If new user was registered successfully, redirect to login
-            return( 
-                <Redirect to={{
-                    pathname: '/', 
-                    state: {referrer: this.props.location, referrerMessage: 'Account was created!'}
-                }} /> 
-            );
         } else {
             // Render registeration form
             return(

@@ -59,17 +59,23 @@ class RegisterForm extends Component {
     }
 
     registerUser(user) {
-        Api.postUser(user, this.onUserRegistered, this.onUserRegisterFailure);
+        Api.registerUser(user, this.onUserRegistered, this.onUserRegisterFailure);
     }
 
-    onUserRegistered(result) {
+    onUserRegistered(response) {
+        
         this.setState({saving: false});
-        this.props.onUserRegistered();
+
+        if(response.id && response.id !== '') {
+            this.props.onUserRegistered();
+        } else {
+            this.onUserRegisterFailure('');
+        }
     }
 
     onUserRegisterFailure(errorMessage) {
         
-        // At this point API returns Mongoose native error messages
+        // At the moment, API returns Mongoose native error messages
         if(errorMessage.includes('duplicate key error')) {
             
             errorMessage = 'Username or email already in use';
