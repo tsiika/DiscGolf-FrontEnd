@@ -17,18 +17,17 @@ class Register extends Component {
         this.onUserRegistered = this.onUserRegistered.bind(this);
     }
 
-    onUserRegistered() {
+    onUserRegistered(response) {
         console.log('onUserRegistered');
+        console.log(response);
+        Auth.setAuthentication(response.accessToken, response.userId);
+        this.forceUpdate();
     }
 
     render() {
 
-        console.log(Auth.isAuthenticated());
-
-        const loggedIn = false;
-
-        if(loggedIn) {
-            // Is user is logged in redirect to dashboard
+        if(Auth.isAuthenticated()) {
+            // If user is logged in redirect to dashboard
             return( <Redirect to="/dashboard" /> );
         } else {
             // Render registeration form

@@ -46,6 +46,9 @@ class App extends Component {
 
 
 				<Switch>
+                    {/* TODO: Create 'wrapper' route ie. 'PrivateRoute', which checks for authentication and redirects by it. 
+                        At the moment check is done on every component separetly. See react-router-dom documentation...
+                    */}
 					{/*Add all routers here*/}
 					<Route exact path="/" component={Home} /> 
 					<Route sensitive path="/register" component={Register} />

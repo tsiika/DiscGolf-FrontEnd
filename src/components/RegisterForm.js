@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Api from '../api/Api';
+import Auth from '../api/Auth';
 
 /*
 *   RegisterForm - Component
@@ -66,8 +67,9 @@ class RegisterForm extends Component {
         
         this.setState({saving: false});
 
-        if(response.id && response.id !== '') {
-            this.props.onUserRegistered();
+        if(response.accessToken && response.accessToken !== '' && response.userId && response.userId !== '') {
+            
+            this.props.onUserRegistered(response);
         } else {
             this.onUserRegisterFailure('');
         }

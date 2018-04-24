@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 //import '../App.css';
-
-
+import Auth from '../api/Auth';
+import Redirect from 'react-router/Redirect';
 
 class App extends Component {
-  render() {
-    return (
-      <div>
-       <h2>You have logged out successfully.</h2>
-      </div>
-    );
-  }
+ 
+    constructor(props) {
+        super(props);
+
+        console.log('Removing authentication');
+        Auth.removeAuthentication();
+    }
+
+    render() {
+        return (
+            <Redirect to="/" />
+        );
+    }
 }
 
 export default App;

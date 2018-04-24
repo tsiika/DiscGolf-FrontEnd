@@ -64,6 +64,39 @@ function registerUser(user, onSuccess, onFailure) {
 }
 
 /*
+*   authenticateUser
+*   
+*   @param  {Object}    user        User-object
+*   @param  {Function}  onSuccess   Optional callback function for success event.
+*   @param  {Function}  onFailure   Optional callback function for failure event.
+*   
+*   @return {Object}    If callbacks where provided, calls them respectively with the resolved promise result,
+*                       otherwise returns promise itself.
+*
+*   Note: If onSuccess is provided, onFailure must be too.
+*/
+function authenticateUser(user, onSuccess, onFailure) {
+
+    let options = { 
+        method: 'POST', 
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(user)
+    };
+
+    let promise = fetch(API_URL + '/auth/authenticate/user', options); 
+
+    // If callback functions were provided, resolve fetch-promise here,
+    // otherwise just return the promise.
+    if(onSuccess && onFailure) {
+        handleJsonPromise(promise, onSuccess, onFailure);
+    } else {
+        return promise;
+    }
+}
+
+
+
+/*
 *   postUser
 *   
 *   @param  {Object}    user        User-object
@@ -282,5 +315,7 @@ module.exports = {
     postCourse: postCourse,
     putCourse: putCourse,
     postRound: postRound,
-    putRound: putRound
+    putRound: putRound,
+    registerUser: registerUser,
+    authenticateUser: authenticateUser
 };

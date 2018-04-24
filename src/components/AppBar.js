@@ -5,6 +5,8 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
+import Auth from '../api/Auth';
+
 
 const paperStyle = {};
 
@@ -20,6 +22,13 @@ class AppBarC extends Component {
     handleToggle = () => this.setState({open: !this.state.open});
 
 render(){
+    /*
+    let logout = (Auth.isAuthenticated()) ?
+        <Link to="/logout" style={{ textDecoration: 'none' }}><MenuItem>Logout</MenuItem></Link> 
+        : 
+        '';
+    */
+
     return(
         <div>
                 <AppBar

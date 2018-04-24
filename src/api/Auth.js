@@ -1,21 +1,33 @@
 
-/*
-*   setAuthenticated
-*/
-function setAuthenticated() {
-    localStorage.setItem('authenticated', true);
+const ACCESS_TOKEN_KEY = 'accessToken';
+const USER_ID_KEY = 'userId';
+
+function setAuthentication(accessToken, userId) {
+    localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+    localStorage.setItem(USER_ID_KEY, userId);
 }
 
-/*
-*   isAuthenticated
-*   
-*   @return {string}    'true' if user is authenticated
-*/
+function removeAuthentication() {
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.removeItem(USER_ID_KEY);
+}
+
+function getAccessToken() {
+    return localStorage.getItem(ACCESS_TOKEN_KEY);
+}
+
+function getUserId() {
+    return localStorage.getItem(USER_ID_KEY);
+}
+
 function isAuthenticated() {
-    return localStorage.getItem('authenticated');
+    return ( (localStorage.getItem(ACCESS_TOKEN_KEY) && localStorage.getItem(USER_ID_KEY)) ? true : false);
 }
 
 module.exports = {
-    setAuthenticated: setAuthenticated,
-    isAuthenticated: isAuthenticated
+    setAuthentication: setAuthentication,
+    removeAuthentication: removeAuthentication,
+    isAuthenticated: isAuthenticated,
+    getAccessToken: getAccessToken,
+    getUserId: getUserId
 }
