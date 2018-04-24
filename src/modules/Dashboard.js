@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import PrevMatch from '../components/PrevMatch';
+import LastRounds from '../components/LastRounds';
 import PrevTourn from '../components/PrevTourn';
 import NewGame from '../components/NewGame';
 import GameStats from '../components/Statistic';
@@ -18,12 +18,17 @@ class App extends Component {
         this.onDataReceived = this.onDataReceived.bind(this);
         this.onDataFailure = this.onDataFailure.bind(this);
 
-        this.state = {user: {}};
+        this.state = {
+            user: {},
+            rounds: {}
+        };
     }
 
     componentDidMount() {
+
         if(Auth.isAuthenticated()) {
-            Api.getUsers(Auth.getUserId(), this.onDataReceived, this.onDataFailure );
+            console.log('Calling Api.getUser');
+            Api.getUser(Auth.getUserId(), this.onDataReceived, this.onDataFailure );
         }
     }
 
@@ -35,7 +40,6 @@ class App extends Component {
     onDataReceived(response) {
         console.log('Users received:');
         this.setState({user: response});
-
     }   
 
     onDataFailure(errorMessage) {
@@ -51,8 +55,7 @@ class App extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                        <h3>User id: {Auth.getUserId()}</h3>
-                        <h3>User name: {this.state.user.name}</h3>
+                        <h3>{this.state.user.username}</h3>
                         </div>
                     </div>
                     <div className="row">
@@ -61,8 +64,8 @@ class App extends Component {
                     </div>
                     <br/>
                     <div className="row">
-                        <div className="col-6"> <PrevMatch /> </div>
-                        <div className="col-6"> <PrevTourn /> </div>
+                        <div className="col-6"><LastRounds /></div>
+                        <div className="col-6"> </div>
                     </div>
                 </div>
         );

@@ -33,6 +33,59 @@ function getUsers(onSuccess, onFailure) {
 }
 
 /*
+*   getUser - Returns user data by the given user id
+*
+*   @param  {String}    User id
+*   @param  {Function}  Optional callback function for success event.
+*   @param  {Function}  Optional callback function for failure event.
+*   
+*   @return {Object}    If callbacks where provided, calls them respectively with the resolved promise result,
+*                       otherwise returns promise itself.
+*
+*   Note: If onSuccess is provided, onFailure must be too.
+*/
+function getUser(userId, onSuccess, onFailure) {
+
+    const url = API_URL + '/users/' + userId;
+    const options = { method: 'GET' };
+
+    let promise = fetch(url, options);
+
+    if(onSuccess && onFailure) {
+        handleJsonPromise(promise, onSuccess, onFailure);
+    } else {
+        return promise;
+    }
+}
+
+/*
+*   getUserRounds - Returns user's rounds data by the given user id  
+*
+*   @param  {String}    User id
+*   @param  {Function}  Optional callback function for success event.
+*   @param  {Function}  Optional callback function for failure event.
+*   
+*   @return {Object}    If callbacks where provided, calls them respectively with the resolved promise result,
+*                       otherwise returns promise itself.
+*
+*   Note: If onSuccess is provided, onFailure must be too.
+*/
+function getUserRounds(userId, onSuccess, onFailure) {
+
+    const url = API_URL + '/users/' + userId + '/rounds/';
+    const options = { method: 'GET' };
+
+    let promise = fetch(url, options);
+
+    if(onSuccess && onFailure) {
+        handleJsonPromise(promise, onSuccess, onFailure);
+    } else {
+        return promise;
+    }
+}
+
+
+/*
 *   registerUser
 *   
 *   @param  {Object}    user        User-object
@@ -310,6 +363,8 @@ function handleJsonPromise(promise, onSuccess, onFailure) {
 
 module.exports = {
     getUsers: getUsers,
+    getUser: getUser,
+    getUserRounds: getUserRounds,
     getCourses: getCourses,
     postUser: postUser,
     postCourse: postCourse,

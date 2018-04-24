@@ -13,18 +13,23 @@ class Courses extends Component {
 
     constructor(props) {
         super(props);
+
+        this.onCoursesReceived = this.onCoursesReceived.bind(this);
+        this.onCoursesFailure = this.onCoursesFailure.bind(this);
+        
         this.state = {courses: {}};
     }
 
-    componentDidMount() {
+    componentDidMount() {        
+        Api.getCourses('', this.onCoursesReceived, this.onCoursesFailure);
+    }
 
-        Api.getCourses().then((response) => {
-            return response.json();
-        }).then((jsonResponse) => {
-            this.setState({courses: jsonResponse});
-        }).catch((reason) => {
-            console.error(reason);
-        });
+    onCoursesReceived(courses) {
+        this.setState({courses: courses});
+    }
+
+    onCoursesFailure(error) {
+        console.log(error);
     }
 
     render() {
