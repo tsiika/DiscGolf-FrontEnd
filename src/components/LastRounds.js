@@ -10,7 +10,7 @@ class LastRounds extends Component {
         this.onRoundsReceived = this.onRoundsReceived.bind(this);
         this.onDataFailure = this.onDataFailure.bind(this);
 
-        this.state = { rounds: {} };
+        this.state = { rounds: [] };
     }
     
     componentDidMount() {
@@ -20,23 +20,19 @@ class LastRounds extends Component {
     }
     
     onRoundsReceived(rounds) {
-        console.log('onRoundsReceived');
-        
-        let courseIds = [];
 
+        let _rounds = [];
+        
         rounds.forEach(round => {
-            console.log(round.courseId);
-            
-            if(!courseIds.includes(round.courseId)) {
-                Api.getCourses(round.courseId, (course) => {
-                    console.log(course);
-                }, (error) => {
-                    console.log(error);
-                });
+            let r = {
+                id: round._id,
+                courseName: round.course.name,
+                played: new Date(round.created).toLocaleDateString('en-US')
             }
-            
-            courseIds.push(round.courseId);
+            _rounds.push(r);
         });
+
+        this.setState({rounds: _rounds});
     }
 
     onDataFailure(errorMessage) {
@@ -45,9 +41,24 @@ class LastRounds extends Component {
     
 
     render() {
+
+        let rows = this.state.rounds.map((round) =>{
+            return(
+                <tr key={round.id}>
+                    <td>{round.courseName}</td>
+                    <td>{round.played}</td>
+                </tr>
+            );
+        });
+
         return (
             <div>
                 <h3>Last rounds</h3>
+                <table>
+                    <tbody>
+                        {rows}
+                    </tbody>
+                </table>
             </div>
         );
     }
