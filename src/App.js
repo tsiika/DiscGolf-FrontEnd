@@ -20,9 +20,6 @@ import Scorecard from './modules/round/Scorecard';
 
 import Admin from './modules/Admin';
 
-import RoundModel from './models/RoundModel';
-
-
 import "./App.css";
 import "./styles/simple-grid.css";
 
@@ -68,15 +65,7 @@ class App extends Component {
                     <Route sensitive exact path="/round/players" render={(props) => <PlayerSelection {...props} />} />
                         
                     <Route sensitive exact path="/round/scorecard" render={(props) => {
-                        
-                        // FIXME: This is really ugly; Get rid of RoundModel and change Scorecard to store round-data without it.
-                        let model = new RoundModel();
-                        model.course = props.location.state.course;
-                        model.players = props.location.state.players;
-                        model.initScores();
-
-                        return <Scorecard model={model} />  
-                        /*return <Scorecard {...props} />*/
+                        return <Scorecard course={props.location.state.course} players={props.location.state.players} /> 
                     }} />
 
                     <Route path="/admin" component={Admin} />

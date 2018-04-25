@@ -18,8 +18,6 @@ class Register extends Component {
     }
 
     onUserRegistered(response) {
-        console.log('onUserRegistered');
-        console.log(response);
         Auth.setAuthentication(response.accessToken, response.userId);
         this.forceUpdate();
     }
@@ -30,7 +28,6 @@ class Register extends Component {
             // If user is logged in redirect to dashboard
             return( <Redirect to="/dashboard" /> );
         } else {
-            // Render registeration form
             return(
                 <div>
                     <h3>Create account</h3>

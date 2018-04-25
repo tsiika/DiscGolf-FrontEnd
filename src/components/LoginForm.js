@@ -107,7 +107,7 @@ class LoginForm extends Component{
                             onChange={this.onInputChange}
                         />
                         <br />
-                        <RaisedButton name="submitButton" type="submit" disabled={this.state.loading} label="Log in" primary style={{marginTop: '20px'}} />
+                        <RaisedButton name="submitButton" type="submit" disabled={this.state.loading} label="Log in" primary style={btnStyle} />
                         <span>or</span>
                         <RegisterButton />
                     </form>

@@ -24,11 +24,9 @@ Number.isInteger = Number.isInteger || function(value) {
 /*
 *   Scorecard - component
 *
-*   Used in the Round-module.
-* 
-*   @props  model   Round datamodel-object
+*   @props  course      Course data object
+*   @props  players     Array of Player data objects
 *
-*   TODO: Send data-object to API
 *   TODO: Keyboard-component for inputting scores on mobile.
 *
 *   TODO:
@@ -46,20 +44,47 @@ class Scorecard extends Component {
         this.onRoundSaved = this.onRoundSaved.bind(this);
         this.onRoundSaveFailure = this.onRoundSaveFailure.bind(this);
 
+        // Init Round data object
+        let round = { _id: null, course: props.course, players: [], scores: {} };
+
+        props.players.forEach((player) => {
+
+            // Populate round.players with just player ids
+            round.players.push(player._id);
+
+            // Init scores-array with objects with player ids as keys
+            round.scores[player._id] = {};
+            // For each player, store each fairway throw count and ob as it's own object,
+            // and par value for convenience
+            round.course.fairways.forEach((fairway) => {
+                round.scores[player._id][fairway.order] = {
+                    throwCount: null,
+                    ob: false,
+                    par: fairway.par
+                };
+            })
+            // Also store the inital total throw count
+            round.scores[player._id].totalThrowCount = 0;
+            // .. total difference to played fairways total par
+            round.scores[player._id].diffToPlayedFairwaysPar = null;
+            // ...and the player(user) name for convenience
+            round.scores[player._id].userName = player.username;
+        });
+
         let currentFairway = null;
         // TODO: course total par should propably be stored in database
         let courseTotalPar = 0;
         // Pick the first fairway of the course (Initially it should be the fairway with order=1)
-        this.props.model.course.fairways.forEach((fairway) => {
+        round.course.fairways.forEach((fairway) => {
             courseTotalPar += fairway.par;
             if( parseInt(fairway.order, 10) === 1 ) currentFairway = fairway;
         });
 
         // If fairway with order=1 was not found (though it should be), pick the first from fairway-array
-        if(!currentFairway) currentFairway = this.props.model.course.fairways[0];
+        if(!currentFairway) currentFairway = round.course.fairways[0];
         
         this.state = { 
-            model: this.props.model,            // Model corresponding the database schema
+            round: round,
             currentFairway: currentFairway,     // Fairway data
             courseTotalPar: courseTotalPar      // Total par value of the course
         };
@@ -69,7 +94,7 @@ class Scorecard extends Component {
     //       a keyboard for mobile usage should replace that also.
     onFairwayChanged(fairwayOrder) {
         
-        this.props.model.course.fairways.forEach((fairway) => {
+        this.state.round.course.fairways.forEach((fairway) => {
             if( parseInt(fairway.order, 10) === fairwayOrder ) {
                 this.setState({currentFairway: fairway});
             }
@@ -79,18 +104,19 @@ class Scorecard extends Component {
     // Handles input change event from PlayerList and updates data-model
     onScoreInputChange(playerId, newThrowCount) {
 
-        let _model = this.state.model;
+        // Note the object copy by assign
+        let _round = Object.assign({}, this.state.round);
 
         // Update fairway throw count
-        _model.scores[playerId][this.state.currentFairway.order].throwCount = newThrowCount;
+        _round.scores[playerId][this.state.currentFairway.order].throwCount = newThrowCount;
         
         // Update total round throw count and total difference to player's played fairways total par value
         let _totalThrowCount = 0;
         let _diffToPlayedFairwaysPar = 0;
 
-        for(let fairwayOrder in _model.scores[playerId]) {
+        for(let fairwayOrder in _round.scores[playerId]) {
 
-            let fairway = _model.scores[playerId][fairwayOrder];
+            let fairway = _round.scores[playerId][fairwayOrder];
             
             if(fairway && fairway.throwCount) {
                 _totalThrowCount += fairway.throwCount;
@@ -98,35 +124,37 @@ class Scorecard extends Component {
             }
         }
 
-        _model.scores[playerId].totalThrowCount = _totalThrowCount;
-        _model.scores[playerId].diffToPlayedFairwaysPar = _diffToPlayedFairwaysPar;
+        _round.scores[playerId].totalThrowCount = _totalThrowCount;
+        _round.scores[playerId].diffToPlayedFairwaysPar = _diffToPlayedFairwaysPar;
 
         // Mark fairway as 'played' (This is mainly for displaying played ones on the FairwayInfo).
         // Also note that fairway objects do not contain 'played'-property, it's created here 'on the fly'.
-        this.state.model.course.fairways.forEach((fairway) => {
+        _round.course.fairways.forEach((fairway) => {
             if(fairway.order === this.state.currentFairway.order) fairway.played = true;
         });
 
-        this.setState({model: _model});
+        this.setState({round: _round});
     }
 
     onProceed() {
         //this.props.postOrUpdateRound();
-        if(this.state.model._id !== null) {
-            Api.putRound(this.state.model.toSchema(), this.onRoundSaved, this.onRoundSaveFailure);
+
+        if(this.state.round._id !== null) {
+            Api.putRound(this.state.round, this.onRoundSaved, this.onRoundSaveFailure);
         } else {
-            Api.postRound(this.state.model.toSchema(), this.onRoundSaved, this.onRoundSaveFailure);
+            Api.postRound(this.state.round, this.onRoundSaved, this.onRoundSaveFailure);
         }
+        
     }
 
     onRoundSaved(response) {
 
         if(response && response._id) {
             // Update the round id, if this was creation event
-            if(this.state.model._id === null) {
-                let model = Object.assign({}, this.state.model);
-                model._id = response._id;
-                this.setState({model: model});
+            if(this.state.round._id === null) {
+                let round = Object.assign({}, this.state.round);
+                round._id = response._id;
+                this.setState({round: round});
             }
         } else {
             console.error('Error on saving round data');
@@ -140,12 +168,14 @@ class Scorecard extends Component {
 
     render() {
 
+        let round = this.state.round;
+
         return (
             <div className="Scorecard">
                 <h2>Scorecard</h2>
-                {this.state.model.course.name} - Par {this.state.courseTotalPar}
-                <FairwayInfo fairways={this.state.model.course.fairways} currentFairway={this.state.currentFairway} onFairwayChanged={this.onFairwayChanged} />
-                <PlayerList currentFairway={this.state.currentFairway} scores={this.state.model.scores} courseTotalPar={this.state.courseTotalPar} onScoreInputChange={this.onScoreInputChange} />
+                {round.course.name} - Par {this.state.courseTotalPar}
+                <FairwayInfo fairways={round.course.fairways} currentFairway={this.state.currentFairway} onFairwayChanged={this.onFairwayChanged} />
+                <PlayerList currentFairway={this.state.currentFairway} scores={round.scores} courseTotalPar={this.state.courseTotalPar} onScoreInputChange={this.onScoreInputChange} />
                 <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} />
             </div>
         );
@@ -224,9 +254,12 @@ class FairwayInfo extends Component {
 class PlayerList extends Component {
 
     constructor(props) {
+
         super(props);
+
         this.onPlayerSelected = this.onPlayerSelected.bind(this);
         this.onScoreInputChange = this.onScoreInputChange.bind(this);
+        
         this.state = {};
     }
 

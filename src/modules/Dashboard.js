@@ -6,7 +6,6 @@ import GameStats from '../components/Statistic';
 import Auth from '../api/Auth';
 import Api from '../api/Api';
 import Redirect from 'react-router/Redirect';
-
  
 class App extends Component {
 
@@ -16,10 +15,7 @@ class App extends Component {
         this.onDataReceived = this.onDataReceived.bind(this);
         this.onDataFailure = this.onDataFailure.bind(this);
 
-        this.state = {
-            user: {},
-            rounds: {}
-        };
+        this.state = { user: {} };
     }
 
     componentDidMount() {

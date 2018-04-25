@@ -47,12 +47,12 @@ class LastRounds extends Component {
     
     render() {
 
-        let rows = this.state.rounds.map((round) =>{
+        let rows = this.state.rounds.map((round) => { 
             return(
                 <tr key={round.id}>
                     <td>{round.played}</td>
                     <td style={{textAlign: 'center'}}>{round.courseName}</td>
-                    <td style={{textAlign: 'right'}}>{round.diffToPlayedPar}</td>
+                    <td style={{textAlign: 'right'}}>{(round.diffToPlayedPar > 0) ? '+' + round.diffToPlayedPar : round.diffToPlayedPar}</td>
                 </tr>
             );
         });
@@ -62,7 +62,7 @@ class LastRounds extends Component {
                 <h3>Last rounds</h3>
                 <table>
                     <tbody>
-                        {rows}
+                        {(rows.length > 0) ? rows : <tr><td>No played rounds</td></tr>}
                     </tbody>
                 </table>
             </div>
