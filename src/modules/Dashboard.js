@@ -14,7 +14,6 @@ class App extends Component {
     constructor(props) {
         super(props);
     
-        this.getData = this.getData.bind(this);
         this.onDataReceived = this.onDataReceived.bind(this);
         this.onDataFailure = this.onDataFailure.bind(this);
 
@@ -27,27 +26,20 @@ class App extends Component {
     componentDidMount() {
 
         if(Auth.isAuthenticated()) {
-            console.log('Calling Api.getUser');
             Api.getUser(Auth.getUserId(), this.onDataReceived, this.onDataFailure );
         }
     }
 
-
-    getData() {
-        //Api.getUsers()
-    }
-
     onDataReceived(response) {
-        console.log('Users received:');
         this.setState({user: response});
     }   
 
     onDataFailure(errorMessage) {
-        console.log('FAILURE: ' + errorMessage);
+        console.error(errorMessage);
     }
 
     render() {
-        console.log('Dashboard.render');
+
         return (
             (!Auth.isAuthenticated()) ?
                 <Redirect to="/"/>

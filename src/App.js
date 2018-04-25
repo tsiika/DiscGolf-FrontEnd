@@ -13,8 +13,15 @@ import Logout from './modules/Logout';
 import Confirm from './modules/Confirm';
 import Dashboard from './modules/Dashboard';
 import Courses from './modules/Courses';
+
 import Round from './modules/round/Round';
+import CourseSelection from './modules/round/CourseSelection';
+import PlayerSelection from './modules/round/PlayerSelection';
+import Scorecard from './modules/round/Scorecard';
+
 import Admin from './modules/Admin';
+
+import RoundModel from './models/RoundModel';
 
 
 import "./App.css";
@@ -56,7 +63,21 @@ class App extends Component {
 					<Route sensitive path="/confirm" component={Confirm} />
 					<Route sensitive path="/dashboard" component={Dashboard} />
 					<Route sensitive path="/courses" component={Courses} />
-                    <Route sensitive path="/round" component={Round} />
+                    
+                    <Route sensitive exact path="/round/course" component={CourseSelection} />
+                    
+                    <Route sensitive exact path="/round/players" render={(props) => <PlayerSelection {...props} />} />
+                        
+                    <Route sensitive exact path="/round/scorecard" render={(props) => {
+                        
+                        let model = new RoundModel();
+                        model.course = props.location.state.course;
+                        model.players = props.location.state.players;
+                        model.initScores();
+
+                        return <Scorecard model={model} />  
+                        /*return <Scorecard {...props} />*/
+                    }} />
 
                     <Route path="/admin" component={Admin} />
 

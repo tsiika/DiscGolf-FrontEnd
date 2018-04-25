@@ -8,6 +8,10 @@ import {
 } from 'material-ui/Table';
 import { RaisedButton } from 'material-ui';
 
+
+import '../../App.css';
+import '../../Round.css';
+
 // Polyfill for the ES2015 Number.isInteger (For IE)
 // TODO: Move this some util module, or etc.
 Number.isInteger = Number.isInteger || function(value) {
@@ -34,6 +38,9 @@ class Scorecard extends Component {
     constructor(props) {
 
         super(props);
+
+        console.log('Scorecard');
+        console.log(props);
 
         this.onFairwayChanged = this.onFairwayChanged.bind(this);
         this.onScoreInputChange = this.onScoreInputChange.bind(this);
@@ -118,7 +125,6 @@ class Scorecard extends Component {
                 {this.state.model.course.name} - Par {this.state.courseTotalPar}
                 <FairwayInfo fairways={this.state.model.course.fairways} currentFairway={this.state.currentFairway} onFairwayChanged={this.onFairwayChanged} />
                 <PlayerList currentFairway={this.state.currentFairway} scores={this.state.model.scores} courseTotalPar={this.state.courseTotalPar} onScoreInputChange={this.onScoreInputChange} />
-                <Keyboard />
                 <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} />
             </div>
         );
@@ -273,6 +279,7 @@ class Keyboard extends Component {
     }
 
     render() {
+        
         return (
             <div className="Keyboard">
                 <div className="column">

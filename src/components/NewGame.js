@@ -11,7 +11,7 @@ class newGame extends Component {
         return (
             <div>
                 <h3>Play</h3>
-                <Link to='/round'>
+                <Link to='/round/course'>
                     <RaisedButton label="Single Round" primary={true} style={style}></RaisedButton> 
                 </Link>
                 <RaisedButton label="Tournament" primary={true} style={style}></RaisedButton>
