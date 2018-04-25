@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import NoMatch from '../../components/404';
 
 import Api from  '../../api/Api';
 
@@ -16,9 +14,6 @@ import {
     TableRowColumn
 } from 'material-ui/Table';
 import { RaisedButton } from 'material-ui';
-
-import RoundModel from '../../models/RoundModel';
-import Scorecard from '../../components/round/Scorecard';
 
 import Auth from '../../api/Auth';
 import Redirect from 'react-router-dom/Redirect';
@@ -42,10 +37,7 @@ class PlayerSelection extends Component {
         this.onPlayersReceived = this.onPlayersReceived.bind(this);
         this.onProceed = this.onProceed.bind(this);
         this.onPlayerSelected = this.onPlayerSelected.bind(this);
-        
-        console.log('PlayerSelection.constructor');
-        console.log(props.location.state.course);
-        
+
         this.state = {
             course: props.location.state.course,
             players: [], 

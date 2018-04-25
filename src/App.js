@@ -14,7 +14,6 @@ import Confirm from './modules/Confirm';
 import Dashboard from './modules/Dashboard';
 import Courses from './modules/Courses';
 
-import Round from './modules/round/Round';
 import CourseSelection from './modules/round/CourseSelection';
 import PlayerSelection from './modules/round/PlayerSelection';
 import Scorecard from './modules/round/Scorecard';
@@ -70,6 +69,7 @@ class App extends Component {
                         
                     <Route sensitive exact path="/round/scorecard" render={(props) => {
                         
+                        // FIXME: This is really ugly; Get rid of RoundModel and change Scorecard to store round-data without it.
                         let model = new RoundModel();
                         model.course = props.location.state.course;
                         model.players = props.location.state.players;

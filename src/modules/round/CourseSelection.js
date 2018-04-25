@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import NoMatch from '../../components/404';
+import Redirect from 'react-router-dom/Redirect';
 
 import Api from  '../../api/Api';
 import Auth from '../../api/Auth';
@@ -17,9 +16,6 @@ import {
     TableRowColumn
 } from 'material-ui/Table';
 import { RaisedButton } from 'material-ui';
-
-import RoundModel from '../../models/RoundModel';
-import Redirect from 'react-router-dom/Redirect';
 
 
 /*

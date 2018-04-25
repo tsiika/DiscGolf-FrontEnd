@@ -19,7 +19,6 @@ class RoundModel {
 
         if(this.players && this.course) {
 
-            console.log('RoundModel.initScore...');
             this.players.forEach((player) => {
                 this.scores[player._id] = {};
                 // For each player, store each fairway throw count and ob as it's own object,

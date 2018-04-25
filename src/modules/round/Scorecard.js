@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Api from '../../api/Api';
 
 import {
     Table,
@@ -39,12 +40,11 @@ class Scorecard extends Component {
 
         super(props);
 
-        console.log('Scorecard');
-        console.log(props);
-
         this.onFairwayChanged = this.onFairwayChanged.bind(this);
         this.onScoreInputChange = this.onScoreInputChange.bind(this);
         this.onProceed = this.onProceed.bind(this);
+        this.onRoundSaved = this.onRoundSaved.bind(this);
+        this.onRoundSaveFailure = this.onRoundSaveFailure.bind(this);
 
         let currentFairway = null;
         // TODO: course total par should propably be stored in database
@@ -107,15 +107,36 @@ class Scorecard extends Component {
             if(fairway.order === this.state.currentFairway.order) fairway.played = true;
         });
 
-        console.log('Input change');
-        console.log(_model);
-
         this.setState({model: _model});
     }
 
     onProceed() {
-        this.props.postOrUpdateRound();
+        //this.props.postOrUpdateRound();
+        if(this.state.model._id !== null) {
+            Api.putRound(this.state.model.toSchema(), this.onRoundSaved, this.onRoundSaveFailure);
+        } else {
+            Api.postRound(this.state.model.toSchema(), this.onRoundSaved, this.onRoundSaveFailure);
+        }
     }
+
+    onRoundSaved(response) {
+
+        if(response && response._id) {
+            // Update the round id, if this was creation event
+            if(this.state.model._id === null) {
+                let model = Object.assign({}, this.state.model);
+                model._id = response._id;
+                this.setState({model: model});
+            }
+        } else {
+            console.error('Error on saving round data');
+        }
+    }
+    
+    onRoundSaveFailure(error) {
+        console.error(error);
+    }
+
 
     render() {
 

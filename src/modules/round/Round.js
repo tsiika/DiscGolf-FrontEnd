@@ -36,6 +36,8 @@ import Scorecard from '../../components/round/Scorecard';
 *   TODO: Do view switching by redirecting to corresponding location (or by pushing history or etc.),
 *         so that it would possible to go back to previous view with browser back-button.
 *         ...or at least do a confirmation check for preventing unwanted page leave.
+*
+*   TODO: THIS MODULE WILL PROBABLY BE REMOVED. CourseSelection, PlayerSelection and Scorecard are now on their own modules...
 * 
 */
 class Round extends Component {
@@ -122,8 +124,6 @@ class Round extends Component {
     // Checks if round data already has id, and performs update or post respectively
     // TODO: UI should propably be 'freezed' during posting and updating (at least for posting)...
     postOrUpdateRound() {
-        console.log('--- postOrUpdateRound ---');
-        console.log(this.state.model._id);
         if(this.state.model._id !== null) {
             this.updateRound();
         } else {
@@ -133,9 +133,6 @@ class Round extends Component {
 
     // Posts new round into database
     postRound() {
-
-        console.log('--- postRound ---');
-        console.log(this.state.model.toSchema());
 
         Api.postRound(this.state.model.toSchema()).then((response) => {
             return response.json();

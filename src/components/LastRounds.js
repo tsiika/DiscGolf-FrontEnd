@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Api from '../api/Api';
 import Auth from '../api/Auth';
 
+/*
+*   LastRounds - Displays player's latest rounds on Dashboard
+*/
 class LastRounds extends Component {
 
     constructor(props) {
@@ -22,13 +25,16 @@ class LastRounds extends Component {
     onRoundsReceived(rounds) {
 
         let _rounds = [];
-        
+        let userId = Auth.getUserId();
+
         rounds.forEach(round => {
             let r = {
                 id: round._id,
-                courseName: round.course.name,
-                played: new Date(round.created).toLocaleDateString('en-US')
+                courseName: (round.course) ? round.course.name : 'Unknown course',
+                played: new Date(round.created).toLocaleDateString('en-US'),
+                diffToPlayedPar: round.scores[userId].diffToPlayedFairwaysPar
             }
+
             _rounds.push(r);
         });
 
@@ -36,17 +42,17 @@ class LastRounds extends Component {
     }
 
     onDataFailure(errorMessage) {
-        console.log(errorMessage);
+        console.error(errorMessage);
     }
     
-
     render() {
 
         let rows = this.state.rounds.map((round) =>{
             return(
                 <tr key={round.id}>
-                    <td>{round.courseName}</td>
                     <td>{round.played}</td>
+                    <td style={{textAlign: 'center'}}>{round.courseName}</td>
+                    <td style={{textAlign: 'right'}}>{round.diffToPlayedPar}</td>
                 </tr>
             );
         });

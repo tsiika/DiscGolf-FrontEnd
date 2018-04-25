@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import LastRounds from '../components/LastRounds';
-import PrevTourn from '../components/PrevTourn';
 import NewGame from '../components/NewGame';
 import GameStats from '../components/Statistic';
 import Auth from '../api/Auth';

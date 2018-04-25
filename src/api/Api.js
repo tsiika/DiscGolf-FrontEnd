@@ -26,7 +26,7 @@ function getUsers(onSuccess, onFailure) {
     let promise = fetch(API_URL + '/users', options);
 
     if(onSuccess && onFailure) {
-        handleJsonPromise(promise);
+        handleJsonPromise(promise, onSuccess, onFailure);
     } else {
         return promise;
     }
@@ -293,7 +293,7 @@ function postRound(round, onSuccess, onFailure) {
     let promise = fetch(API_URL + '/rounds', options); 
 
     if(onSuccess && onFailure) {
-        handleJsonPromise(promise);
+        handleJsonPromise(promise, onSuccess, onFailure);
     } else {
         return promise;
     }
@@ -322,7 +322,7 @@ function putRound(data, onSuccess, onFailure) {
     let promise = fetch(API_URL + '/rounds', options); 
 
     if(onSuccess && onFailure) {
-        handleJsonPromise(promise);
+        handleJsonPromise(promise, onSuccess, onFailure);
     } else {
         return promise;
     }
