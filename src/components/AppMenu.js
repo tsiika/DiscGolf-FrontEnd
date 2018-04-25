@@ -72,6 +72,3 @@ export default class AppMenu extends React.Component {
 		);
 	}
 }
-
-
-

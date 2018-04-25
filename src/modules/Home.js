@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import '../App.css';
 import TopNavigation from '../components/TopNavigation';
-import CourseCard from '../components/CourseCard';
-import AddCourseForm from '../components/AddCourseForm';
-
+import RecentTab from '../components/Recent';
+import FavoritsTab from '../components/Favorits';
+import NearbyTab from '../components/Nearby';
+import AddCourseTab from '../components/AddCourseTab'
 
 import {Tabs, Tab} from 'material-ui/Tabs';
 // From https://github.com/oliviertassinari/react-swipeable-views
@@ -57,27 +58,22 @@ class App extends Component {
                label="NEARBY" value={2} />
           <Tab icon={<IconAddCourse />}
                label="Add course" value={3} />
-
-
         </Tabs>
         <SwipeableViews
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange}
         >
           <div>
-            <CourseCard />
-            <CourseCard />
-            <CourseCard />
+            <RecentTab />
           </div>
           <div>
-            <CourseCard />
+            <FavoritsTab />
           </div>
           <div >
-            <CourseCard />
-            <CourseCard />
+            <NearbyTab />
           </div>
           <div>
-            <AddCourseForm />
+            <AddCourseTab />
           </div>
         </SwipeableViews>
       </div>
