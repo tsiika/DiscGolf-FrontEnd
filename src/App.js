@@ -1,7 +1,7 @@
 //Imports will be in separate module in future 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect} from 'react-router-dom';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -9,13 +9,15 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {List, ListItem} from 'material-ui/List';
 
 import Container from './components/Container';
-import AppMenu from './components/AppMenu';
+
 import NoMatch from './components/404';
 import AppBar from './components/AppBar';
 import AddCourseForm from './components/AddCourseForm';
+import fakeAuth from './modules/Login';
 
 import Home from './modules/Home';
 import Login from './modules/Login';
+import Courselist from './modules/Courselist';
 import Register from './modules/Register';
 import Logout from './modules/Logout';
 import Confirm from './modules/Confirm';
@@ -43,9 +45,7 @@ class App extends Component {
 
 		return (
 			<div className="App">
-				<AppBar>
-					<AppMenu/>
-				</AppBar>
+				<AppBar />
 				<Container/>
 
 
@@ -53,6 +53,7 @@ class App extends Component {
 					{/*Add all routers here*/}
 					<Route exact path="/" component={Home} /> 
 					<Route path="/login" component={Login} />
+					<Route path="/courselist" component={Courselist}/>
 					<Route path="/register" component={Register} />
 					<Route path="/logout" component={Logout} />
 					<Route path="/confirm" component={Confirm} />

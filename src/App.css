@@ -63,3 +63,12 @@ th {
   fill: blue;
   font-weight: bold;
 }
+
+.disclaimer {
+  font-size: 16px;
+}
+
+.cardHeader {
+  font-size: 50px;
+  padding: 25px;
+}

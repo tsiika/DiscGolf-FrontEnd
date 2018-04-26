@@ -5,7 +5,6 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 
-import AppMenu from './AppMenu';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -44,6 +43,7 @@ render(){
 
                     <AppBar title="Menu"/>
                     <Link to="/" style={{ textDecoration: 'none' }}><MenuItem>Home</MenuItem></Link>
+                    <Link to="/courselist" style={{ textDecoration: 'none' }}><MenuItem>Courselist</MenuItem></Link>
                     <Link to="/login" style={{ textDecoration: 'none' }}><MenuItem>Login</MenuItem></Link>
                     <Link to="/register" style={{ textDecoration: 'none' }}><MenuItem>Register</MenuItem></Link>
                     <Link to="/dashboard" style={{ textDecoration: 'none' }}><MenuItem>Dashboard</MenuItem></Link>
