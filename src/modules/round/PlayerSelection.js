@@ -39,6 +39,7 @@ class PlayerSelection extends Component {
         this.onPlayerSelected = this.onPlayerSelected.bind(this);
 
         this.state = {
+            loading: true,
             course: props.location.state.course,
             players: [], 
             selectedPlayers:[], 
@@ -59,7 +60,7 @@ class PlayerSelection extends Component {
     }
 
     onPlayersReceived(_players) {
-        this.setState({players: _players});
+        this.setState({players: _players, loading: false});
     }
 
     onPlayerSelected(_selections) {
@@ -76,6 +77,9 @@ class PlayerSelection extends Component {
     }
 
     render() {
+
+        if(this.state.loading) return(<div className="loader"></div>);
+
         let players = this.state.players;
         let tableRows = '';
 

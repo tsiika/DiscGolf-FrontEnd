@@ -25,12 +25,14 @@ import "./styles/simple-grid.css";
 
 
 class App extends Component {
-	state = {
-		loading: true,
-	};
-
+    
+    constructor(props) {
+        super(props);
+        this.state = { loading: true };
+    }
+    
 	componentDidMount(){
-		setTimeout(() => this.setState({loading: false}),1);
+		setTimeout(() => this.setState({loading: false}), 1);
 	}
 
 	render() {

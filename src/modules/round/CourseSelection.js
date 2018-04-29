@@ -35,7 +35,8 @@ class CourseSelection extends Component {
         this.onCourseSelected = this.onCourseSelected.bind(this);
         this.onProceed = this.onProceed.bind(this);
         
-        this.state = { 
+        this.state = {
+            loading: true,
             courseSelected: false, 
             proceeding: false,
             selectedCourseIndex: null,
@@ -55,7 +56,7 @@ class CourseSelection extends Component {
     }
 
     onCoursesReceived(_courses) {
-        this.setState({courses: _courses});
+        this.setState({courses: _courses, loading: false});
     }
 
     onCourseSelected(selection) {
@@ -72,6 +73,8 @@ class CourseSelection extends Component {
 
     render() {
         
+        if(this.state.loading) return (<div className="loader"></div>);
+
         let courses = this.state.courses;
         let tableRows = '';
 
