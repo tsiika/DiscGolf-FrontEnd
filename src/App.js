@@ -14,9 +14,9 @@ import Confirm from './modules/Confirm';
 import Dashboard from './modules/Dashboard';
 import Courses from './modules/Courses';
 
-import CourseSelection from './modules/round/CourseSelection';
-import PlayerSelection from './modules/round/PlayerSelection';
-import Scorecard from './modules/round/Scorecard';
+import CourseSelection from './modules/CourseSelection';
+import PlayerSelection from './modules/PlayerSelection';
+import Scorecard from './modules/Scorecard';
 
 import Admin from './modules/Admin';
 

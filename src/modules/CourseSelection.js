@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Redirect from 'react-router-dom/Redirect';
 
-import Api from  '../../api/Api';
-import Auth from '../../api/Auth';
+import Api from  '../api/Api';
+import Auth from '../api/Auth';
 
-import '../../App.css';
-import '../../Round.css';
+import '../App.css';
+import '../Round.css';
 
 import {
     Table,

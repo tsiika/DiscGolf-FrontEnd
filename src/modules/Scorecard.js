@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Api from '../../api/Api';
+import Api from '../api/Api';
 
 import {
     Table,
@@ -10,8 +10,8 @@ import {
 import { RaisedButton } from 'material-ui';
 
 
-import '../../App.css';
-import '../../Round.css';
+import '../App.css';
+import '../Round.css';
 
 // Polyfill for the ES2015 Number.isInteger (For IE)
 // TODO: Move this some util module, or etc.
