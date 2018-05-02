@@ -7,6 +7,7 @@ div.Scorecard {
     margin: 20px;
     padding: 20px 5px 20px 5px;
     height: 550px;
+    max-width: 500px;
 }
 
 div.Scorecard div.fairway-info {
@@ -67,25 +68,35 @@ div.Scorecard div.player-list .input-column {
     text-align: center;
 }
 
-div.Keyboard {
+div.keyboard {
     display: flex;
-    border: 1px solid steelblue;
+    border: 0px solid steelblue;
 }
 
-div.Keyboard .column {
+div.keyboard-column {
     display: flex;
     flex-direction: column;
-    border: 1px solid steelblue;
+    border: 0px solid steelblue;
 }
 
-div.Keyboard .row {
+div.keyboard-row {
     display: flex;
     flex-direction: row;
-    border: 1px solid slateblue;    
+    border: 0px solid slateblue;    
 }
 
-div.Keyboard .button {
-    padding: 5px 5px 5px 5px;
+div.keyboard-button {
+    border: 0px solid lime;
+    margin: 5px 5px 5px 5px;
+    min-width: 50px !important;
+    min-height: 48px !important;
+}
+
+div.keyboard-button-big {
+    border: 0px solid lime;
+    margin: 5px 5px 5px 5px;
+    min-width: 50px !important;
+    min-height: 105px !important;
 }
 
 

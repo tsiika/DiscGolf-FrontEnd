@@ -40,6 +40,7 @@ class Scorecard extends Component {
 
         this.onFairwayChanged = this.onFairwayChanged.bind(this);
         this.onScoreInputChange = this.onScoreInputChange.bind(this);
+        this.onPlayerSelected = this.onPlayerSelected.bind(this);
         this.onProceed = this.onProceed.bind(this);
         this.onRoundSaved = this.onRoundSaved.bind(this);
         this.onRoundSaveFailure = this.onRoundSaveFailure.bind(this);
@@ -83,10 +84,13 @@ class Scorecard extends Component {
         // If fairway with order=1 was not found (though it should be), pick the first from fairway-array
         if(!currentFairway) currentFairway = round.course.fairways[0];
         
+        let selectedPlayerId = round.players[0];
+
         this.state = { 
             round: round,
             currentFairway: currentFairway,     // Fairway data
-            courseTotalPar: courseTotalPar      // Total par value of the course
+            courseTotalPar: courseTotalPar,      // Total par value of the course
+            selectedPlayerId: selectedPlayerId
         };
     }
     
@@ -101,9 +105,12 @@ class Scorecard extends Component {
         });
     }
 
+    onPlayerSelected(playerRowIndex) {
+        this.setState({selectedPlayerId: this.state.round.players[playerRowIndex]});
+    }
+
     // Handles input change event from PlayerList and updates data-model
     onScoreInputChange(playerId, newThrowCount) {
-
         // Note the object copy by assign
         let _round = Object.assign({}, this.state.round);
 
@@ -171,12 +178,14 @@ class Scorecard extends Component {
         let round = this.state.round;
 
         return (
-            <div className="Scorecard">
-                <h2>Scorecard</h2>
-                {round.course.name} - Par {this.state.courseTotalPar}
-                <FairwayInfo fairways={round.course.fairways} currentFairway={this.state.currentFairway} onFairwayChanged={this.onFairwayChanged} />
-                <PlayerList currentFairway={this.state.currentFairway} scores={round.scores} courseTotalPar={this.state.courseTotalPar} onScoreInputChange={this.onScoreInputChange} />
-                <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} />
+            <div className="container flex-container">
+                <div className="Scorecard">
+                    <h2>Scorecard</h2>
+                    {round.course.name} - Par {this.state.courseTotalPar}
+                    <FairwayInfo fairways={round.course.fairways} currentFairway={this.state.currentFairway} onFairwayChanged={this.onFairwayChanged} />
+                    <PlayerList currentFairway={this.state.currentFairway} scores={round.scores} courseTotalPar={this.state.courseTotalPar} onPlayerSelected={this.onPlayerSelected} onScoreInputChange={this.onScoreInputChange} />
+                    <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} />
+                </div>
             </div>
         );
     }
@@ -259,12 +268,16 @@ class PlayerList extends Component {
 
         this.onPlayerSelected = this.onPlayerSelected.bind(this);
         this.onScoreInputChange = this.onScoreInputChange.bind(this);
-        
-        this.state = {};
+
+        this.state = {selectedRow: 0};
     }
 
     onPlayerSelected(selection) {
-        //console.log(selection);
+        
+        if(selection.length > 0) {
+            this.props.onPlayerSelected(selection[0]);
+            this.setState({selectedRow: selection[0]});
+        }
     }
 
     onScoreInputChange(event) {
@@ -286,8 +299,10 @@ class PlayerList extends Component {
 
         // Create table rows from round score data
         let tableRows = [];
+        let index = 0;
+
         for(let playerId in scores) {
-            
+            let selected = (index === this.state.selectedRow); 
             let playerName = scores[playerId].userName;
             let throwCount = scores[playerId][currentFairway.order].throwCount || 0;
             let ob = scores[playerId][currentFairway.order].ob;
@@ -302,7 +317,7 @@ class PlayerList extends Component {
             diffToPlayedFairwaysTotalPar = (diffToPlayedFairwaysTotalPar > 0) ? '+' + diffToPlayedFairwaysTotalPar : diffToPlayedFairwaysTotalPar;
  
             tableRows.push(
-                <TableRow key={playerId}>                      
+                <TableRow key={playerId} selected={selected}>                      
                     <TableRowColumn>{playerName}</TableRowColumn>
                     <TableRowColumn className="input-column"><input type="text" className="read-only" defaultValue={ob} readOnly={true} /></TableRowColumn>
                     <TableRowColumn className="input-column"><input type="text" value={throwCount} data-player-id={playerId} onChange={this.onScoreInputChange}/></TableRowColumn>
@@ -310,6 +325,8 @@ class PlayerList extends Component {
                     <TableRowColumn className="input-column"><input type="text" className="read-only" value={diffToPlayedFairwaysTotalPar || 0} readOnly={true}/></TableRowColumn>
                 </TableRow>
             );
+
+            index++;
         }
         
 
@@ -329,20 +346,62 @@ class Keyboard extends Component {
     
     constructor(props) {
         super(props);
+        
+        this.onClick = this.onClick.bind(this);
         this.state = {};
+
+        this.buttonStyles = {
+            small: {
+                maxWidth: '50px',
+                height: '48px'
+            },
+            big: {
+                maxWidth: '50px',
+                height: '105px'
+            }
+        }
+    }
+
+    onClick(event) {
+        console.log(event.target.dataset.value);
     }
 
     render() {
-        
+
         return (
-            <div className="Keyboard">
-                <div className="column">
-                    <div className="row">
-                        <RaisedButton primary={true} className="button" label="1" />
-                        <RaisedButton primary={true} className="button" label="1" />
-                        <RaisedButton primary={true} className="button" label="1" />
+            <div className="keyboard">
+                <div className="keyboard-column">
+                    <div className="keyboard-row">
+                        <RaisedButton primary={true} className="keyboard-button" buttonStyle={this.buttonStyles.small} label="0" data-value='0' onClick={this.onClick}/>
                     </div>
-                    
+                    <div className="keyboard-row">
+                        <RaisedButton primary={true} className="keyboard-button-big" buttonStyle={this.buttonStyles.big} label="<" data-value='prev' onClick={this.onClick}/>
+                    </div>
+                </div>
+                <div className="keyboard-column">
+                    <div className="keyboard-row">
+                        <RaisedButton primary={true} className="keyboard-button" buttonStyle={this.buttonStyles.small} label="7" data-value='7' onClick={this.onClick} />
+                        <RaisedButton primary={true} className="keyboard-button" buttonStyle={this.buttonStyles.small} label="8" data-value='8' onClick={this.onClick} />
+                        <RaisedButton primary={true} className="keyboard-button" buttonStyle={this.buttonStyles.small} label="9" data-value='9' onClick={this.onClick}/>
+                    </div>
+                    <div className="keyboard-row">
+                        <RaisedButton primary={true} className="keyboard-button" buttonStyle={this.buttonStyles.small} label="4" data-value='4' onClick={this.onClick}/>
+                        <RaisedButton primary={true} className="keyboard-button" buttonStyle={this.buttonStyles.small} label="5" data-value='5' onClick={this.onClick}/>
+                        <RaisedButton primary={true} className="keyboard-button" buttonStyle={this.buttonStyles.small} label="6" data-value='6' onClick={this.onClick}/>
+                    </div>
+                    <div className="keyboard-row">
+                        <RaisedButton primary={true} className="keyboard-button" buttonStyle={this.buttonStyles.small} label="1" data-value='1' onClick={this.onClick}/>
+                        <RaisedButton primary={true} className="keyboard-button" buttonStyle={this.buttonStyles.small} label="2" data-value='2' onClick={this.onClick}/>
+                        <RaisedButton primary={true} className="keyboard-button" buttonStyle={this.buttonStyles.small} label="3" data-value='3' onClick={this.onClick}/>
+                    </div>
+                </div>
+                <div className="keyboard-column">
+                    <div className="keyboard-row">
+                        <RaisedButton primary={true} className="keyboard-button" buttonStyle={this.buttonStyles.small} label="OB" data-value='OB' onClick={this.onClick}/>
+                    </div>
+                    <div className="keyboard-row">
+                        <RaisedButton primary={true} className="keyboard-button-big" buttonStyle={this.buttonStyles.big} label=">" data-value='next' onClick={this.onClick}/>
+                    </div>
                 </div>
             </div>
         );
