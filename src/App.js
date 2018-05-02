@@ -14,6 +14,7 @@ import Confirm from './modules/Confirm';
 import Dashboard from './modules/Dashboard';
 import Courses from './modules/Courses';
 
+import Round from './modules/Round';
 import CourseSelection from './modules/CourseSelection';
 import PlayerSelection from './modules/PlayerSelection';
 import Scorecard from './modules/Scorecard';
@@ -62,13 +63,14 @@ class App extends Component {
 					<Route sensitive path="/dashboard" component={Dashboard} />
 					<Route sensitive path="/courses" component={Courses} />
                     
-                    <Route sensitive exact path="/round/course" component={CourseSelection} />
-                    
+                    <Route sensitive exact path="/round/course" component={CourseSelection} />                    
                     <Route sensitive exact path="/round/players" render={(props) => <PlayerSelection {...props} />} />
-                        
                     <Route sensitive exact path="/round/scorecard" render={(props) => {
                         return <Scorecard course={props.location.state.course} players={props.location.state.players} /> 
                     }} />
+
+                    <Route sensitive exact path="/round/:roundId" component={Round} />
+
 
                     <Route path="/admin" component={Admin} />
 

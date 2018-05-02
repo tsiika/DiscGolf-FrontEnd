@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Api from '../api/Api';
 import Auth from '../api/Auth';
+import { Link } from 'react-router-dom';
 
 /*
 *   LastRounds - Displays player's latest rounds on Dashboard
@@ -50,8 +51,8 @@ class LastRounds extends Component {
         let rows = this.state.rounds.map((round) => { 
             return(
                 <tr key={round.id}>
-                    <td>{round.played}</td>
-                    <td style={{textAlign: 'center'}}>{round.courseName}</td>
+                    <td style={{textAlign: 'left'}}><Link to={{pathname: '/round/' + round.id}}>{round.played}</Link></td>
+                    <td style={{textAlign: 'left'}}>{round.courseName}</td>
                     <td style={{textAlign: 'right'}}>{(round.diffToPlayedPar > 0) ? '+' + round.diffToPlayedPar : round.diffToPlayedPar}</td>
                 </tr>
             );
