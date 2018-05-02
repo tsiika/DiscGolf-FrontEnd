@@ -10,10 +10,8 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 
 import FontIcon from 'material-ui/FontIcon';
-import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin';
-import IconHistory from 'material-ui/svg-icons/action/history';
-import IconFavorite from 'material-ui/svg-icons/action/favorite';
 import IconAddCourse from 'material-ui/svg-icons/content/add-circle';
+import TrackIcon from 'material-ui/svg-icons/action/track-changes';
 
 const styles = {
 headline: {
@@ -49,7 +47,7 @@ return (
         onChange={this.handleChange}
         value={this.state.slideIndex}
     >
-        <Tab icon={<IconHistory />}
+        <Tab icon={<TrackIcon />}
             label="Recent" value={0} />
 { /*       <Tab icon={<IconFavorite />}
             label="FAVORITES" value={1} />

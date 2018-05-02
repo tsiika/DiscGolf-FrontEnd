@@ -4,6 +4,10 @@ import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import axios from 'axios';
 
+// Images
+import DG1 from './img/Disc-Golf-course1.jpg';
+import DGavatar from './img/disc_golf.jpg';
+
 import API from '../api/axiosAPI';
 
 export default class CourseCard extends React.Component {
@@ -46,7 +50,7 @@ export default class CourseCard extends React.Component {
                 >
                 <CardHeader title={course.name}           
                 subtitle={course.holes + " reikää"}
-                  avatar="https://www.sandypines.com/wp-content/uploads/disc_golf.jpg" 
+                  avatar={DGavatar}
                   actAsExpander={true} 
                   showExpandableButton={true} 
                   
@@ -56,7 +60,7 @@ export default class CourseCard extends React.Component {
                   expandable={true} 
                   overlay={<CardTitle title={course.name} subtitle={course.description + " " + "Radassa on " + course.holes + " reikää"} />} 
                   > 
-                  <img src="https://www.outsidepursuits.com/wp-content/uploads/2017/08/Best-Disc-Golf-Disc.jpg" alt="course1 Picture" /> 
+                  <img src={DG1} alt="Course picture" /> 
                   </CardMedia> 
 
                 </Card>

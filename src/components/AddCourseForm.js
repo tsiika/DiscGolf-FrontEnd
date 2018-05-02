@@ -43,33 +43,33 @@ class AddCourseForm extends React.Component {
 	render() {
 		return(
 			<form onSubmit={this.submit}>
-			    <TextField
-        		  name="courseName"
-        		  hintText="Course Name"
-        		  onChange={this.change}
-				  value={this.state.courseName}
-        		  floatingLabelText="Course name"
-        		  floatingLabelFixed
-      		    />
+				<TextField
+					name="courseName"
+					hintText="Course Name"
+					onChange={this.change}
+					value={this.state.courseName}
+					floatingLabelText="Course name"
+					floatingLabelFixed
+				/>
 				<br/>
 				<TextField
-        		  name="holesNum"
-        		  type="number"
-        		  hintText="Holes Number"
-        		  onChange={this.change}
-				  value={this.state.holesNum}
-        		  floatingLabelText="Number of holes"
-        		  floatingLabelFixed
-      		    />
+					name="holesNum"
+					type="number"
+					hintText="Holes Number"
+					onChange={this.change}
+					value={this.state.holesNum}
+					floatingLabelText="Number of holes"
+					floatingLabelFixed
+				/>
 				<br/>
 				<TextField
-        		  name="courseLocation"
-        		  hintText="Course Location"
-        		  onChange={this.change}
-				  value={this.state.courseLocation}
-        		  floatingLabelText="Location of course"
-        		  floatingLabelFixed
-      		    />
+					name="courseLocation"
+					hintText="Course Location"
+					onChange={this.change}
+					value={this.state.courseLocation}
+					floatingLabelText="Location of course"
+					floatingLabelFixed
+				/>
 				<br/>
 				<RaisedButton type="submit" label="Add Course" primary/>
 			</form>

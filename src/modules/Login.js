@@ -35,11 +35,10 @@ class LoginForm extends Component{
     return (
       <div>
         <form onSubmit={this.loginForm.bind(this)}>
-          <h2>This is login page.</h2>
           <TextField
           name="username"
-          hintText="User name"
-          floatingLabelText="User Name"
+          hintText="Username"
+          floatingLabelText="Username"
           floatingLabelFixed
           onChange = {this.handleChange}
         />

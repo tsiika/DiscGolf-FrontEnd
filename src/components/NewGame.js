@@ -10,14 +10,14 @@ const style = {
 class NewGame extends Component {
     render() {
         /*trying to add a dialog to choose a single course or Tournamate
-           the modifications are after the play header and before the 
-           paragraph*/
-           const playButton = withRouter(({ history }) => (
+            the modifications are after the play header and before the 
+            paragraph*/
+            const playButton = withRouter(({ history }) => (
                 <RaisedButton
-                         label="Play"
-                         type="button"
-                         onClick={() => {history.push('/play') }}
-                         backgroundColor="#a4c639" /> 
+                            label="Play"
+                            type="button"
+                            onClick={() => {history.push('/play') }}
+                            backgroundColor="#a4c639" /> 
             ));
         return (
             <div>

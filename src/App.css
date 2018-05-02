@@ -26,9 +26,11 @@ th {
   margin: 20px;
 }
 
+/*
 .col-12 {
   border-bottom: solid 1px #443367;
 }
+*/
 
 .loader:empty {
   position: absolute;
@@ -71,4 +73,15 @@ th {
 .cardHeader {
   font-size: 50px;
   padding: 25px;
+}
+
+.headline {
+  font-size: 24;
+  padding-top: 16;
+  margin-bottom: 12;
+  font-weight: 400;
+}
+
+.slide {
+  padding: 10;
 }
