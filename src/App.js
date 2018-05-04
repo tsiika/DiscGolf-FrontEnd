@@ -1,6 +1,5 @@
 //Imports will be in separate module in future 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect} from 'react-router-dom';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';

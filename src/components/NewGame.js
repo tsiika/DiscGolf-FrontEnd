@@ -14,7 +14,6 @@ class newGame extends Component {
                 <Link to='/round/course'>
                     <RaisedButton label="Single Round" primary={true} style={style}></RaisedButton> 
                 </Link>
-                <RaisedButton label="Tournament" primary={true} style={style}></RaisedButton>
             </div>
         )
     }

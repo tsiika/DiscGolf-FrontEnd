@@ -34,7 +34,7 @@ export default class CourseCard extends React.Component {
 
     return (
 
-<div className="container">
+      <div className="container">
             <h3>
               COURSE LIST
             </h3>

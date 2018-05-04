@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { d3 } from 'd3';
-import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const API = 'http://localhost:5000/api/v0/statistics/5ad72e0876e4056ff784106e';
+const API = 'http://localhost:5000/api/v0/statistics/';
 
 
 

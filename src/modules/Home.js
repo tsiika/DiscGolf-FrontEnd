@@ -2,19 +2,9 @@ import React, { Component } from 'react';
 import '../App.css';
 
 import LoginForm from './Login'
-import TopNavigation from '../components/TopNavigation';
-import RecentTab from '../components/Recent';
-import AddCourseTab from '../components/AddCourseTab'
-
-import {Tabs, Tab} from 'material-ui/Tabs';
-// From https://github.com/oliviertassinari/react-swipeable-views
-import SwipeableViews from 'react-swipeable-views';
 
 class App extends Component {
   render() {
-    this.state = {
-    slideIndex: 0,
-    }
 
     return (
       <div>

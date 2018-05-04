@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Api from '../api/Api';
 
 import { TextField, RaisedButton } from 'material-ui';
-import { Redirect, withRouter } from 'react-router-dom';
+//import { Redirect, withRouter } from 'react-router-dom';
 
 import '../App.css';
 

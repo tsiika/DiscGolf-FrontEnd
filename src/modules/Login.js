@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -65,14 +65,6 @@ class LoginForm extends Component{
 
         let errorMessage = (this.state.errorMessage !== '') ? <span style={{color: '#900'}}>{this.state.errorMessage}</span> : '';
 
-        const RegisterButton = withRouter(({ history }) => (
-            <RaisedButton
-            label="Create account"
-            type='button'
-            style={btnStyle}
-            onClick={() => {history.push('/register') }}
-            backgroundColor="#a4c639" />
-        ));
 
         return (
             
@@ -81,7 +73,6 @@ class LoginForm extends Component{
             :
                 <div>
                     {errorMessage}
-                  
                     <form onSubmit={this.onSubmit}>
                         <TextField
                         name="username"
