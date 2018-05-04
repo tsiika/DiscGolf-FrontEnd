@@ -60,7 +60,8 @@ class LastRounds extends Component {
 
         return (
             <div>
-                <h3>Last rounds</h3>
+                <h1>Last rounds</h1>
+                <h3>Latest rounds played by you!</h3>
                 <table>
                     <tbody>
                         {(rows.length > 0) ? rows : <tr><td>No played rounds</td></tr>}
