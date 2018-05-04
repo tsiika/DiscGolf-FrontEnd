@@ -39,7 +39,7 @@ th {
   width: 6em;
   height: 6em;
   border: 1.1em solid rgba(0,0,0,0.2);
-  border-left: 1.1em solid #000;
+  border-left: 1.1em solid rgb(75, 119, 214);
   border-radius: 50%;
   animation: load 1s infinite linear;
 }
@@ -73,6 +73,7 @@ th {
 .cardHeader {
   font-size: 50px;
   padding: 25px;
+
 }
 
 .headline {
@@ -84,4 +85,12 @@ th {
 
 .slide {
   padding: 10;
+}
+
+form:required {
+  background-color: #BBB;
+}
+
+.container {
+  height: auto;
 }

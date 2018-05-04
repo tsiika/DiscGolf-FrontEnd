@@ -76,7 +76,7 @@ import '../App.css';
     return (
       <div>
         <form>
-        <h2>This is registration page.</h2>
+
         <TextField
           name="namef"
           hintText="Full Name"
@@ -98,8 +98,8 @@ import '../App.css';
         <br />
         <TextField
           name="username"
-          hintText="User Name"
-          floatingLabelText="User Name"
+          hintText="Username"
+          floatingLabelText="Username"
           value={this.state.username}
           onChange={e => this.change(e)}
           errorText={this.state.usernameError}
@@ -131,7 +131,7 @@ import '../App.css';
         />
         <br/>
         <br />
-        <RaisedButton type="submit" label="Submit" onClick={e => this.onSubmit(e)} secondary/>
+        <RaisedButton type="submit" label="Submit" onClick={e => this.onSubmit(e)} backgroundColor="#00cc44" labelColor="#FFF" />
         </form>
       </div>
 

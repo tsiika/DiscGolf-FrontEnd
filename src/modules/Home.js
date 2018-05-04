@@ -22,24 +22,16 @@ class App extends Component {
           <div className="row">
             <div className="col-12 headline">
               <h1>Disc Golf App</h1>
-              <p>Amet sint aliquip elit ut non ea reprehenderit exercitation id Lorem in ad excepteur officia. Amet sint tempor fugiat mollit aute Lorem laboris laborum reprehenderit ut consectetur aliquip. Non duis esse officia ea reprehenderit esse pariatur labore duis labore magna. Nulla dolore sit veniam adipisicing nisi velit aute ullamco incididunt.</p>
+              <p>Amet sint aliquip elit ut non ea reprehenderit exercitation id Lorem in ad excepteur officia. 
+                Amet sint tempor fugiat mollit aute Lorem laboris laborum reprehenderit ut consectetur aliquip.
+                Non duis esse officia ea reprehenderit esse pariatur labore duis labore magna. 
+                Nulla dolore sit veniam adipisicing nisi velit aute ullamco incididunt.</p>
             </div>
           </div>
 
           <div className="row"> {/* insert login-wrapper div class here */}
-            <div className="col-6">
-            <LoginForm/>
-            </div>
-
-            <div className="col-6">
-            <h2>Start playing now!</h2>
-            <p>Register for free or login!</p>
-            </div>
-          </div>
-
-          <div className="row">
             <div className="col-12">
-            <p>Nulla velit culpa commodo nisi labore non enim aliqua dolor ullamco et velit. Incididunt consectetur irure nulla occaecat ipsum fugiat pariatur incididunt. Voluptate ipsum tempor sit tempor nulla exercitation ex. Consequat sunt et magna duis id est laboris cupidatat. Duis labore Lorem esse eu.</p>
+            <LoginForm/>
             </div>
           </div>
         </div>
