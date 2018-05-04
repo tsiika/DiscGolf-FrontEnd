@@ -26,7 +26,7 @@ import Dashboard from './modules/Dashboard';
 import Courses from './modules/Courselist';
 //import Round from './modules/Round';
 import CourseSelection from './components/CourseSelection';
-//import PlayerSelection from './modules/PlayerSelection';
+import PlayerSelection from './components/PlayerSelection';
 import Scorecard from './modules/ScoreCard';
 
 import "./App.css";
@@ -65,7 +65,8 @@ class App extends Component {
 					<Route sensitive path="/dashboard" component={Dashboard} />
 					<Route sensitive path="/AddCourseForm" component={AddCourseForm} />
 
-                    <Route sensitive exact path="/round/course" component={CourseSelection} />                    
+                    <Route sensitive exact path="/round/course" component={CourseSelection} /> 
+					<Route sensitive exact path="/round/players" render={(props) => <PlayerSelection {...props} />} />                   
                     <Route sensitive exact path="/round/scorecard" render={(props) => {
                         return <Scorecard course={props.location.state.course} players={props.location.state.players} /> 
                     }} />
