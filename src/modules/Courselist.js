@@ -74,7 +74,7 @@ return (
                     </div>
 
                     <div>
-                    <p>Course selection. It works, but it does not work.</p>
+                    <CourseSelection />
                     </div>
 
                     <div>

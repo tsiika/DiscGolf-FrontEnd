@@ -23,6 +23,12 @@ import Logout from './modules/Logout';
 import Confirm from './modules/Confirm';
 import Dashboard from './modules/Dashboard';
 
+import Courses from './modules/Courselist';
+//import Round from './modules/Round';
+import CourseSelection from './components/CourseSelection';
+//import PlayerSelection from './modules/PlayerSelection';
+import Scorecard from './modules/ScoreCard';
+
 import "./App.css";
 import "./styles/simple-grid.css";
 
@@ -53,12 +59,18 @@ class App extends Component {
 					{/*Add all routers here*/}
 					<Route exact path="/" component={Home} /> 
 					<Route path="/login" component={Login} />
-					<Route path="/courselist" component={Courselist}/>
 					<Route path="/register" component={Register} />
-					<Route path="/logout" component={Logout} />
-					<Route path="/confirm" component={Confirm} />
-					<Route path="/dashboard" component={Dashboard} />
-					<Route path="/AddCourseForm" component={AddCourseForm} />
+					<Route sensitive path="/courselist" component={Courselist}/>
+					<Route sensitive path="/logout" component={Logout} />
+					<Route sensitive path="/dashboard" component={Dashboard} />
+					<Route sensitive path="/AddCourseForm" component={AddCourseForm} />
+
+                    <Route sensitive exact path="/round/course" component={CourseSelection} />                    
+                    <Route sensitive exact path="/round/scorecard" render={(props) => {
+                        return <Scorecard course={props.location.state.course} players={props.location.state.players} /> 
+                    }} />
+
+
 
 
 					{/*404*/}
