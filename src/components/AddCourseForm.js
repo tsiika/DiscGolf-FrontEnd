@@ -158,16 +158,12 @@ class CourseForm extends Component {
 				/>
 				<br/>
 
-				<RaisedButton type="submit" label="Add Course" primary/>
-				
                 <div>
                     <h3>Fairways</h3>
                     <FairwayTable fairways={this.state.course.fairways}s/>
                 </div>
-                <div>
-                    <RaisedButton style={{padding: '10px 5px 5px 5px'}} type="submit" label="Save" primary={true} />
-                    <RaisedButton style={{padding: '10px 5px 5px 5px'}} type="button" label="Add fairway" primary={true} backgroundColor="#009" onClick={this.onAddFairway} />
-                </div>
+                    <RaisedButton style={{margin: '10px'}} type="button" label="Add fairway" primary={true} backgroundColor="#BB9" onClick={this.onAddFairway} />
+					<RaisedButton style={{margin: '10px'}} type="submit" label="Save" primary={true} />
                 </form>
                     
                 </div>

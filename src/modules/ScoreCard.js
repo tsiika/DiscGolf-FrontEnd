@@ -17,8 +17,8 @@ import '../styles/Round.css';
 // TODO: Move this some util module, or etc.
 Number.isInteger = Number.isInteger || function(value) {
     return typeof value === "number" && 
-           isFinite(value) && 
-           Math.floor(value) === value;
+        isFinite(value) && 
+        Math.floor(value) === value;
 };
 
 /*
