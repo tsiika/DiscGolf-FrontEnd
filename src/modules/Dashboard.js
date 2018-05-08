@@ -45,14 +45,12 @@ class App extends Component {
                         <h3>{this.state.user.username}</h3>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-6"><NewGame /> </div>
-                        <div className="col-6"><GameStats /> </div>
+                    <div className="row col-ctrl">
+                        <div className="col-12"><NewGame /> </div>
                     </div>
                     <br/>
                     <div className="row">
-                        <div className="col-6"><LastRounds /></div>
-                        <div className="col-6">pöö <p></p></div>
+                        <div className="col-12"><LastRounds /></div>
                     </div>
                 </div>
         );

@@ -7,31 +7,6 @@ body {
   text-align: center;
 }
 
-table {
-  margin: auto;
-  width: 100%;
-  padding: 5px;
-}
-
-td {
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-tr {
-  margin: 20px;
-}
-
-th {
-  margin: 20px;
-}
-
-/*
-.col-12 {
-  border-bottom: solid 1px #443367;
-}
-*/
-
 .loader:empty {
   position: absolute;
   top: calc(50% - 4em);
@@ -91,6 +66,7 @@ form:required {
   background-color: #BBB;
 }
 
-.container {
-  height: auto;
-}
+
+
+
+

@@ -101,7 +101,7 @@ class LoginForm extends Component{
                         />
                         <br />
                         
-                        <RaisedButton name="submitButton" type="submit" disabled={this.state.loading} label="Log in" primary style={btnStyle} />
+                        <RaisedButton name="submitButton" type="submit" disabled={this.state.loading} label="Log in" style={btnStyle} labelColor="#FFFFFF" backgroundColor="#00B5CC"/>
                         
                         <p className="disclaimer">Don't have an account? <Link to="./Register">Register here.</Link></p>
                     </form>

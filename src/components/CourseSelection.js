@@ -5,6 +5,7 @@ import Api from  '../api/Api';
 import Auth from '../api/Auth';
 
 import '../App.css';
+import '../styles/simple-grid.css'
 import '../styles/Round.css';
 
 import {
@@ -17,6 +18,7 @@ import {
 } from 'material-ui/Table';
 import { RaisedButton } from 'material-ui';
 
+const style = { textAlign: 'right', padding: '0px'}
 
 /*
 *   CourseSeletion - component
@@ -40,7 +42,10 @@ class CourseSelection extends Component {
             courseSelected: false, 
             proceeding: false,
             selectedCourseIndex: null,
-            selectedCourse: {} 
+            selectedCourse: {},
+            height: '300px',
+            stripedRows: true,
+            showCheckboxes: false,
         };
     }
 
@@ -83,7 +88,7 @@ class CourseSelection extends Component {
             tableRows = courses.map((course, index) => {
                 let selected = ( parseInt(this.state.selectedCourseIndex, 10) === index ) ? true : false;                
                 return (                    
-                    <TableRow key={course._id} selected={selected}>
+                    <TableRow scope='row' key={course._id} selected={selected}>
                         <TableRowColumn>{course.name}</TableRowColumn>
                         <TableRowColumn>{course.description}</TableRowColumn>
                         <TableRowColumn>{ (course.fairways) ? course.fairways.length : 0 }</TableRowColumn>
@@ -107,19 +112,20 @@ class CourseSelection extends Component {
                         <div className="row">
                         <div className="col-12">
                         <h2>Choose course</h2>
-                        <Table selectable={true} multiSelectable={false} onRowSelection={this.onCourseSelected}>
-                            <TableHeader displaySelectAll={false} enableSelectAll={false}>
-                                <TableRow>                    
+                        <Table selectable={true} multiSelectable={false} onRowSelection={this.onCourseSelected} height={this.state.height}>
+                            <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={this.state.showCheckboxes}>
+                                <TableRow style={style}>
                                     <TableHeaderColumn>name</TableHeaderColumn>
                                     <TableHeaderColumn>description</TableHeaderColumn>
                                     <TableHeaderColumn>fairways</TableHeaderColumn>
                                 </TableRow>
+
                             </TableHeader>
-                            <TableBody displayRowCheckbox={false} deselectOnClickaway={false}>
+                            <TableBody displayRowCheckbox={false} deselectOnClickaway={false} stripedRows={this.state.stripedRows} style={style}>
                                 {tableRows}
                             </TableBody>
                         </Table>
-                        <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} disabled={!this.state.courseSelected} />
+                        <RaisedButton label="Proceed" onClick={this.onProceed} disabled={!this.state.courseSelected}  labelColor="#FFFFFF" backgroundColor="#00B5CC"/>
                     </div>
                     </div>
                     </div>
