@@ -4,7 +4,7 @@ Front End side of unnamed disc golf app (name will be changed in time!)
 # About
 This project is part of full-stack developer course by Opiframe Oy. During this course students are creating their own projects and this is ours!
 
-Idea for this app is to follow disc golfers as they play the game. 
+Idea for this app is to follow disc golfers as they play the game. Players log in and select course to play. As they are playing player will input their throws in app.
 
 We decided to separate front-end and back-end to separate repositories. With this it's easier to examine the source code as their own instances:
 
@@ -21,6 +21,8 @@ In the first stage the page layout is built to look and feel functional. Informa
 On second stage React will be implemented to project. 
 
 Third stage of project is to get React talk to back-end.
+
+Fourth and last stage is to get app up and running in Heroku.
 
 # Contributors
 List of contributor of this project:

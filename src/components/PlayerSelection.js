@@ -103,7 +103,7 @@ class PlayerSelection extends Component {
                 :
                     <div>
                         <h2>Choose players</h2>
-                        <Table selectable={true} multiSelectable={true} onRowSelection={this.onPlayerSelected}>
+                        <Table selectable={true} multiSelectable={true} onRowSelection={this.onPlayerSelected} style={{padding: '5px', marginBottom: '5px', marginTop: '5px', overflowX: 'hidden'}}>
                             <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={true}>
                                 <TableRow>
                                     <TableHeaderColumn>Name</TableHeaderColumn>
@@ -113,7 +113,7 @@ class PlayerSelection extends Component {
                                 {tableRows}
                             </TableBody>
                         </Table>
-                        <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} disabled={!this.state.playersSelected} />
+                        <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} disabled={!this.state.playersSelected} labelColor="#FFFFFF" backgroundColor="#00B5CC" />
                     </div>
         );
     }

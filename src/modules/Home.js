@@ -3,7 +3,18 @@ import '../App.css';
 
 import LoginForm from './Login'
 
+import API from '../api/axiosAPI';
+
 class App extends Component {
+
+  componentDidMount(){
+    fetch(API)
+      .then(results => {
+        return console.log('Connection to API successful');
+      }).then(
+        console.log('Wake up.'),
+      )
+  }
   render() {
 
     return (

@@ -30,16 +30,33 @@ import Scorecard from './modules/ScoreCard';
 
 import "./App.css";
 import "./styles/simple-grid.css";
+//import API from '../src/api/axiosAPI';
 
+const API = 'https://flatbread-api.herokuapp.com/';
 
 class App extends Component {
 	state = {
 		loading: true,
+		response: ''
 	};
+
+	
 
 	componentDidMount(){
 		setTimeout(() => this.setState({loading: false}),1);
+
+		this.callAPI()
+			.then(res => this.setState({response: res.express}))
+			.catch(err => console.log(err));
 	}
+
+	callAPI = async () => {
+		const response = await fetch(API);
+		const body = await response.json();
+
+		if(response.status !== 200) throw Error(body.message);
+		return body;
+		};
 
 	render() {
 		const { loading } = this.state;

@@ -49,6 +49,10 @@ class App extends Component {
                         <div className="col-12"><NewGame /> </div>
                     </div>
                     <br/>
+                    <div className="row col-ctrl">
+                        <div className="col-12"><GameStats /> </div>
+                    </div>
+                    <br/>
                     <div className="row">
                         <div className="col-12"><LastRounds /></div>
                     </div>

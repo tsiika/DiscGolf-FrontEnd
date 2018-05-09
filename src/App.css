@@ -66,7 +66,34 @@ form:required {
   background-color: #BBB;
 }
 
+th {
+  text-transform: uppercase;
+  padding: 3px;
+}
+
+td {
+  padding: 10px;
+}
 
 
+@media only screen and (min-width: 300px) { 
+  .container {
+    width: 80%;
+  }
 
-
+  table {
+    overflow-x: auto;
+    width: 80%;
+  }
+  
+  th {
+    text-transform: uppercase;
+    padding: 3px;
+  }
+  
+  td {
+    padding: 1px;
+    width: 50%;
+  }
+  
+}
