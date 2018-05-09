@@ -1,6 +1,6 @@
 body {
   width: auto;
-  background-color:#FFF;   
+  background-color:rgb(244, 244, 244);   
   background-attachment: fixed; 
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
@@ -66,6 +66,19 @@ form:required {
   background-color: #BBB;
 }
 
+input:required {
+  box-shadow:none;
+}
+
+table{
+  border: 1px solid rgb(209, 209, 209);
+}
+
+.last{
+padding: 30px;
+border: 0px;
+}
+
 th {
   text-transform: uppercase;
   padding: 3px;
@@ -73,6 +86,22 @@ th {
 
 td {
   padding: 10px;
+}
+
+.dash {
+  border: 1px #BBB solid;
+  border-radius: 5px;
+  background-color: rgb(248, 248, 248);
+}
+
+.course-form-wrapper {
+  border: 1px #BBB solid;
+  border-radius: 5px;
+  background-color: rgb(248, 248, 248);
+}
+
+.shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 
@@ -83,7 +112,7 @@ td {
 
   table {
     overflow-x: auto;
-    width: 80%;
+    width: 100%;
   }
   
   th {

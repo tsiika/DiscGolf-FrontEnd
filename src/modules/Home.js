@@ -23,10 +23,8 @@ class App extends Component {
           <div className="row">
             <div className="col-12 headline">
               <h1>Disc Golf App</h1>
-              <p>Amet sint aliquip elit ut non ea reprehenderit exercitation id Lorem in ad excepteur officia. 
-                Amet sint tempor fugiat mollit aute Lorem laboris laborum reprehenderit ut consectetur aliquip.
-                Non duis esse officia ea reprehenderit esse pariatur labore duis labore magna. 
-                Nulla dolore sit veniam adipisicing nisi velit aute ullamco incididunt.</p>
+              <h3>Let's go throw some discs!</h3>
+              <p>Login or create free account under a minute and start playing right away!</p>
             </div>
           </div>
 

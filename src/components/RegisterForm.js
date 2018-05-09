@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'; 
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 import Api from '../api/Api';
 
 import '../App.css';
+
+const style = {
+    marginTop: '20px', 
+    margin: '10px',
+}
 
 /*
 *   RegisterForm - Component
@@ -163,7 +169,11 @@ class RegisterForm extends Component {
                             onChange={this.onInputChange}
                         />
                     </div>
-                    <RaisedButton name="submitButton" type="submit" disabled={this.state.saving} label="Create account" primary style={{marginTop: '20px'}} />
+                    <RaisedButton name="submitButton" type="submit" disabled={this.state.saving} label="Create account" primary style={style} />
+                    
+                    <Link to='/'>
+                        <RaisedButton name="back" type="button" label="Return" secondary style={style}/>
+                    </Link>
                 </form>
             </div>
         );

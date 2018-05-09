@@ -71,7 +71,7 @@ class LoginForm extends Component{
             (Auth.isAuthenticated()) ?
                 <Redirect to="/dashboard" />
             :
-                <div>
+                <div style={{borderTop: '1px dashed #AAA', paddingTop: '25px', paddingBottom: '15px'}}>
                     {errorMessage}
                     <form onSubmit={this.onSubmit}>
                         <TextField

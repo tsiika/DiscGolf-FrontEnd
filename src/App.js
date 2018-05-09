@@ -54,9 +54,14 @@ class App extends Component {
 		const response = await fetch(API);
 		const body = await response.json();
 
-		if(response.status !== 200) throw Error(body.message);
-		return body;
-		};
+		if(response.status !== 200) {
+			throw Error(body.message);
+			return body;
+			this.setState = true;
+		} else {
+			this.setState = false;
+		}
+	}
 
 	render() {
 		const { loading } = this.state;

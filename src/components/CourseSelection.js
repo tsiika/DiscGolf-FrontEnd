@@ -112,7 +112,7 @@ class CourseSelection extends Component {
                         <div className="row">
                         <div className="col-12">
                         <h2>Choose course</h2>
-                        <Table selectable={true} multiSelectable={false} onRowSelection={this.onCourseSelected} height={this.state.height}>
+                        <Table selectable={true} multiSelectable={false} onRowSelection={this.onCourseSelected} height={this.state.height} className="shadow">
                             <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={this.state.showCheckboxes}>
                                 <TableRow style={style}>
                                     <TableHeaderColumn>name</TableHeaderColumn>

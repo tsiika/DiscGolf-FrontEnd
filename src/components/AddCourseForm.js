@@ -123,7 +123,7 @@ class CourseForm extends Component {
 
         return(
             <div className="flex-container">
-                <div className="course-form-wrapper">
+                <div className="course-form-wrapper shadow">
                     <h2>{title}</h2>
                     
                 <form onSubmit={this.onSaveCourse}>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {RaisedButton, Popover, Menu, MenuItem} from 'material-ui';
 
-const API = 'http://localhost:5000/api/v0/statistics/';
+import WarnIcon from 'material-ui/svg-icons/alert/error-outline';
+
+//const API = 'http://localhost:5000/api/v0/statistics/';
 
 
 
@@ -65,7 +67,7 @@ class gameStats extends Component {
                 <h1>Statistic</h1>
                     <h3>Played courses</h3>
                         
-                <RaisedButton label="Show more" primary={true} onClick={this.handleClick}>
+                <RaisedButton label="Show more" icon={<WarnIcon/>} onClick={this.handleClick} labelColor="#FFFFFF" backgroundColor="#00B5CC">
                 <Popover
                     open={this.state.open}
                     anchorEl={this.state.anchorEl}
@@ -78,7 +80,7 @@ class gameStats extends Component {
 
                         </Menu>
                     </Popover>
-                </RaisedButton> 
+                </RaisedButton> <br/><br/>
 
                 {/*
                 <div>

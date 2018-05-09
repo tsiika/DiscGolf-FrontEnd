@@ -8,6 +8,9 @@ div.Scorecard {
     padding: 20px 5px 20px 5px;
     height: 550px;
     max-width: 500px;
+    background-color: #FFF;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 div.Scorecard div.fairway-info {

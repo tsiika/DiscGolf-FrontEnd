@@ -179,12 +179,14 @@ class Scorecard extends Component {
 
         return (
             <div className="container flex-container">
-                <div className="Scorecard">
-                    <h2>Scorecard</h2>
-                    {round.course.name} - Par {this.state.courseTotalPar}
-                    <FairwayInfo fairways={round.course.fairways} currentFairway={this.state.currentFairway} onFairwayChanged={this.onFairwayChanged} />
-                    <PlayerList currentFairway={this.state.currentFairway} scores={round.scores} courseTotalPar={this.state.courseTotalPar} onPlayerSelected={this.onPlayerSelected} onScoreInputChange={this.onScoreInputChange} />
-                    <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} />
+                <div className="row">
+                    <div className="Scorecard">
+                        <h2>Scorecard</h2>
+                        {round.course.name} - Par {this.state.courseTotalPar}
+                        <FairwayInfo fairways={round.course.fairways} currentFairway={this.state.currentFairway} onFairwayChanged={this.onFairwayChanged} />
+                        <PlayerList currentFairway={this.state.currentFairway} scores={round.scores} courseTotalPar={this.state.courseTotalPar} onPlayerSelected={this.onPlayerSelected} onScoreInputChange={this.onScoreInputChange} />
+                        <RaisedButton primary={true} label="Proceed" onClick={this.onProceed} />
+                    </div>
                 </div>
             </div>
         );

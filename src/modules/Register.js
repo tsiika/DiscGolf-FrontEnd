@@ -30,8 +30,15 @@ class Register extends Component {
         } else {
             return(
                 <div>
+                    <div className="container dash">
+                        <div className="row">
+                            <div className="col-12">
+
                     <h3>Create account</h3>
                     <RegisterForm onUserRegistered={this.onUserRegistered} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             );
         }

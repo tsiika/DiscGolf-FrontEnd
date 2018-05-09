@@ -36,33 +36,42 @@ export default class CourseCard extends React.Component {
     return (
 
       <div className="container">
-            <h3>
-              COURSE LIST
+        <div className="row">
+          <div className="col-12">
+            <h3 style={{paddingTop: '22px'}}>
+              Courses
             </h3>
-          <div>
 
+            <div>
               {this.state.courses.map(course => 
-                <Card key={course.id} containerStyle={{ margin:'auto' }} 
+                <Card 
+                key={course.id} 
+                containerStyle={{ margin:'auto' }} 
                 expanded={this.state.expanded} 
                 onExpandChange={this.handleExpandChange}
                 className="cardHeader" >
 
-                <CardHeader title={course.name}           
+                <CardHeader 
+                title={course.name}    
                 subtitle={course.fairways.length  + " holes"}
-                  avatar={DGavatar}
-                  actAsExpander={true} 
-                  showExpandableButton={true} /> 
+                avatar={DGavatar}
+                actAsExpander={true} 
+                showExpandableButton={true} /> 
 
                 <CardMedia 
                   expandable={true} 
-                  overlay={<CardTitle title={course.name} subtitle={course.description + " " + "Course has " + course.fairways.length + " holes"} />} > 
+                  overlay={
+                    <CardTitle 
+                      title={course.name} 
+                      subtitle={course.description + " " + "Course has " + course.fairways.length + " holes"} />
+                      } > 
                   <img src={DG1} alt="Course picture" /> 
-                  </CardMedia> 
+                </CardMedia> 
                 </Card>
               )}
-
+            </div>
           </div>
-      
+        </div>
       </div> 
   );
   }
