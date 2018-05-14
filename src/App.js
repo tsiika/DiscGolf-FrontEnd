@@ -13,7 +13,7 @@ import NoMatch from './components/404';
 import AppBar from './components/AppBar';
 import AddCourseForm from './components/AddCourseForm';
 
-import BNavigationBar from './components/BottomNavigation'
+import BNavigationBar from './components/BottomNavigation';
 
 
 import fakeAuth from './modules/Login';
@@ -79,7 +79,6 @@ class App extends Component {
 			<div className="App">
 				<AppBar />
 				<Container/>
-				
 				<Switch>
 					{/*Add all routers here*/}
 					<Route exact path="/" component={Home} /> 
@@ -102,8 +101,11 @@ class App extends Component {
 					{/*404*/}
 					<Route component={NoMatch}/>
 				</Switch>
+				
 				<BNavigationBar />
+
 			</div>
+
 		)
 	}
 }

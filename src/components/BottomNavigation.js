@@ -9,7 +9,7 @@ import IconLogout from 'material-ui/svg-icons/action/lock';
 import IconDashboard from 'material-ui/svg-icons/av/web';
 import Login from '../modules/Login';
 import Home from '../modules/Home';
-
+import Auth from '../api/Auth';
 
 const bottomStyle = {
   position: 'fixed',
