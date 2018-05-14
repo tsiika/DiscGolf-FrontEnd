@@ -5,8 +5,7 @@ export default class FavoritsTab extends React.Component {
 	render(){
 		return(
 			<div>
-			<CourseCard />
-            <CourseCard />
+            	<CourseCard />
             </div>
 			);
 	}

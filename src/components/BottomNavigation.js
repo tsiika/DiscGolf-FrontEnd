@@ -11,9 +11,6 @@ import Login from '../modules/Login';
 import Home from '../modules/Home';
 
 
-/*const paperStyle = {
-    position: 'relative'
-};*/
 const bottomStyle = {
   position: 'fixed',
   width: "100%",

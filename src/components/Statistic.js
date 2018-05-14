@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { d3 } from 'd3';
-import axios from 'axios';
-import RaisedButton from 'material-ui/RaisedButton';
+import {RaisedButton, Popover, Menu, MenuItem} from 'material-ui';
 
-const API = 'http://localhost:5000/api/v0/statistics/5ad72e0876e4056ff784106e';
+import WarnIcon from 'material-ui/svg-icons/alert/error-outline';
+
+//const API = 'http://localhost:5000/api/v0/statistics/';
 
 
 
@@ -11,14 +11,33 @@ class gameStats extends Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			list:[]
-		}
+            list:[],
+            open: false,
+        };
     }
+
+    handleClick = (event) => {
+        // This prevents ghost click.
+        event.preventDefault();
     
+        this.setState({
+            open: true,
+            anchorEl: event.currentTarget,
+        });
+    };
+    
+    handleRequestClose = () => {
+        this.setState({
+            open: false,
+        });
+    };
+    
+    /*
     componentDidMount() {
         this.getCourses();
     }
 
+    
     getCourses = () => {
         let fetchObj = {
             method: "GET",
@@ -38,7 +57,7 @@ class gameStats extends Component {
         }).catch((error) => {
             console.log("Error:"+error);
         })
-    }
+    }*/
             
     
         
@@ -48,11 +67,25 @@ class gameStats extends Component {
                 <h1>Statistic</h1>
                     <h3>Played courses</h3>
                         
-                <RaisedButton label="Show more" primary={true}></RaisedButton> 
+                <RaisedButton label="Show more" icon={<WarnIcon/>} onClick={this.handleClick} labelColor="#FFFFFF" backgroundColor="#00B5CC">
+                <Popover
+                    open={this.state.open}
+                    anchorEl={this.state.anchorEl}
+                    anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                    targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                    onRequestClose={this.handleRequestClose}
+                    >
+                        <Menu>
+                            <MenuItem primaryText='This module is not in use at the moment.' />
 
+                        </Menu>
+                    </Popover>
+                </RaisedButton> <br/><br/>
+
+                {/*
                 <div>
                     <p list={this.state.list}/>
-                </div>
+                </div>*/}
             </div>
         )
     }

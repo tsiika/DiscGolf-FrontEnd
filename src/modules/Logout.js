@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
-import '../App.css';
+import Auth from '../api/Auth';
+import Redirect from 'react-router/Redirect';
 
+/*
+*   Logout - Removes authentication and redirects to login screen
+*/
+class Logout extends Component {
+ 
+    constructor(props) {
+        super(props);
+        Auth.removeAuthentication();
+    }
 
-
-class App extends Component {
-  render() {
-    return (
-      <div>
-       <h2>You have logged out successfully.</h2>
-      </div>
-    );
-  }
+    render() {
+        return ( <Redirect to="/" /> );
+    }
 }
 
-export default App;
+export default Logout;

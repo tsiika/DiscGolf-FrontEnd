@@ -5,9 +5,7 @@ export default class RecentTab extends React.Component {
 	render(){
 		return(
 			<div>
-			<CourseCard />
-            <CourseCard />
-            <CourseCard />
+				<CourseCard />
             </div>
 			);
 	}
