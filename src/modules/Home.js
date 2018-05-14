@@ -1,21 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 
-import RecentTab from '../components/Recent';
-import FavoritsTab from '../components/Favorits';
-
-import AddCourseTab from '../components/AddCourseTab'
-import BNavigationBar from '../components/BottomNavigation'
-import {Tabs, Tab} from 'material-ui/Tabs';
-// From https://github.com/oliviertassinari/react-swipeable-views
-import SwipeableViews from 'react-swipeable-views';
-
-
-
-
-
 import LoginForm from './Login'
-
 
 import API from '../api/axiosAPI';
 
@@ -47,9 +33,7 @@ class App extends Component {
             <LoginForm/>
             </div>
           </div>
-
         </div>
-
       </div>
     );
   }

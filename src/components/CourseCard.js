@@ -16,7 +16,6 @@ export default class CourseCard extends React.Component {
     super(props);
     this.state = {
       courses: [],
-
     };
   }
 

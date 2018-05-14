@@ -1,0 +1,12 @@
+.course-form-wrapper {
+    width: 80%;
+}
+
+.course-form-text-field {
+    width: 100% !important;
+    max-width: 500px;
+}
+
+.course-form-wrapper h3 {
+    font-size: 1rem;
+}

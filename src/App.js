@@ -11,13 +11,9 @@ import Container from './components/Container';
 
 import NoMatch from './components/404';
 import AppBar from './components/AppBar';
+import BNavigationBar from './components/BottomNavigation'
 import AddCourseForm from './components/AddCourseForm';
-
-import BNavigationBar from './components/BottomNavigation';
-
-
 import fakeAuth from './modules/Login';
-
 
 import Home from './modules/Home';
 import Login from './modules/Login';
@@ -37,7 +33,7 @@ import "./App.css";
 import "./styles/simple-grid.css";
 //import API from '../src/api/axiosAPI';
 
-const API = 'https://flatbread-api.herokuapp.com/';
+const API = 'https://www.flatbread-api.herokuapp.com/';
 
 class App extends Component {
 	state = {
@@ -79,6 +75,8 @@ class App extends Component {
 			<div className="App">
 				<AppBar />
 				<Container/>
+
+
 				<Switch>
 					{/*Add all routers here*/}
 					<Route exact path="/" component={Home} /> 
@@ -101,11 +99,9 @@ class App extends Component {
 					{/*404*/}
 					<Route component={NoMatch}/>
 				</Switch>
-				
 				<BNavigationBar />
 
 			</div>
-
 		)
 	}
 }

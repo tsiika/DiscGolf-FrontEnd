@@ -1,0 +1,29 @@
+.Admin {
+
+}
+
+div.Admin div.flex-grid {
+    border: 0px solid red;
+    display: flex;
+    flex-direction: column;
+}
+
+div.Admin div.row {
+    border: 0px solid rgb(0, 188, 212);
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    div.Admin div.row {
+        flex-direction: row;
+    }
+}
+
+div.Admin div.col {
+    flex: 1;
+    border: 1px solid rgb(0, 188, 212);
+    padding: 10px;
+}
+
+
