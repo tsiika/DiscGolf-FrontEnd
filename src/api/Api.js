@@ -7,8 +7,8 @@
 *   and to return resolved data or just the fetch-promise respectively.
 */
 
-const API_URL = 'http://localhost:5000/api/v0';
-//const API_URL = 'https://flatbread-api.herokuapp.com/api/v0';
+//const API_URL = 'http://localhost:5000/api/v0';
+const API_URL = 'https://flatbread-api.herokuapp.com/api/v0';
 
 /*
 *   getUsers
