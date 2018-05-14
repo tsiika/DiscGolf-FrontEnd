@@ -1,33 +1,10 @@
 body {
   width: auto;
-  background-color:#FFF;   
+  background-color:rgb(244, 244, 244);   
   background-attachment: fixed; 
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-}
-
-table {
-  margin: auto;
-  width: 100%;
-  padding: 5px;
-}
-
-td {
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-tr {
-  margin: 20px;
-}
-
-th {
-  margin: 20px;
-}
-
-.col-12 {
-  border-bottom: solid 1px #443367;
 }
 
 .loader:empty {
@@ -37,7 +14,7 @@ th {
   width: 6em;
   height: 6em;
   border: 1.1em solid rgba(0,0,0,0.2);
-  border-left: 1.1em solid #000;
+  border-left: 1.1em solid rgb(75, 119, 214);
   border-radius: 50%;
   animation: load 1s infinite linear;
 }
@@ -51,27 +28,101 @@ th {
   }
 }
 
-.flex-container {
-    display: flex;
-    justify-content: center;
+.bar {
+  fill: green;
 }
 
-.login-wrapper {
-    padding: 70px 10px 20px 10px;
+.highlight {
+  fill: red;
 }
 
-form.register-form input:invalid {
-    outline: none !important;
-    border: 0px !important;
+.title {
+  fill: blue;
+  font-weight: bold;
 }
 
-/* Overwrite Mozilla default styles for invalid elements */
-:not(output):-moz-ui-invalid {
-    box-shadow: none !important;
+.disclaimer {
+  font-size: 16px;
 }
 
-:not(output):-moz-ui-invalid:-moz-focusring {
-    box-shadow: none !important;
+.cardHeader {
+  font-size: 50px;
+  padding: 25px;
+
+}
+
+.headline {
+  font-size: 24;
+  padding-top: 16;
+  margin-bottom: 12;
+  font-weight: 400;
+}
+
+.slide {
+  padding: 10;
+}
+
+form:required {
+  background-color: #BBB;
+}
+
+input:required {
+  box-shadow:none;
+}
+
+table{
+  border: 1px solid rgb(209, 209, 209);
+}
+
+.last{
+padding: 30px;
+border: 0px;
+}
+
+th {
+  text-transform: uppercase;
+  padding: 3px;
+}
+
+td {
+  padding: 10px;
+}
+
+.dash {
+  border: 1px #BBB solid;
+  border-radius: 5px;
+  background-color: rgb(248, 248, 248);
+}
+
+.course-form-wrapper {
+  border: 1px #BBB solid;
+  border-radius: 5px;
+  background-color: rgb(248, 248, 248);
+}
+
+.shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 
+@media only screen and (min-width: 300px) { 
+  .container {
+    width: 80%;
+  }
+
+  table {
+    overflow-x: auto;
+    width: 100%;
+  }
+  
+  th {
+    text-transform: uppercase;
+    padding: 3px;
+  }
+  
+  td {
+    padding: 1px;
+    width: 50%;
+  }
+  
+}

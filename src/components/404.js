@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router-dom';
 
 class App extends Component {
@@ -8,7 +9,7 @@ class App extends Component {
           <h1>Hold your horses! <i>(404)</i></h1><br/>
             <p>Something you were looking for is not here!</p>
             <p>We strongly suggest to return home.</p>
-                <Link to="/"><button>Back Home</button></Link>
+                <Link to="/"><RaisedButton type="submit" label="Return home" primary/></Link>
       </div>
     );
   }

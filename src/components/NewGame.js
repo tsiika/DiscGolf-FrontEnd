@@ -10,11 +10,11 @@ class newGame extends Component {
     render() {
         return (
             <div>
-                <h3>Play</h3>
+                <h1>Play</h1>
+                <h3>Start playing new round!</h3>
                 <Link to='/round/course'>
-                    <RaisedButton label="Single Round" primary={true} style={style}></RaisedButton> 
+                    <RaisedButton label="Single Round" style={style} labelColor="#FFFFFF" backgroundColor="#00B5CC"></RaisedButton> 
                 </Link>
-                <RaisedButton label="Tournament" primary={true} style={style}></RaisedButton>
             </div>
         )
     }

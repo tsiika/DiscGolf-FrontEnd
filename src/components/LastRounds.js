@@ -3,6 +3,8 @@ import Api from '../api/Api';
 import Auth from '../api/Auth';
 import { Link } from 'react-router-dom';
 
+import Warn from './no-use';
+
 /*
 *   LastRounds - Displays player's latest rounds on Dashboard
 */
@@ -60,12 +62,22 @@ class LastRounds extends Component {
 
         return (
             <div>
-                <h3>Last rounds</h3>
-                <table>
-                    <tbody>
-                        {(rows.length > 0) ? rows : <tr><td>No played rounds</td></tr>}
-                    </tbody>
-                </table>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <h1>Last rounds</h1>
+                            <h3>Latest rounds played by you!</h3>
+
+                            <Warn/>
+
+                            <table className="last">
+                                <tbody>
+                                    {(rows.length > 0) ? rows : <tr><td>No played rounds</td></tr>}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

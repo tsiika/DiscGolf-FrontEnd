@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+
 import Auth from '../api/Auth';
+
 
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 
-const paperStyle = {};
+const paperStyle = {
+
+};
+
 
 class AppBarC extends Component {
     constructor(props) {
@@ -20,6 +25,7 @@ class AppBarC extends Component {
 
     handleToggle = () => this.setState({open: !this.state.open});
 
+
     render() {
 
         // Links shown only for authenticated user
@@ -28,7 +34,7 @@ class AppBarC extends Component {
                 return (
                     <div>
                         <Link to="/dashboard" style={{ textDecoration: 'none' }}><MenuItem>Dashboard</MenuItem></Link>
-                        <Link to="/courses" style={{ textDecoration: 'none' }}><MenuItem>Courses</MenuItem></Link>
+                        <Link to="/courselist" style={{ textDecoration: 'none' }}><MenuItem>Courses</MenuItem></Link>
                         <Link to="/logout" style={{ textDecoration: 'none' }}><MenuItem>Logout</MenuItem></Link>
                     </div>
                 );

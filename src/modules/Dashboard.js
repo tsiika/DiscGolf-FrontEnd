@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Paper} from 'material-ui';
 
 import LastRounds from '../components/LastRounds';
 import NewGame from '../components/NewGame';
@@ -6,7 +7,8 @@ import GameStats from '../components/Statistic';
 import Auth from '../api/Auth';
 import Api from '../api/Api';
 import Redirect from 'react-router/Redirect';
- 
+
+
 class App extends Component {
 
     constructor(props) {
@@ -45,15 +47,20 @@ class App extends Component {
                         <h3>{this.state.user.username}</h3>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-6"><NewGame /> </div>
-                        <div className="col-6"><GameStats /> </div>
+
+                    <div className="row col-ctrl">
+                        <div className="col-12 dash shadow"><NewGame /> </div>
                     </div>
                     <br/>
-                    <div className="row">
-                        <div className="col-6"><LastRounds /></div>
-                        <div className="col-6"> </div>
+                    
+                    <div className="row col-ctrl">
+                        <div className="col-12 dash shadow"><GameStats /> </div>
                     </div>
+                    <br/>
+
+                    <div className="row">
+                        <div className="col-12 dash shadow"><LastRounds /></div>
+                    </div><br/><br/>
                 </div>
         );
     }
