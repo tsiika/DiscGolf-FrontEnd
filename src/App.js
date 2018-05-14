@@ -11,6 +11,7 @@ import Container from './components/Container';
 
 import NoMatch from './components/404';
 import AppBar from './components/AppBar';
+import BNavigationBar from './components/BottomNavigation'
 import AddCourseForm from './components/AddCourseForm';
 import fakeAuth from './modules/Login';
 
@@ -98,6 +99,7 @@ class App extends Component {
 					{/*404*/}
 					<Route component={NoMatch}/>
 				</Switch>
+				<BNavigationBar />
 
 			</div>
 		)
