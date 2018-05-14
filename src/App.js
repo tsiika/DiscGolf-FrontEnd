@@ -32,7 +32,7 @@ import "./App.css";
 import "./styles/simple-grid.css";
 //import API from '../src/api/axiosAPI';
 
-const API = 'https://flatbread-api.herokuapp.com/';
+const API = 'https://www.flatbread-api.herokuapp.com/';
 
 class App extends Component {
 	state = {
