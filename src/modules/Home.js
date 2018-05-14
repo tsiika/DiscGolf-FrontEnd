@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import '../App.css';
-import TopNavigation from '../components/TopNavigation';
 import RecentTab from '../components/Recent';
 import FavoritsTab from '../components/Favorits';
 import NearbyTab from '../components/Nearby';
 import AddCourseTab from '../components/AddCourseTab'
-
+import BNavigationBar from '../components/BottomNavigation'
 import {Tabs, Tab} from 'material-ui/Tabs';
 // From https://github.com/oliviertassinari/react-swipeable-views
 import SwipeableViews from 'react-swipeable-views';
@@ -76,6 +75,7 @@ class App extends Component {
             <AddCourseTab />
           </div>
         </SwipeableViews>
+        
       </div>
     );
   }

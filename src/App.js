@@ -13,6 +13,7 @@ import AppMenu from './components/AppMenu';
 import NoMatch from './components/404';
 import AppBar from './components/AppBar';
 import AddCourseForm from './components/AddCourseForm';
+import BNavigationBar from './components/BottomNavigation'
 
 import Home from './modules/Home';
 import Login from './modules/Login';
@@ -47,8 +48,7 @@ class App extends Component {
 					<AppMenu/>
 				</AppBar>
 				<Container/>
-
-
+				
 				<Switch>
 					{/*Add all routers here*/}
 					<Route exact path="/" component={Home} /> 
@@ -63,7 +63,7 @@ class App extends Component {
 					{/*404*/}
 					<Route component={NoMatch}/>
 				</Switch>
-
+				<BNavigationBar />
 			</div>
 		)
 	}
