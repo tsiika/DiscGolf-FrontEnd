@@ -9,9 +9,18 @@ const Auth = require('./Auth');
 *   TODO: Change every function to accept callback functions for succes- and failure-events,
 *   and to return resolved data or just the fetch-promise respectively.
 */
-//const API_URL = 'https://flatbread-api.herokuapp.com/api/v0';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api/v0';
 
+const API_HOST = process.env.REACT_APP_API_HOST || 'http://localhost:5000';
+const API_URL = API_HOST + '/api/v0';
+
+function getApiHost() {
+    return API_HOST;
+}
+
+function getApiUrl() {
+    return API_URL;
+}
+ 
 function getAuthHeader() {
     return { "Authorization": "Bearer " + Auth.getAccessToken() };
 }
@@ -414,6 +423,8 @@ function handleJsonPromise(promise, onSuccess, onFailure) {
 }
 
 module.exports = {
+    getApiHost: getApiHost,
+    getApiUrl: getApiUrl,
     getUsers: getUsers,
     getUser: getUser,
     getUserRounds: getUserRounds,

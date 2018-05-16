@@ -8,7 +8,8 @@ import axios from 'axios';
 import DG1 from './img/Disc-Golf-course1.jpg';
 import DGavatar from './img/disc_golf.jpg';
 
-import API from '../api/axiosAPI';
+//import API from '../api/axiosAPI';
+import Api from '../api/Api';
 
 export default class CourseCard extends React.Component {
 
@@ -20,12 +21,19 @@ export default class CourseCard extends React.Component {
   }
 
   componentDidMount() {
+    /*
     axios.get(API)
       .then(res => {
         const courses = res.data;
         this.setState({courses});
         console.log(this.state.courses );
       })
+      */
+    Api.getCourses(null, (result) => {
+        this.setState({courses: result})
+    }, (error) => {
+        console.error(error);
+    });
   };
 
 

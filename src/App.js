@@ -29,19 +29,19 @@ import CourseSelection from './components/CourseSelection';
 import PlayerSelection from './components/PlayerSelection';
 import Scorecard from './modules/ScoreCard';
 
+import Api from './api/Api';
+
 import "./App.css";
 import "./styles/simple-grid.css";
-//import API from '../src/api/axiosAPI';
 
-const API = 'https://www.flatbread-api.herokuapp.com/';
+const API_HOST = Api.getApiHost();
 
 class App extends Component {
-	state = {
+    
+    state = {
 		loading: true,
 		response: ''
 	};
-
-	
 
 	componentDidMount(){
 		setTimeout(() => this.setState({loading: false}),1);
@@ -52,7 +52,7 @@ class App extends Component {
 	}
 
 	callAPI = async () => {
-		const response = await fetch(API);
+		const response = await fetch(API_HOST);
 		const body = await response.json();
 
 		if(response.status !== 200) {
