@@ -1,3 +1,6 @@
+//import Auth from './Auth';
+const Auth = require('./Auth');
+
 /*
 *   Api
 *
@@ -6,9 +9,12 @@
 *   TODO: Change every function to accept callback functions for succes- and failure-events,
 *   and to return resolved data or just the fetch-promise respectively.
 */
+//const API_URL = 'https://flatbread-api.herokuapp.com/api/v0';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api/v0';
 
-const API_URL = 'http://localhost:5000/api/v0';                         //Use only in development!
-//const API_URL = 'https://www.flatbread-api.herokuapp.com/api/v0';     //Use only in production!
+function getAuthHeader() {
+    return { "Authorization": "Bearer " + Auth.getAccessToken() };
+}
 
 /*
 *   getUsers
@@ -24,6 +30,8 @@ const API_URL = 'http://localhost:5000/api/v0';                         //Use on
 function getUsers(onSuccess, onFailure) {
 
     const options = { method: 'GET' };
+    options.headers = getAuthHeader();
+
     let promise = fetch(API_URL + '/users', options);
 
     if(onSuccess && onFailure) {
@@ -49,6 +57,7 @@ function getUser(userId, onSuccess, onFailure) {
 
     const url = API_URL + '/users/' + userId;
     const options = { method: 'GET' };
+    options.headers = getAuthHeader();
 
     let promise = fetch(url, options);
 
@@ -75,6 +84,7 @@ function getUserRounds(userId, onSuccess, onFailure) {
 
     const url = API_URL + '/users/' + userId + '/rounds/';
     const options = { method: 'GET' };
+    options.headers = getAuthHeader();
 
     let promise = fetch(url, options);
 
@@ -170,6 +180,8 @@ function postUser(user, onSuccess, onFailure) {
         body: JSON.stringify(user)
     };
 
+    options.headers = Object.assign(options.headers, getAuthHeader());
+
     let promise = fetch(API_URL + '/users', options); 
 
     // If callback functions were provided, resolve fetch-promise here,
@@ -199,6 +211,8 @@ function getRounds(roundId, onSuccess, onFailure) {
     
     let url = API_URL + '/rounds/' + roundId;
     let options = { method: 'GET'};
+
+    options.headers = getAuthHeader();
     
     let promise = fetch(url, options);
 
@@ -226,7 +240,9 @@ function getCourses(courseId, onSuccess, onFailure) {
     
     let url = API_URL + '/courses/' + courseId;
     let options = { method: 'GET'};
-    
+
+    options.headers = getAuthHeader();
+
     let promise = fetch(url, options);
 
     if(onSuccess && onFailure) {
@@ -255,6 +271,8 @@ function postCourse(course, onSuccess, onFailure) {
         headers: {'content-type': 'application/json'},
         body: JSON.stringify(course) 
     };
+
+    options.headers = Object.assign(options.headers, getAuthHeader());
 
     let promise = fetch(API_URL + '/courses', options);
 
@@ -287,6 +305,8 @@ function putCourse(course, onSuccess, onFailure) {
         body: JSON.stringify(course) 
     };
 
+    options.headers = Object.assign(options.headers, getAuthHeader());
+
     let promise = fetch(API_URL + '/courses', options);
 
     // If callback functions were provided, resolve fetch-promise here,
@@ -318,6 +338,8 @@ function postRound(round, onSuccess, onFailure) {
         body: JSON.stringify(round)
     }
     
+    options.headers = Object.assign(options.headers, getAuthHeader());
+
     let promise = fetch(API_URL + '/rounds', options); 
 
     if(onSuccess && onFailure) {
@@ -346,6 +368,8 @@ function putRound(data, onSuccess, onFailure) {
         headers: {'content-type': 'application/json'},
         body: JSON.stringify(data)
     }
+
+    options.headers = Object.assign(options.headers, getAuthHeader());
     
     let promise = fetch(API_URL + '/rounds', options); 
 
