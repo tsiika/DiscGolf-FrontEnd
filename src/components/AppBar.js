@@ -9,10 +9,6 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 
-const paperStyle = {
-
-};
-
 
 class AppBarC extends Component {
     constructor(props) {

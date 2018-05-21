@@ -104,6 +104,37 @@ td {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.btnStyle {
+  margin: 30px 7px 7px 7px;
+}
+
+.regForm {
+  margin-top: 20px; 
+  margin: 10px;
+}
+
+.ngStyle { /*New Game*/
+  margin: 12;
+}
+
+.csStyle { /*CourseSelection*/
+  text-align: right; 
+  padding: 0px;
+}
+
+.paperStyle {
+  height: 95%;
+  width: 85%;
+  text-align: center;
+  display: inline-block;
+}
+
+.bottomStyle {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  bottom: 0px;
+}
 
 @media only screen and (min-width: 300px) { 
   .container {

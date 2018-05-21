@@ -18,8 +18,6 @@ import {
 } from 'material-ui/Table';
 import { RaisedButton } from 'material-ui';
 
-const style = { textAlign: 'right', padding: '0px'}
-
 /*
 *   CourseSeletion - component
 *
@@ -114,14 +112,14 @@ class CourseSelection extends Component {
                         <h2>Choose course</h2>
                         <Table selectable={true} multiSelectable={false} onRowSelection={this.onCourseSelected} height={this.state.height} className="shadow">
                             <TableHeader displaySelectAll={false} enableSelectAll={false} adjustForCheckbox={this.state.showCheckboxes}>
-                                <TableRow style={style}>
+                                <TableRow style={csStyle}>
                                     <TableHeaderColumn>name</TableHeaderColumn>
                                     <TableHeaderColumn>description</TableHeaderColumn>
                                     <TableHeaderColumn>fairways</TableHeaderColumn>
                                 </TableRow>
 
                             </TableHeader>
-                            <TableBody displayRowCheckbox={false} deselectOnClickaway={false} stripedRows={this.state.stripedRows} style={style}>
+                            <TableBody displayRowCheckbox={false} deselectOnClickaway={false} stripedRows={this.state.stripedRows} style={csStyle}>
                                 {tableRows}
                             </TableBody>
                         </Table>

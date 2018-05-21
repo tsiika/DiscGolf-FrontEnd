@@ -32,7 +32,7 @@ We decided to separate front-end and back-end to separate repositories. With thi
 
 ~~Third stage of project is to get React talk to back-end.~~
 
-Fourth stage is to get app up and running in Heroku.
+~~Fourth stage is to get app up and running in Heroku.~~
 
 
 # Contributors

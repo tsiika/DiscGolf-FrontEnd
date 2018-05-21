@@ -11,11 +11,6 @@ import Login from '../modules/Login';
 import Home from '../modules/Home';
 import Auth from '../api/Auth';
 
-const bottomStyle = {
-  position: 'fixed',
-  width: "100%",
-  bottom: '0px', 
-};
 
 const homeIcon = <IconHome />;
 const loginIcon = <IconLogin />;
@@ -31,6 +26,7 @@ class BNavigationBar extends Component {
   select = (index) => this.setState({selectedIndex: index});
 
   render() {
+    
     return (
       <Paper style={bottomStyle}  zDepth={1}>
         <BottomNavigation selectedIndex={this.state.selectedIndex}>
@@ -45,7 +41,7 @@ class BNavigationBar extends Component {
             onClick={() => this.select(1)}
           /></Link>
           <Link to="/dashboard" style={{ textDecoration: 'none' }}><BottomNavigationItem
-            label="Dash Board"
+            label="Dashboard"
             icon={dashboardIcon}
             onClick={() => this.select(2)}
           /></Link>

@@ -1,13 +1,7 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 
-
-const paperStyle = {
-    height: '95%',
-    width: "85%",
-    textAlign: 'center',
-    display: 'inline-block',
-};
+import '../App.css';
 
 const MainContainer = () => (
 

@@ -7,10 +7,6 @@ import Api from '../api/Api';
 
 import '../App.css';
 
-const style = {
-    marginTop: '20px', 
-    margin: '10px',
-}
 
 /*
 *   RegisterForm - Component
@@ -169,10 +165,10 @@ class RegisterForm extends Component {
                             onChange={this.onInputChange}
                         />
                     </div>
-                    <RaisedButton name="submitButton" type="submit" disabled={this.state.saving} label="Create account" primary style={style} />
+                    <RaisedButton name="submitButton" type="submit" disabled={this.state.saving} label="Create account" primary style={regForm} />
                     
                     <Link to='/'>
-                        <RaisedButton name="back" type="button" label="Return" secondary style={style}/>
+                        <RaisedButton name="back" type="button" label="Return" secondary style={regForm}/>
                     </Link>
                 </form>
             </div>

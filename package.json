@@ -1,6 +1,6 @@
 {
   "name": "discgolf-frontend-react",
-  "version": "0.0.2",
+  "version": "0.5.0",
   "description": "Application for disc golf hobbyists",
   "main": "index.js",
   "scripts": {
@@ -32,11 +32,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "clean-webpack-plugin": "^0.1.19",
-    "d3": "^5.2.0",
+    "d3": "^5.4.0",
     "d3-color": "^1.2.0",
     "dc": "^2.1.10",
     "gulp": "^3.9.1",
-    "material-ui": "^0.20.0",
+    "material-ui": "^0.20.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-router": "^4.2.0",
@@ -56,6 +56,6 @@
     "babel-preset-stage-2": "^6.18.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "^3.2.0",
-    "webpack": "^4.8.1"
+    "webpack": "^4.8.3"
   }
 }

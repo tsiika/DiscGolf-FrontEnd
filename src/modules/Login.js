@@ -10,7 +10,7 @@ import Redirect from 'react-router-dom/Redirect';
 
 import '../App.css';
 
-var btnStyle = { margin: '30px 7px 7px 7px' };
+
 
 class LoginForm extends Component{
 
